@@ -1,0 +1,47 @@
+# Archivos sensibles
+token.pickle
+cookies.txt
+
+# Carpeta con credenciales
+credentials/
+
+# Carpeta con descargas
+downloads/
+
+# archivos temporales
+project_videos/
+
+# archivos de configuración local
+configs/
+global/
+
+# Carpetas de trabajo
+audios/
+
+# Logs
+debug/
+
+test_videos/
+
+!global/
+
+# Ignorar todos los TXT
+*.txt
+
+# Pero no ignorar este:
+!requirements.txt
+
+# archivos de video generados
+output_videos/
+
+# Ignorar archivos de entorno
+.env
+
+# Ignorar entorno virtual
+venv/
+
+# Modelos entrenados
+*.pt
+
+__pycache__/
+*.pyc

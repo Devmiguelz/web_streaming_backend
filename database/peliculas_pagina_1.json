@@ -1,0 +1,162 @@
+[
+  {
+    "tipo": "pelicula",
+    "titulo": "Steve",
+    "enlace": "https://cinecalidad.bar/peli/steve/",
+    "imagen": "https://image.tmdb.org/t/p/w342/wmLoMyofbseLfxiGgk1Iz5H97c3.jpg",
+    "calidad": "HD",
+    "año": "2025",
+    "descripcion": "En un intenso día, el dedicado director de una escuela orientada a la rehabilitación lucha por mantener a raya a sus alumnos, mientras carga con el peso de sus propios problemas.",
+    "generos": [
+      "Comedia",
+      "Drama"
+    ]
+  },
+  {
+    "tipo": "pelicula",
+    "titulo": "Días Perfectos",
+    "enlace": "https://cinecalidad.bar/peli/dias-perfectos/",
+    "imagen": "https://image.tmdb.org/t/p/w342/efnvsuEdkdwiWR7WyQ2QgcGt8mM.jpg",
+    "calidad": "HD",
+    "año": "2023",
+    "descripcion": "Hirayama está contento con su vida como limpiador de baños en Tokio. Fuera de su rutina estructurada, le encanta la música en cintas de casete, los libros y tomar fotografías de árboles. A través de...",
+    "generos": [
+      "Drama"
+    ]
+  },
+  {
+    "tipo": "pelicula",
+    "titulo": "Juego sucio",
+    "enlace": "https://cinecalidad.bar/peli/juego-sucio/",
+    "imagen": "https://image.tmdb.org/t/p/w342/tFWFcc2DlAp02oyj3eCfxF220l3.jpg",
+    "calidad": "HD",
+    "año": "2025",
+    "descripcion": "Parker es un experto ladrón, muy profesional en lo suyo, que elabora sus golpes con una ética de trabajo clara y directa. Junto con Grofield, Zen y un equipo experto, todos se toparán con un...",
+    "generos": [
+      "Crimen"
+    ]
+  },
+  {
+    "tipo": "pelicula",
+    "titulo": "A través del fuego",
+    "enlace": "https://cinecalidad.bar/peli/a-traves-del-fuego-2/",
+    "imagen": "https://image.tmdb.org/t/p/w342/dftMArca90s5ldlmltYZtkzVGNV.jpg",
+    "calidad": "HD",
+    "año": "2025",
+    "descripcion": "Un padre perseverante lo arriesga todo para rescatar a una maestra entregada y a sus estudiantes de un incendio peligroso.",
+    "generos": [
+      "Drama",
+      "Misterio",
+      "Suspense"
+    ]
+  },
+  {
+    "tipo": "pelicula",
+    "titulo": "La Máquina: The Smashing Machine",
+    "enlace": "https://cinecalidad.bar/peli/la-maquina-the-smashing-machine/",
+    "imagen": "https://image.tmdb.org/t/p/w342/4Yal9OAEAr1ifWMEPXf76iIYvZR.jpg",
+    "calidad": "HD",
+    "año": "2025",
+    "descripcion": "La historia del campeón de artes marciales mixtas y de la UFC, Mark Kerr.",
+    "generos": [
+      "Drama",
+      "Historia"
+    ]
+  },
+  {
+    "tipo": "pelicula",
+    "titulo": "Los Extraños: Capítulo 2",
+    "enlace": "https://cinecalidad.bar/peli/los-extranos-capitulo-2/",
+    "imagen": "https://image.tmdb.org/t/p/w342/fSRRH7UasrE6q240H00dww3vE1c.jpg",
+    "calidad": "CAM",
+    "año": "2025",
+    "descripcion": "Después de descubrir que una de sus víctimas, Maya, sigue con vida, tres maníacos enmascarados regresan para terminar el trabajo. Sin un lugar donde esconderse y sin nadie en quien confiar, Maya pronto se ve...",
+    "generos": [
+      "Estrenos",
+      "Suspense",
+      "Terror"
+    ]
+  },
+  {
+    "tipo": "pelicula",
+    "titulo": "HIM: El elegido",
+    "enlace": "https://cinecalidad.bar/peli/him-el-elegido/",
+    "imagen": "https://image.tmdb.org/t/p/w342/fiXNf4HpEQuxedx7q05bO7cGCh0.jpg",
+    "calidad": "HD",
+    "año": "2025",
+    "descripcion": "Cuando la carrera de Cameron Cade llegaba a su fin por culpa de un traumatismo craneoencefálico, recibe la invitación de su héroe Isaiah White, el legendario mariscal de campo y megaestrella cultural, para vivir en...",
+    "generos": [
+      "Misterio",
+      "Terror"
+    ]
+  },
+  {
+    "tipo": "pelicula",
+    "titulo": "Mantis",
+    "enlace": "https://cinecalidad.bar/peli/mantis/",
+    "imagen": "https://image.tmdb.org/t/p/w342/v1vs4RJyqzckfxPjyWN5zN1dEgH.jpg",
+    "calidad": "HD",
+    "año": "2025",
+    "descripcion": "La sociedad secreta de asesinos a sueldo se sume en el caos y surge una nueva generación de asesinos. Sin las viejas reglas, ¿quién se atreverá a reclamar las sombras?",
+    "generos": [
+      "Acción",
+      "Crimen",
+      "Suspense"
+    ]
+  },
+  {
+    "tipo": "pelicula",
+    "titulo": "Primitive War",
+    "enlace": "https://cinecalidad.bar/peli/primitive-war/",
+    "imagen": "https://image.tmdb.org/t/p/w342/nWBqU5YXmDVJWWEDJ4u3ZSseNVL.jpg",
+    "calidad": "HD",
+    "año": "2025",
+    "descripcion": "Vietnam. 1968. Una unidad de reconocimiento conocida como Escuadrón Buitre es enviada a un valle aislado de la jungla para descubrir el destino de un pelotón de Boina Verde desaparecido. Pronto descubren que no están...",
+    "generos": [
+      "Acción",
+      "Bélica",
+      "Terror"
+    ]
+  },
+  {
+    "tipo": "pelicula",
+    "titulo": "Un paseo con Madeleine",
+    "enlace": "https://cinecalidad.bar/peli/un-paseo-con-madeleine/",
+    "imagen": "https://image.tmdb.org/t/p/w342/j1vSMee6Hpuh323kJTZrn0mxlKg.jpg",
+    "calidad": "HD",
+    "año": "2022",
+    "descripcion": "Madeleine abandona su hogar para ingresar en una residencia de ancianos, al otro lado de París. Un taxista viene a recogerla y ella le pide que pase por unos lugares de la capital que han...",
+    "generos": [
+      "Comedia",
+      "Drama"
+    ]
+  },
+  {
+    "tipo": "pelicula",
+    "titulo": "Una batalla tras otra",
+    "enlace": "https://cinecalidad.bar/peli/una-batalla-tras-otra/",
+    "imagen": "https://image.tmdb.org/t/p/w342/iZ1499F6hYxDxiqioy8oSUaxipG.jpg",
+    "calidad": "HD",
+    "año": "2025",
+    "descripcion": "Cuando su malvado némesis resurge después de 16 años, una banda de ex revolucionarios se reúne para rescatar a la hija de uno de los suyos.",
+    "generos": [
+      "Acción",
+      "Crimen",
+      "Suspense"
+    ]
+  },
+  {
+    "tipo": "pelicula",
+    "titulo": "El último encargo",
+    "enlace": "https://cinecalidad.bar/peli/el-ultimo-encargo/",
+    "imagen": "https://image.tmdb.org/t/p/w342/lbpyI9nwzSVDjS7OnE0uC41UciP.jpg",
+    "calidad": "HD",
+    "año": "2025",
+    "descripcion": "Una rutinaria recogida de dinero da un giro salvaje cuando dos conductores de furgón blindado, Russell y Travis, son asaltados por una banda a las órdenes de la hábil Zoe, con planes que van mucho...",
+    "generos": [
+      "Acción",
+      "Comedia",
+      "Crimen"
+    ]
+  }
+]
