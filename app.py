@@ -290,7 +290,7 @@ if __name__ == '__main__':
     print(f"📁 Películas: {len(cargar_json(PELICULAS_FILE))}")
     print(f"📺 Series: {len(cargar_json(SERIES_FILE))}")
     print("=" * 60)
-    print("🌐 Servidor corriendo en http://localhost:5000")
+    print("🌐 Servidor corriendo en http://localhost:5400")
     print("=" * 60)
     
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5400)
