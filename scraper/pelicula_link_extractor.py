@@ -582,7 +582,6 @@ class AdvancedLinksExtractor:
                 print("\n❌ Operación cancelada")
                 return None
 
-
 # Ejemplo de uso
 if __name__ == "__main__":
     extractor = AdvancedLinksExtractor()
