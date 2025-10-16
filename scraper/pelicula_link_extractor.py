@@ -250,6 +250,7 @@ class AdvancedLinksExtractor:
         
         resultado = {
             **info_basica,
+            'año': pelicula.get('año'),
             'url_pelicula': url_pelicula,
             'servidores': []
         }
@@ -380,6 +381,84 @@ class AdvancedLinksExtractor:
         
         return peliculas
     
+    def recuperar_años_faltantes(self, archivo_cache, archivo_database, delay=1):
+        """
+        Lee el JSON de cache y actualiza solo las películas sin año desde database
+        """
+        # Cargar películas desde cache
+        peliculas = self.cargar_peliculas_json(archivo_cache)
+
+        if not peliculas:
+            return []
+        
+        # Cargar database si se proporciona
+        peliculas_database = None
+        if archivo_database:
+            print(f"\n📥 Cargando database para buscar años faltantes...")
+            peliculas_database = self.cargar_peliculas_json(archivo_database)
+        else:
+            print("❌ Se requiere archivo database para actualizar años")
+            return peliculas
+        
+        # Filtrar películas sin año
+        peliculas_sin_año = []
+        for pelicula in peliculas:
+            año = pelicula.get('año')
+            
+            # Si no tiene año o el año está vacío
+            if not año or año == "" or año is None:
+                peliculas_sin_año.append(pelicula)
+        
+        total = len(peliculas_sin_año)
+        
+        if total == 0:
+            print("✅ Todas las películas ya tienen año!")
+            return peliculas
+        
+        print(f"\n{'='*80}")
+        print(f"🔄 Actualizando años de {total} películas...")
+        print('='*80)
+        
+        actualizadas = 0
+        no_encontradas = 0
+        
+        for i, pelicula in enumerate(peliculas_sin_año, 1):
+            titulo = pelicula.get('titulo', 'Sin título')
+            print(f"\n[{i}/{total}] {titulo}")
+            
+            # Buscar año en database
+            año_encontrado = None
+            for p_db in peliculas_database:
+                if p_db.get('titulo') == titulo:
+                    año_encontrado = p_db.get('año')
+                    break
+            
+            # Actualizar en la lista original
+            for j, p in enumerate(peliculas):
+                if p.get('titulo') == titulo:
+                    if año_encontrado:
+                        peliculas[j]['año'] = año_encontrado
+                        print(f"   ✅ Año actualizado: {año_encontrado}")
+                        actualizadas += 1
+                    else:
+                        print(f"   ⚠️  Año no encontrado en database")
+                        no_encontradas += 1
+                    break
+            
+            # Pausa entre películas
+            if i < total:
+                time.sleep(delay)
+        
+        # Resumen
+        print(f"\n{'='*80}")
+        print(f"📊 Resumen de actualización de años:")
+        print(f"   ✅ Actualizadas: {actualizadas}")
+        print(f"   ⚠️  No encontradas: {no_encontradas}")
+        print('='*80)
+        
+        # Guardar resultados actualizados
+        self.guardar_resultados(peliculas, prefijo='peliculas_años_actualizados')
+
     def procesar_peliculas(self, archivo_json, limite=None, delay=10):
         """
         Procesa múltiples películas
@@ -403,6 +482,7 @@ class AdvancedLinksExtractor:
             print(f"\n[{i}/{total}] {pelicula.get('titulo', 'Sin título')}")
             
             resultado = self.procesar_pelicula(pelicula)
+            resultado["id"] = i
             
             if resultado:
                 # Mostrar servidores encontrados
@@ -514,10 +594,31 @@ if __name__ == "__main__":
     print("\n¿Qué deseas hacer?")
     print("  1. Procesar películas desde database/")
     print("  2. Recuperar servidores faltantes desde cache/")
+    print("  3. Actualizar años faltantes desde cache/ (requiere database/)")
     
-    modo = input("\nOpción (1-2): ").strip()
+    modo = input("\nOpción (1-3): ").strip()
     
-    if modo == '2':
+    if modo == '3':
+
+        print("\n🔄 MODO: Actualizar años faltantes")
+        archivo_cache = extractor.seleccionar_archivo_json(carpeta='cache')        
+        if not archivo_cache:
+            print("\n❌ Debes seleccionar un archivo de cache para continuar")
+            exit(1)
+        
+        archivo_database = extractor.seleccionar_archivo_json(carpeta='database')        
+        if not archivo_database:
+            print("\n❌ Debes seleccionar un archivo de database para continuar")
+            exit(1)
+        
+        # Actualizar años
+        extractor.recuperar_años_faltantes(
+            archivo_cache=archivo_cache,
+            archivo_database=archivo_database,
+            delay=1
+        )
+
+    elif modo == '2':
         # Modo recuperación
         print("\n🔄 MODO: Recuperar servidores faltantes")
         archivo_cache = extractor.seleccionar_archivo_json(carpeta='cache')
@@ -545,7 +646,7 @@ if __name__ == "__main__":
             delay=5
         )
         
-    else:
+    elif modo == '1':
         # Modo normal
         print("\n📥 MODO: Procesar películas nuevas")
         archivo_database = extractor.seleccionar_archivo_json(carpeta='database')
