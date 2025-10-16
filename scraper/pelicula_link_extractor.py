@@ -295,7 +295,7 @@ class AdvancedLinksExtractor:
         
         return resultados
     
-    def guardar_resultados(self, resultados, prefijo='peliculas_servidores'):
+    def guardar_resultados(self, resultados, prefijo='peliculas'):
         """
         Guarda resultados únicamente en un archivo JSON
         """
@@ -304,7 +304,7 @@ class AdvancedLinksExtractor:
             return
 
         carpeta_destino = os.path.join(os.path.dirname(__file__), '../cache')
-        archivo = f'{prefijo}s.json'
+        archivo = f'{prefijo}.json'
         os.makedirs(carpeta_destino, exist_ok=True)
         ruta_archivo = os.path.join(carpeta_destino, archivo)
 
