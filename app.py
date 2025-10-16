@@ -28,11 +28,11 @@ CACHE_DIR = 'cache'
 PELICULAS_FILE = os.path.join(CACHE_DIR, 'peliculas.json')
 SERIES_FILE = os.path.join(CACHE_DIR, 'series.json')
 
-EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')
-EMAIL_PORT = int(os.getenv('EMAIL_PORT', 587))
-EMAIL_USER = os.getenv('EMAIL_USER', 'tu-email@gmail.com')
-EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD', 'tu-contraseña-app')
-EMAIL_DESTINATARIO = os.getenv('EMAIL_DESTINATARIO', 'contacto@cinevo.com')
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT'))
+EMAIL_USER = os.getenv('EMAIL_USER')
+EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')
+EMAIL_DESTINATARIO = os.getenv('EMAIL_DESTINATARIO')
 
 # Crear directorio de cache si no existe
 os.makedirs(CACHE_DIR, exist_ok=True)
