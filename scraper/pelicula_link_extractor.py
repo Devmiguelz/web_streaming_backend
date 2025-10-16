@@ -234,7 +234,7 @@ class AdvancedLinksExtractor:
         Procesa una película completa: extrae player y todos los servidores
         """
         titulo = pelicula.get('titulo', 'Desconocido')
-        url_pelicula = pelicula.get('enlace')
+        url_pelicula = pelicula.get('enlace') or pelicula.get('url_pelicula')
         
         if not url_pelicula:
             print(f"  ⚠️ {titulo}: No tiene URL")
@@ -267,6 +267,118 @@ class AdvancedLinksExtractor:
         resultado['servidores'] = servidores
         
         return resultado
+    
+    def actualizar_servidores_pelicula(self, pelicula, peliculas_database=None):
+        """
+        Actualiza solo los servidores de una película que ya fue procesada
+        """
+        titulo = pelicula.get('titulo', 'Desconocido')
+        url_pelicula = pelicula.get('url_pelicula') or pelicula.get('enlace')
+        
+        # Si no tiene URL, buscarla en database
+        if not url_pelicula and peliculas_database:
+            print(f"  🔍 Buscando URL en database para: {titulo}")
+            for p_db in peliculas_database:
+                if p_db.get('titulo') == titulo:
+                    url_pelicula = p_db.get('enlace')
+                    if url_pelicula:
+                        print(f"  ✓ URL encontrada en database")
+                        pelicula['url_pelicula'] = url_pelicula
+                    break
+        
+        if not url_pelicula:
+            print(f"  ⚠️ {titulo}: No tiene URL ni en cache ni en database")
+            return pelicula
+        
+        try:
+            response = self.session.get(url_pelicula, headers=self.headers, timeout=15)
+            response.raise_for_status()
+            
+            soup = BeautifulSoup(response.content, 'html.parser')
+            
+            # Extraer URL del player
+            player_url = self.extraer_player_url(soup)
+            if not player_url:
+                print(f"  ⚠️ No se encontró player URL")
+                return pelicula
+            
+            # Actualizar player_url
+            pelicula['player_url'] = player_url
+            
+            # Extraer servidores
+            servidores = self.extraer_servidores_video(player_url, url_pelicula)
+            
+            # Actualizar servidores
+            pelicula['servidores'] = servidores
+            
+            if servidores:
+                print(f"  ✅ {len(servidores)} servidores actualizados")
+            else:
+                print(f"  ⚠️ No se encontraron servidores")
+            
+            return pelicula
+            
+        except Exception as e:
+            print(f"  ❌ Error actualizando: {e}")
+            return pelicula
+    
+    def recuperar_servidores_faltantes(self, archivo_cache, archivo_database, delay=5):
+        """
+        Lee el JSON de cache y reprocesa solo las películas sin servidores
+        """
+        # Cargar películas desde cache
+        peliculas = self.cargar_peliculas_json(archivo_cache)
+
+        if not peliculas:
+            return []
+        
+        # Cargar database si se proporciona
+        peliculas_database = None
+        if archivo_database:
+            print(f"\n📥 Cargando database para buscar URLs faltantes...")
+            peliculas_database = self.cargar_peliculas_json(archivo_database)
+        
+        # Filtrar películas sin servidores o con player_url de YouTube
+        peliculas_sin_servidores = []
+        for pelicula in peliculas:
+            servidores = pelicula.get('servidores', [])
+            player_url = pelicula.get('player_url', '')
+            
+            # Si no tiene servidores O si el player_url es de YouTube
+            if not servidores or 'youtube.com' in player_url.lower():
+                peliculas_sin_servidores.append(pelicula)
+        
+        total = len(peliculas_sin_servidores)
+        
+        if total == 0:
+            print("✅ Todas las películas ya tienen servidores!")
+            return peliculas
+        
+        print(f"\n{'='*80}")
+        print(f"🔄 Recuperando servidores de {total} películas...")
+        print('='*80)
+        
+        for i, pelicula in enumerate(peliculas_sin_servidores, 1):
+            print(f"\n[{i}/{total}] {pelicula.get('titulo', 'Sin título')}")
+            
+            # Actualizar la película
+            pelicula_actualizada = self.actualizar_servidores_pelicula(pelicula, peliculas_database)
+            
+            # Actualizar en la lista original
+            titulo = pelicula_actualizada.get('titulo')
+            for j, p in enumerate(peliculas):
+                if p.get('titulo') == titulo:
+                    peliculas[j] = pelicula_actualizada
+                    break
+            
+            # Pausa entre películas
+            if i < total:
+                time.sleep(delay)
+        
+        # Guardar resultados actualizados
+        self.guardar_resultados(peliculas, prefijo='peliculas_actualizadas')
+        
+        return peliculas
     
     def procesar_peliculas(self, archivo_json, limite=None, delay=10):
         """
@@ -326,33 +438,44 @@ class AdvancedLinksExtractor:
 
         print(f"\n✓ JSON guardado: {ruta_archivo}")
 
-    def seleccionar_archivo_json(self):
+    def seleccionar_archivo_json(self, carpeta='database'):
         """
-        Lista los archivos JSON disponibles en ../database y permite seleccionar uno
+        Lista los archivos JSON disponibles y permite seleccionar uno
         """
-        database_path = os.path.join('..', 'database')
+
+        database_path = os.path.join(os.path.dirname(__file__), f'../{carpeta}')
         
-        # Verificar que existe la carpeta database
+        # Verificar que existe la carpeta
         if not os.path.exists(database_path):
             print(f"❌ Error: No se encontró la carpeta {database_path}")
             return None
         
         # Obtener todos los archivos JSON
-        archivos_json = [f for f in os.listdir(database_path) if f.endswith('.json')]
+        archivos_json = sorted([f for f in os.listdir(database_path) if f.endswith('.json')])
         
         if not archivos_json:
             print(f"❌ No se encontraron archivos JSON en {database_path}")
             return None
         
         # Mostrar lista de archivos
-        print("\n📁 Archivos JSON disponibles en database/:")
-        print("-" * 60)
+        print(f"\n📁 Archivos JSON disponibles en {carpeta}/:")
+        print("-" * 90)
         for i, archivo in enumerate(archivos_json, 1):
             ruta_completa = os.path.join(database_path, archivo)
-            # Obtener tamaño del archivo
-            tamano = os.path.getsize(ruta_completa) / 1024  # KB
-            print(f"  {i}. {archivo} ({tamano:.1f} KB)")
-        print("-" * 60)
+            tamano = os.path.getsize(ruta_completa) / 1024
+            
+            # Intentar leer el número de películas
+            try:
+                with open(ruta_completa, 'r', encoding='utf-8') as f:
+                    datos = json.load(f)
+                    num_peliculas = len(datos) if isinstance(datos, list) else "?"
+                    # Contar películas sin servidores
+                    sin_servidores = sum(1 for p in datos if not p.get('servidores', []))
+                    print(f"  {i}. {archivo:<35} ({tamano:>6.1f} KB | {num_peliculas:>4} películas | {sin_servidores:>3} sin servidores)")
+            except:
+                print(f"  {i}. {archivo:<35} ({tamano:>6.1f} KB)")
+        
+        print("-" * 90)
         
         # Solicitar selección
         while True:
@@ -387,49 +510,87 @@ if __name__ == "__main__":
     print("🎬 EXTRACTOR AVANZADO DE ENLACES DE VIDEO")
     print("="*80)
     
-    # Solicitar archivo JSON
-    archivo_json = extractor.seleccionar_archivo_json()
-    if not archivo_json:
-        exit(1)
+    # Menú principal
+    print("\n¿Qué deseas hacer?")
+    print("  1. Procesar películas desde database/")
+    print("  2. Recuperar servidores faltantes desde cache/")
     
-    # Preguntar cuántas procesar
-    print("\n¿Cuántas películas procesar?")
-    print("  1. Solo 3 (prueba rápida)")
-    print("  2. 10 películas")
-    print("  3. 25 películas")
-    print("  4. Recuperar servidores")
-    print("  5. Todas")
+    modo = input("\nOpción (1-2): ").strip()
     
-    opcion = input("\nOpción (1-5): ").strip()
-    limite_map = {'1': 3, '2': 10, '3': 25, '4': -1, '5': None}
-    limite = limite_map.get(opcion, 3)
-    
-    if limite is not None:
-        print(f"\n⚙️ Procesando {limite} películas...")    
-    elif limite == -1:
-        print("\n⚙️ Recuperando servidores de TODAS las películas (esto puede tardar)...")
-    else:
-        print("\n⚙️ Procesando TODAS las películas (esto puede tardar)...")
-    
-    # Procesar
-    resultados = extractor.procesar_peliculas(
-        archivo_json=archivo_json,
-        limite=limite,
-        delay=5
-    )
-    
-    if resultados:
-        print(f"\n{'='*80}")
-        print(f"✅ Completado: {len(resultados)} películas procesadas")
-        print('='*80)
+    if modo == '2':
+        # Modo recuperación
+        print("\n🔄 MODO: Recuperar servidores faltantes")
+        archivo_cache = extractor.seleccionar_archivo_json(carpeta='cache')
         
-        # Estadísticas
-        total_servidores = sum(len(p.get('servidores', [])) for p in resultados)
-        print(f"\n📊 ESTADÍSTICAS:")
-        print(f"  - Total servidores encontrados: {total_servidores}")
-        print(f"  - Promedio por película: {total_servidores/len(resultados):.1f}")
+        if not archivo_cache:
+            print("\n❌ Debes seleccionar un archivo de cache para continuar")
+            exit(1)
+
+        # Preguntar si desea cargar database para URLs faltantes
+        print("\n¿Deseas cargar un archivo de database/ para buscar URLs faltantes?")
+        print("  1. Sí, seleccionar archivo de database/")
+        print("  2. No, solo usar URLs que ya están en cache")
         
-        # Guardar
-        extractor.guardar_resultados(resultados)
+        usar_db = input("\nOpción (1-2): ").strip()
+        
+        archivo_database = None
+        if usar_db == '1':
+            print("\n📂 Selecciona el archivo de database:")
+            archivo_database = extractor.seleccionar_archivo_json(carpeta='database')
+        
+        # Recuperar servidores
+        extractor.recuperar_servidores_faltantes(
+            archivo_cache=archivo_cache,
+            archivo_database=archivo_database,
+            delay=5
+        )
+        
     else:
-        print("\n❌ No se procesó ninguna película")
+        # Modo normal
+        print("\n📥 MODO: Procesar películas nuevas")
+        archivo_database = extractor.seleccionar_archivo_json(carpeta='database')
+        
+        if not archivo_database:
+            exit(1)
+        
+        # Preguntar cuántas procesar
+        print("\n¿Cuántas películas procesar?")
+        print("  1. Solo 3 (prueba rápida)")
+        print("  2. 10 películas")
+        print("  3. 25 películas")
+        print("  4. Todas")
+        
+        opcion = input("\nOpción (1-4): ").strip()
+        limite_map = {'1': 3, '2': 10, '3': 25, '4': None}
+        limite = limite_map.get(opcion, 3)
+        
+        if limite:
+            print(f"\n⚙️ Procesando {limite} películas...")
+        else:
+            print("\n⚙️ Procesando TODAS las películas (esto puede tardar)...")
+        
+        # Procesar
+        resultados = extractor.procesar_peliculas(
+            archivo_json=archivo_database,
+            limite=limite,
+            delay=5
+        )
+        
+        if resultados:
+            print(f"\n{'='*80}")
+            print(f"✅ Completado: {len(resultados)} películas procesadas")
+            print('='*80)
+            
+            # Estadísticas
+            total_servidores = sum(len(p.get('servidores', [])) for p in resultados)
+            sin_servidores = sum(1 for p in resultados if not p.get('servidores', []))
+            
+            print(f"\n📊 ESTADÍSTICAS:")
+            print(f"  - Total servidores encontrados: {total_servidores}")
+            print(f"  - Promedio por película: {total_servidores/len(resultados):.1f}")
+            print(f"  - Películas sin servidores: {sin_servidores}")
+            
+            # Guardar
+            extractor.guardar_resultados(resultados)
+        else:
+            print("\n❌ No se procesó ninguna película")
