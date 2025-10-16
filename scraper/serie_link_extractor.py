@@ -41,14 +41,24 @@ class CineCalidadSerieExtractor:
             soup = BeautifulSoup(response.content, 'html.parser')
             
             # Buscar el iframe
-            iframe = soup.find('iframe')
-            if iframe and 'src' in iframe.attrs:
-                player_url = iframe['src']
-                print(f"  ✓ Player URL encontrada: {player_url}")
-                return player_url
-            else:
-                print("  ⚠️ No se encontró iframe")
+            iframes = soup.find_all('iframe', class_='absolute inset-0 w-full h-full')
+        
+            if not iframes:
+                print("  ⚠️ No se encontraron iframes con las clases especificadas")
                 return None
+            
+            # Filtrar iframes que NO sean de YouTube
+            for iframe in iframes:
+                if 'src' in iframe.attrs:
+                    src = iframe['src']
+                    
+                    # Excluir iframes de YouTube (trailers)
+                    if 'youtube.com' not in src.lower() and 'youtu.be' not in src.lower():
+                        print(f"  ✓ Player URL encontrada: {src}")
+                        return src
+            
+            print("  ⚠️ No se encontró iframe válido (solo trailers de YouTube)")
+            return None
                 
         except Exception as e:
             print(f"  ❌ Error extrayendo player URL: {e}")
@@ -334,8 +344,8 @@ class CineCalidadSerieExtractor:
             # Construir el resultado final
             resultado = {
                 **serie_info,
-                'temporadas': temporadas,
-                'url_serie': url_serie
+                'url_serie': url_serie,
+                'temporadas': temporadas
             }
             
             print(f"\n{'='*60}")
@@ -398,6 +408,59 @@ class CineCalidadSerieExtractor:
             json.dump(resultados, f, ensure_ascii=False, indent=2)
 
         print(f"\n✓ JSON guardado: {ruta_archivo}")
+    
+    def seleccionar_archivo_json(self):
+        """
+        Lista los archivos JSON disponibles en ../database y permite seleccionar uno
+        """
+        database_path = os.path.join('..', 'database')
+        
+        # Verificar que existe la carpeta database
+        if not os.path.exists(database_path):
+            print(f"❌ Error: No se encontró la carpeta {database_path}")
+            return None
+        
+        # Obtener todos los archivos JSON
+        archivos_json = [f for f in os.listdir(database_path) if f.endswith('.json')]
+        
+        if not archivos_json:
+            print(f"❌ No se encontraron archivos JSON en {database_path}")
+            return None
+        
+        # Mostrar lista de archivos
+        print("\n📁 Archivos JSON disponibles en database/:")
+        print("-" * 60)
+        for i, archivo in enumerate(archivos_json, 1):
+            ruta_completa = os.path.join(database_path, archivo)
+            # Obtener tamaño del archivo
+            tamano = os.path.getsize(ruta_completa) / 1024  # KB
+            print(f"  {i}. {archivo} ({tamano:.1f} KB)")
+        print("-" * 60)
+        
+        # Solicitar selección
+        while True:
+            try:
+                seleccion = input(f"\nSelecciona un archivo (1-{len(archivos_json)}) o Enter para cancelar: ").strip()
+                
+                if not seleccion:
+                    print("❌ Operación cancelada")
+                    return None
+                
+                indice = int(seleccion) - 1
+                
+                if 0 <= indice < len(archivos_json):
+                    archivo_seleccionado = archivos_json[indice]
+                    ruta_completa = os.path.join(database_path, archivo_seleccionado)
+                    print(f"✓ Archivo seleccionado: {archivo_seleccionado}")
+                    return ruta_completa
+                else:
+                    print(f"⚠️ Por favor ingresa un número entre 1 y {len(archivos_json)}")
+                    
+            except ValueError:
+                print("⚠️ Por favor ingresa un número válido")
+            except KeyboardInterrupt:
+                print("\n❌ Operación cancelada")
+                return None
 
 
 # Ejemplo de uso
@@ -408,23 +471,26 @@ if __name__ == "__main__":
     print("="*80)
     
     # Solicitar archivo JSON
-    archivo_json = input("\nArchivo JSON de películas (default: series_pagina_1.json): ").strip()
+    archivo_json = extractor.seleccionar_archivo_json()
     if not archivo_json:
-        archivo_json = "series_pagina_1.json"
+        exit(1)
     
     # Preguntar cuántas procesar
     print("\n¿Cuántas películas procesar?")
     print("  1. Solo 3 (prueba rápida)")
     print("  2. 10 películas")
     print("  3. 25 películas")
-    print("  4. Todas")
+    print("  4. Recuperar servidores")
+    print("  5. Todas")
     
-    opcion = input("\nOpción (1-4): ").strip()
-    limite_map = {'1': 3, '2': 10, '3': 25, '4': None}
+    opcion = input("\nOpción (1-5): ").strip()
+    limite_map = {'1': 3, '2': 10, '3': 25, '4': -1, '5': None}
     limite = limite_map.get(opcion, 3)
-    
-    if limite:
-        print(f"\n⚙️ Procesando {limite} películas...")
+
+    if limite is not None:
+        print(f"\n⚙️ Procesando {limite} películas...")    
+    elif limite == -1:
+        print("\n⚙️ Recuperando servidores de TODAS las películas (esto puede tardar)...")
     else:
         print("\n⚙️ Procesando TODAS las películas (esto puede tardar)...")
     
