@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import os
 import json
 import time
 
@@ -201,16 +202,22 @@ class CinecalidadScraper:
     
     def guardar_json(self, datos, archivo='peliculas_cinecalidad.json'):
         """
-        Guarda los datos en un archivo JSON
+        Guarda los datos en un archivo JSON en la carpeta ../database
         """
         if not datos:
             print("No hay datos para guardar")
             return
         
-        with open(archivo, 'w', encoding='utf-8') as f:
+        carpeta_destino = os.path.join(os.path.dirname(__file__), '../database')
+
+        os.makedirs(carpeta_destino, exist_ok=True)
+
+        ruta_archivo = os.path.join(carpeta_destino, archivo)
+
+        with open(ruta_archivo, 'w', encoding='utf-8') as f:
             json.dump(datos, f, ensure_ascii=False, indent=2)
-        
-        print(f"✓ Datos guardados en '{archivo}'")
+
+        print(f"✓ Datos guardados en '{ruta_archivo}'")
     
     def mostrar_peliculas(self, datos, limite=5):
         """

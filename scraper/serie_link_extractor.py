@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import time
-import re
+import os
 from urllib.parse import urljoin, urlparse
 
 class CineCalidadSerieExtractor:
@@ -388,14 +388,16 @@ class CineCalidadSerieExtractor:
         if not resultados:
             print("No hay resultados para guardar")
             return
+        
+        carpeta_destino = os.path.join(os.path.dirname(__file__), '../cache')
+        archivo = f'{prefijo}s.json'
+        os.makedirs(carpeta_destino, exist_ok=True)
+        ruta_archivo = os.path.join(carpeta_destino, archivo)
 
-        timestamp = time.strftime("%Y%m%d_%H%M%S")
-        archivo_json = f'{prefijo}_{timestamp}.json'
-
-        with open(archivo_json, 'w', encoding='utf-8') as f:
+        with open(ruta_archivo, 'w', encoding='utf-8') as f:
             json.dump(resultados, f, ensure_ascii=False, indent=2)
 
-        print(f"\n✓ JSON guardado: {archivo_json}")
+        print(f"\n✓ JSON guardado: {ruta_archivo}")
 
 
 # Ejemplo de uso
