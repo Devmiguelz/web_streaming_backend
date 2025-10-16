@@ -1,16 +1,38 @@
 from flask import Flask, jsonify, request, send_from_directory
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 from flask_cors import CORS
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from datetime import datetime
 import json
 import os
-from datetime import datetime
+from dotenv import load_dotenv
+
+# Cargar variables de entorno
+load_dotenv()
 
 app = Flask(__name__, static_folder='../frontend', static_url_path='')
-CORS(app)  # Permitir peticiones desde el frontend
+limiter = Limiter(
+    get_remote_address,  # Función para identificar al cliente (por IP)
+    app=app,
+    default_limits=[],  # Límites por defecto
+    storage_uri="memory://",  # Backend de almacenamiento
+    strategy="fixed-window"  # Estrategia de conteo
+)
+CORS(app)  
 
 # Configuración
 CACHE_DIR = 'cache'
 PELICULAS_FILE = os.path.join(CACHE_DIR, 'peliculas.json')
 SERIES_FILE = os.path.join(CACHE_DIR, 'series.json')
+
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', 587))
+EMAIL_USER = os.getenv('EMAIL_USER', 'tu-email@gmail.com')
+EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD', 'tu-contraseña-app')
+EMAIL_DESTINATARIO = os.getenv('EMAIL_DESTINATARIO', 'contacto@cinevo.com')
 
 # Crear directorio de cache si no existe
 os.makedirs(CACHE_DIR, exist_ok=True)
@@ -271,6 +293,63 @@ def actualizar_datos():
     
     return jsonify({'error': 'Error al actualizar'}), 500
 
+@app.route('/api/contacto', methods=['POST'])
+@limiter.limit("5 per hour")
+def contacto():
+    """
+    Endpoint para recibir mensajes del formulario de contacto
+    """
+    try:
+        # Obtener datos del formulario
+        data = request.get_json()
+        
+        # Validar campos requeridos
+        campos_requeridos = ['nombre', 'email', 'asunto', 'mensaje']
+        for campo in campos_requeridos:
+            if not data.get(campo):
+                return jsonify({
+                    'error': f'El campo {campo} es requerido'
+                }), 400
+        
+        nombre = data.get('nombre').strip()
+        email = data.get('email').strip()
+        asunto = data.get('asunto').strip()
+        mensaje = data.get('mensaje').strip()
+        
+        # Validación básica de email
+        if '@' not in email or '.' not in email:
+            return jsonify({
+                'error': 'Email inválido'
+            }), 400
+        
+        # Validar longitud de campos
+        if len(nombre) < 2 or len(nombre) > 100:
+            return jsonify({
+                'error': 'El nombre debe tener entre 2 y 100 caracteres'
+            }), 400
+        
+        if len(mensaje) < 10 or len(mensaje) > 5000:
+            return jsonify({
+                'error': 'El mensaje debe tener entre 10 y 5000 caracteres'
+            }), 400
+        
+        # Enviar el email
+        if enviar_email(nombre, email, asunto, mensaje):
+            return jsonify({
+                'mensaje': 'Mensaje enviado con éxito',
+                'status': 'success'
+            }), 200
+        else:
+            return jsonify({
+                'error': 'Error al enviar el mensaje. Por favor, intenta de nuevo.'
+            }), 500
+    
+    except Exception as e:
+        print(f'Error en endpoint contacto: {str(e)}')
+        return jsonify({
+            'error': 'Error procesando la solicitud'
+        }), 500
+
 # ==================== MANEJO DE ERRORES ====================
 
 @app.errorhandler(404)
@@ -280,6 +359,126 @@ def not_found(e):
 @app.errorhandler(500)
 def server_error(e):
     return jsonify({'error': 'Error interno del servidor'}), 500
+
+# ==================== ENVIO DE CORREO ====================
+
+def enviar_email(nombre, email, asunto, mensaje):
+    """
+    Envía un email usando SMTP
+    """
+    try:
+        # Crear el mensaje
+        msg = MIMEMultipart('alternative')
+        msg['Subject'] = f'[Cinevo Contacto] {asunto}'
+        msg['From'] = EMAIL_USER
+        msg['To'] = EMAIL_DESTINATARIO
+        msg['Reply-To'] = email
+        
+        # Contenido del email en texto plano
+        texto_plano = f"""
+        Nuevo mensaje de contacto desde Cinevo
+        
+        Nombre: {nombre}
+        Email: {email}
+        Asunto: {asunto}
+        Fecha: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}
+        
+        Mensaje:
+        {mensaje}
+        """
+        
+        # Contenido del email en HTML
+        html = f"""
+        <html>
+            <head>
+                <style>
+                    body {{
+                        font-family: Arial, sans-serif;
+                        line-height: 1.6;
+                        color: #333;
+                    }}
+                    .container {{
+                        max-width: 600px;
+                        margin: 0 auto;
+                        padding: 20px;
+                        background-color: #f4f4f4;
+                    }}
+                    .header {{
+                        background: linear-gradient(135deg, #e50914, #b20710);
+                        color: white;
+                        padding: 20px;
+                        text-align: center;
+                        border-radius: 5px 5px 0 0;
+                    }}
+                    .content {{
+                        background: white;
+                        padding: 20px;
+                        border-radius: 0 0 5px 5px;
+                    }}
+                    .info-item {{
+                        margin: 10px 0;
+                        padding: 10px;
+                        background: #f9f9f9;
+                        border-left: 3px solid #e50914;
+                    }}
+                    .label {{
+                        font-weight: bold;
+                        color: #e50914;
+                    }}
+                    .mensaje {{
+                        background: #f9f9f9;
+                        padding: 15px;
+                        border-radius: 5px;
+                        margin-top: 15px;
+                    }}
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <div class="header">
+                        <h2>🎬 Nuevo mensaje de Cinevo</h2>
+                    </div>
+                    <div class="content">
+                        <div class="info-item">
+                            <span class="label">Nombre:</span> {nombre}
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Email:</span> {email}
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Asunto:</span> {asunto}
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Fecha:</span> {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}
+                        </div>
+                        <div class="mensaje">
+                            <p class="label">Mensaje:</p>
+                            <p>{mensaje.replace(chr(10), '<br>')}</p>
+                        </div>
+                    </div>
+                </div>
+            </body>
+        </html>
+        """
+        
+        # Adjuntar ambas versiones
+        parte_texto = MIMEText(texto_plano, 'plain', 'utf-8')
+        parte_html = MIMEText(html, 'html', 'utf-8')
+        
+        msg.attach(parte_texto)
+        msg.attach(parte_html)
+        
+        # Conectar al servidor SMTP y enviar
+        with smtplib.SMTP(EMAIL_HOST, EMAIL_PORT) as server:
+            server.starttls()  # Seguridad TLS
+            server.login(EMAIL_USER, EMAIL_PASSWORD)
+            server.send_message(msg)
+        
+        return True
+    
+    except Exception as e:
+        print(f'Error enviando email: {str(e)}')
+        return False
 
 # ==================== INICIO DEL SERVIDOR ====================
 

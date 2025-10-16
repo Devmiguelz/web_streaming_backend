@@ -4,3 +4,5 @@ requests
 beautifulsoup4
 lxml
 APScheduler
+python-dotenv
+Flask-Limiter
