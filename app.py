@@ -86,6 +86,111 @@ def static_files(path):
     """Servir archivos estáticos"""
     return send_from_directory(app.static_folder, path)
 
+# ==================== API RELACIONADOS ====================
+
+@app.route('/api/<tipo>/<item_id>/relacionados', methods=['GET'])
+def obtener_relacionados(tipo, item_id):
+    """
+    Obtiene contenido relacionado por género y año
+    Parámetros:
+        - tipo: 'peliculas' o 'series'
+        - item_id: ID del item actual
+    Query params opcionales:
+        - limite: cantidad de resultados (default: 10)
+    """
+    try:
+        # Validar tipo
+        if tipo not in ['peliculas', 'series']:
+            return jsonify({'error': 'Tipo inválido'}), 400
+        
+        # Obtener el límite de resultados
+        limite = request.args.get('limite', 10, type=int)
+        if limite > 20:
+            limite = 20  # Máximo 20 resultados
+        
+        # Cargar datos según el tipo
+        archivo = PELICULAS_FILE if tipo == 'peliculas' else SERIES_FILE
+        datos = cargar_json(archivo)
+        
+        if not datos:
+            return jsonify({'error': 'No se pudieron cargar los datos'}), 500
+        
+        # Buscar el item actual
+        item_actual = None
+        item_id = int(item_id)
+        if 0 <= item_id < len(datos):
+            item_actual = datos[item_id]
+        
+        if not item_actual:
+            return jsonify({'error': 'Item no encontrado'}), 404
+        
+        # Obtener géneros y año del item actual
+        generos_actual = item_actual.get('generos', [])
+        año_actual = item_actual.get('año')
+        
+        # Calcular relacionados con puntuación
+        relacionados = []
+        
+        for item in datos:
+            # Saltar el item actual
+            if item == item_actual:
+                continue
+            
+            puntuacion = 0
+            
+            # Puntos por géneros compartidos
+            generos_item = item.get('generos', [])
+            if generos_actual and generos_item:
+                generos_comunes = set(generos_actual) & set(generos_item)
+                puntuacion += len(generos_comunes) * 3  # 3 puntos por género común
+            
+            # Puntos por año cercano
+            año_item = item.get('año')
+            if año_actual and año_item:
+                try:
+                    diferencia_años = abs(int(año_actual) - int(año_item))
+                    if diferencia_años == 0:
+                        puntuacion += 5
+                    elif diferencia_años <= 1:
+                        puntuacion += 3
+                    elif diferencia_años <= 3:
+                        puntuacion += 2
+                    elif diferencia_años <= 5:
+                        puntuacion += 1
+                except (ValueError, TypeError):
+                    pass
+            
+            # Solo incluir si tiene alguna relación
+            if puntuacion > 0:
+                relacionados.append({
+                    'item': item,
+                    'puntuacion': puntuacion
+                })
+        
+        # Ordenar por puntuación descendente
+        relacionados.sort(key=lambda x: x['puntuacion'], reverse=True)
+        
+        # Limitar resultados
+        relacionados = relacionados[:limite]
+        
+        # Extraer solo los items (sin la puntuación)
+        resultado = [r['item'] for r in relacionados]
+        
+        return jsonify({
+            'relacionados': resultado,
+            'total': len(resultado),
+            'item_actual': {
+                'id': item_id,
+                'titulo': item_actual.get('titulo') or item_actual.get('nombre'),
+                'generos': generos_actual,
+                'año': año_actual
+            }
+        })
+    
+    except Exception as e:
+        print(f'Error obteniendo relacionados: {str(e)}')
+        return jsonify({'error': 'Error procesando la solicitud'}), 500
+
 # ==================== API PELÍCULAS ====================
 
 @app.route('/api/peliculas')
