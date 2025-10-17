@@ -1,6 +1,21 @@
 [
   {
     "tipo": "serie",
+    "titulo": "La Diplomática",
+    "enlace": "https://cinecalidad.bar/serie/la-diplomatica/",
+    "imagen": "https://image.tmdb.org/t/p/w342/1jEUtX0NQyZjZUt575061fKIaXm.jpg",
+    "temporadas": "seasons 2",
+    "episodios": "Episodios 6",
+    "calidad": "",
+    "año": "",
+    "descripcion": "En medio de una crisis internacional, una diplomática de carrera aterriza en un puesto de alto perfil para el que no es apta, con implicaciones tectónicas para su matrimonio y su futuro político.",
+    "generos": [
+      "Drama",
+      "War & Politics"
+    ]
+  },
+  {
+    "tipo": "serie",
     "titulo": "La nueva brigada",
     "enlace": "https://cinecalidad.bar/serie/la-nueva-brigada/",
     "imagen": "https://image.tmdb.org/t/p/w342/axSGysoo3CW3P1QnAxQrY1h7kWq.jpg",
@@ -1125,21 +1140,6 @@
     "generos": [
       "Drama",
       "Misterio"
-    ]
-  },
-  {
-    "tipo": "serie",
-    "titulo": "La Diplomática",
-    "enlace": "https://cinecalidad.bar/serie/la-diplomatica/",
-    "imagen": "https://image.tmdb.org/t/p/w342/1jEUtX0NQyZjZUt575061fKIaXm.jpg",
-    "temporadas": "seasons 2",
-    "episodios": "Episodios 6",
-    "calidad": "",
-    "año": "",
-    "descripcion": "En medio de una crisis internacional, una diplomática de carrera aterriza en un puesto de alto perfil para el que no es apta, con implicaciones tectónicas para su matrimonio y su futuro político.",
-    "generos": [
-      "Drama",
-      "War & Politics"
     ]
   },
   {

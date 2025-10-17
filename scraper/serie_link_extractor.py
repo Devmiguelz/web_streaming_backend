@@ -5,6 +5,7 @@ import time
 import os
 from urllib.parse import urlparse
 import uuid
+import re
 
 class CineCalidadSerieExtractor:
 
@@ -21,20 +22,18 @@ class CineCalidadSerieExtractor:
         }
 
     def cargar_series_json(self, archivo_json):
-        """Carga películas desde JSON"""
+        """Carga series desde JSON"""
         try:
             with open(archivo_json, 'r', encoding='utf-8') as f:
                 series = json.load(f)
-            print(f"✓ {len(series)} películas cargadas desde {archivo_json}")
+            print(f"✓ {len(series)} series cargadas desde {archivo_json}")
             return series
         except FileNotFoundError:
             print(f"❌ Error: No se encontró el archivo {archivo_json}")
             return []
     
     def extraer_player_url_episodio(self, url_episodio_serie):
-        """
-        Extrae la URL del iframe player desde la página de la película
-        """
+        """Extrae la URL del iframe player desde la página del episodio"""
         try:
             response = self.session.get(url_episodio_serie, headers=self.headers, timeout=15)
             response.raise_for_status()
@@ -66,9 +65,7 @@ class CineCalidadSerieExtractor:
             return None
 
     def extraer_servidores_video(self, player_url, referer_url):
-        """
-        Accede al iframe del player y extrae los servidores de video disponibles
-        """
+        """Accede al iframe del player y extrae los servidores de video disponibles"""
         try:
             # Headers específicos con referer
             headers_player = self.headers.copy()
@@ -93,7 +90,6 @@ class CineCalidadSerieExtractor:
                     # El onclick contiene: go_to_player('/r.php?id=...&hash=...')
                     if 'go_to_player' in onclick:
                         # Extraer la URL entre comillas
-                        import re
                         match = re.search(r"go_to_player\('([^']+)'\)", onclick)
                         if match:
                             ruta_relativa = match.group(1)
@@ -131,9 +127,7 @@ class CineCalidadSerieExtractor:
             return []
 
     def obtener_url_final_video(self, redirect_url, referer_url):
-        """
-        Sigue la redirección de /r.php para obtener la URL final del video
-        """
+        """Sigue la redirección de /r.php para obtener la URL final del video"""
         try:
             headers_redirect = self.headers.copy()
             headers_redirect['Referer'] = referer_url
@@ -226,28 +220,138 @@ class CineCalidadSerieExtractor:
         
         return info
     
-    def _extraer_temporadas_episodios(self, soup):
-        """Extrae las temporadas y sus episodios"""
+    def _cargar_episodios_temporada(self, serie_id, temporada_numero, url_serie):
+        """
+        Hace una petición AJAX para cargar los episodios de una temporada específica
+        """
+        try:
+
+            ajax_url = f"{self.base_url}/wp-admin/admin-ajax.php"
+            
+            data = {
+                'action': 'action_change_episode',
+                'serie': str(serie_id),
+                'season': str(temporada_numero)
+            }
+            
+            ajax_headers = {
+                'Accept': 'application/json, text/javascript, */*; q=0.01',
+                'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8',
+                'X-Requested-With': 'XMLHttpRequest',
+                'Origin': self.base_url,
+                'Referer': url_serie,
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+            }
+            
+            response = self.session.post(
+                ajax_url,
+                data=data,
+                headers=ajax_headers,
+                timeout=15
+            )
+            response.raise_for_status()
+
+            try:
+                json_response = response.json()
+                
+                if json_response.get('res') == 'conexion' and 'd' in json_response:
+                    episodios = []
+                    
+                    for ep_data in json_response['d']:
+                        imagen_url = None
+                        if ep_data.get('image'):
+                            img_match = re.search(r'src="([^"]+)"', ep_data['image'])
+                            if img_match:
+                                imagen_url = img_match.group(1)
+                        
+                        episodio_data = {
+                            'numero': f"{ep_data.get('season_number')}X{ep_data.get('episode')}",
+                            'titulo': ep_data.get('nameep'),
+                            'url': ep_data.get('url'),
+                            'imagen': imagen_url,
+                            'estado': ep_data.get('availability', {}).get('text'),
+                            'servidores': []
+                        }
+                        
+                        episodios.append(episodio_data)
+                    
+                    print(f"    ✓ {len(episodios)} episodios encontrados (JSON)")
+                    return episodios
+                else:
+                    print(f"    ⚠️ Respuesta JSON inesperada: {json_response}")
+                    
+            except json.JSONDecodeError:
+
+                print(f"    → Respuesta no es JSON, intentando parsear HTML...")
+                
+                html_episodios = response.text
+                
+                if not html_episodios or html_episodios.strip() == '':
+                    print(f"    ⚠️ No se recibieron episodios para temporada {temporada_numero}")
+                    return []
+                
+                soup = BeautifulSoup(html_episodios, 'html.parser')
+                episodios_list = soup.find_all('li', class_='TPostMve')
+                
+                episodios = []
+                
+                for ep in episodios_list:
+                    article = ep.find('article')
+                    if article:
+                        link_tag = article.find('a')
+                        titulo_tag = article.find('h2', class_='episodiotitle')
+                        numero_tag = article.find('span', class_='tilpisode')
+                        img_tag = article.find('img')
+                        estado_tag = article.find('span', class_='displ')
+                        
+                        episodio_data = {
+                            'numero': numero_tag.text.strip() if numero_tag else None,
+                            'titulo': titulo_tag.text.strip() if titulo_tag else None,
+                            'url': link_tag['href'] if link_tag else None,
+                            'imagen': img_tag['src'] if img_tag else None,
+                            'estado': estado_tag.text.strip() if estado_tag else None,
+                            'servidores': []
+                        }
+                        
+                        episodios.append(episodio_data)
+                
+                print(f"    ✓ {len(episodios)} episodios encontrados (HTML)")
+                return episodios
+            
+        except Exception as e:
+            print(f"    ❌ Error cargando episodios de temporada {temporada_numero}: {e}")
+            return []
+    
+    def _extraer_temporadas_episodios(self, soup, url_serie):
+        """Extrae las temporadas y sus episodios usando AJAX"""
         temporadas = []
         
         try:
-            # Buscar el selector de temporadas
             season_selector = soup.find('select', id='season-selector')
             
             if not season_selector:
                 print("No se encontró selector de temporadas")
                 return temporadas
             
-            # Obtener todas las opciones de temporada
             options = season_selector.find_all('option')
             
-            print(f"\n📺 Temporadas encontradas: {len(options)}")
+            if not options:
+                print("No se encontraron opciones de temporada")
+                return temporadas
+            
+            serie_id = options[0].get('data-serie') if options else None
+            
+            if not serie_id:
+                print("⚠️ No se pudo extraer el ID de la serie")
+                return temporadas
+            
+            print(f"\n📺 Temporadas encontradas: {len(options)} (Serie ID: {serie_id})")
             
             for option in options:
                 temp_numero = option['value']
                 temp_nombre = option.text.strip()
                 
-                print(f"  → {temp_nombre}")
+                print(f"\n  → {temp_nombre}")
                 
                 temporada_data = {
                     'numero': temp_numero,
@@ -255,36 +359,12 @@ class CineCalidadSerieExtractor:
                     'episodios': []
                 }
                 
-                # Buscar los episodios de esta temporada
-                # Los episodios están en divs con clase 'se-a'
-                episodes_container = soup.find('div', class_='se-a')
-                
-                if episodes_container:
-                    episodios_list = episodes_container.find_all('li', class_='TPostMve')
-                    
-                    for ep in episodios_list:
-                        article = ep.find('article')
-                        if article:
-                            link_tag = article.find('a')
-                            titulo_tag = article.find('h2', class_='episodiotitle')
-                            numero_tag = article.find('span', class_='tilpisode')
-                            img_tag = article.find('img')
-                            estado_tag = article.find('span', class_='displ')
-                            
-                            episodio_data = {
-                                'numero': numero_tag.text.strip() if numero_tag else None,
-                                'titulo': titulo_tag.text.strip() if titulo_tag else None,
-                                'url': link_tag['href'] if link_tag else None,
-                                'imagen': img_tag['src'] if img_tag else None,
-                                'estado': estado_tag.text.strip() if estado_tag else None,
-                                'servidores': []  # Se llenará después
-                            }
-                            
-                            temporada_data['episodios'].append(episodio_data)
-                    
-                    print(f"    ✓ {len(temporada_data['episodios'])} episodios encontrados")
+                episodios = self._cargar_episodios_temporada(serie_id, temp_numero, url_serie)
+                temporada_data['episodios'] = episodios
                 
                 temporadas.append(temporada_data)
+                
+                time.sleep(1)
             
         except Exception as e:
             print(f"Error al extraer temporadas y episodios: {e}")
@@ -307,13 +387,6 @@ class CineCalidadSerieExtractor:
     def procesar_serie(self, serie, delay_entre_episodios=5):
         """
         Extrae todos los datos de una serie incluyendo episodios y enlaces
-        
-        Args:
-            url_serie (str): URL de la serie (ej: https://cinecalidad.bar/serie/andor-v4/)
-            extraer_urls_finales (bool): Si True, extrae las URLs finales de video (más lento)
-        
-        Returns:
-            dict: Diccionario con toda la información de la serie
         """
         try:
             url_serie = serie.get('enlace')
@@ -327,23 +400,21 @@ class CineCalidadSerieExtractor:
             
             soup = BeautifulSoup(response.content, 'html.parser')
             
-            # Extraer información básica de la serie
             serie_info = self._extraer_info_basica(soup)
             
-            # Extraer temporadas y episodios
-            temporadas = self._extraer_temporadas_episodios(soup)
+            temporadas = self._extraer_temporadas_episodios(soup, url_serie)
             
-            # Extraer enlaces de cada episodio
             print("\n🎬 Extrayendo enlaces de servidores de cada episodio...\n")
             for temporada in temporadas:
+                print(f"\n📂 Procesando {temporada['nombre']}...")
                 for episodio in temporada['episodios']:
-                    print(f"  → Procesando: {episodio['titulo']}")
+                    print(f"  → {episodio['titulo']}")
                     servidores = self._extraer_enlaces_episodio(episodio['url'])
                     episodio['servidores'] = servidores
-                    time.sleep(delay_entre_episodios) 
+                    time.sleep(delay_entre_episodios)
             
-            # Construir el resultado final
             resultado = {
+                'id': f"{uuid.uuid4()}",
                 **serie_info,
                 'url_serie': url_serie,
                 'temporadas': temporadas
@@ -360,9 +431,7 @@ class CineCalidadSerieExtractor:
             return None
 
     def procesar_series(self, archivo_json, limite=None, delay=5):
-        """
-        Procesa múltiples películas
-        """
+        """Procesa múltiples series"""
         series = self.cargar_series_json(archivo_json)
         
         if not series:
@@ -375,27 +444,24 @@ class CineCalidadSerieExtractor:
         total = len(series)
         
         print(f"\n{'='*80}")
-        print(f"Procesando {total} películas...")
+        print(f"Procesando {total} series...")
         print('='*80)
         
         for i, serie in enumerate(series, 1):
             print(f"\n[{i}/{total}] {serie.get('titulo', 'Sin título')}")
             
-            resultado = self.procesar_serie(serie)
+            resultado = self.procesar_serie(serie, delay_entre_episodios=delay)
             
             if resultado:
                 resultados.append(resultado)
             
-            # Pausa entre películas
             if i < total:
                 time.sleep(delay)
         
         return resultados
 
-    def guardar_resultados(self, resultados, prefijo='series'):
-        """
-        Guarda resultados únicamente en un archivo JSON
-        """
+    def guardar_resultados(self, resultados, prefijo='series_new'):
+        """Guarda resultados en un archivo JSON"""
         if not resultados:
             print("No hay resultados para guardar")
             return
@@ -411,41 +477,35 @@ class CineCalidadSerieExtractor:
         print(f"\n✓ JSON guardado: {ruta_archivo}")
     
     def recuperar_propiedad_faltantes(self, archivo_cache, archivo_database, delay=1):
-        """
-        Lee el JSON de cache y actualiza solo las películas sin año desde database
-        """
-        # Cargar películas desde cache
+        """Lee el JSON de cache y actualiza propiedades faltantes desde database"""
         series = self.cargar_series_json(archivo_cache)
 
         if not series:
             return []
         
-        # Cargar database si se proporciona
         series_database = None
         if archivo_database:
-            print(f"\n📥 Cargando database para buscar propiedad faltantes...")
+            print(f"\n📥 Cargando database para buscar propiedades faltantes...")
             series_database = self.cargar_series_json(archivo_database)
         else:
-            print("❌ Se requiere archivo database para actualizar propiedad")
+            print("❌ Se requiere archivo database para actualizar propiedades")
             return series
         
-        # Filtrar películas sin año
         serie_sin_propiedad = []
         for serie in series:
-            año = serie.get('propiedad')
+            propiedad = serie.get('propiedad')
             
-            # Si no tiene año o el año está vacío
-            if not año or año == "" or año is None:
+            if not propiedad or propiedad == "" or propiedad is None:
                 serie_sin_propiedad.append(serie)
         
         total = len(serie_sin_propiedad)
         
         if total == 0:
-            print("✅ Todas las películas ya tienen año!")
+            print("✅ Todas las series ya tienen la propiedad!")
             return series
         
         print(f"\n{'='*80}")
-        print(f"🔄 Actualizando años de {total} películas...")
+        print(f"🔄 Actualizando propiedades de {total} series...")
         print('='*80)
         
         actualizadas = 0
@@ -455,79 +515,65 @@ class CineCalidadSerieExtractor:
             titulo = serie.get('titulo', 'Sin título')
             print(f"\n[{i}/{total}] {titulo}")
             
-            # Buscar año en database
-            año_encontrado = None
-            for p_db in series_database:
-                if p_db.get('titulo') == titulo:
-                    año_encontrado = p_db.get('tipo')
+            propiedad_encontrada = None
+            for s_db in series_database:
+                if s_db.get('titulo') == titulo:
+                    propiedad_encontrada = s_db.get('tipo')
                     break
             
-            # Actualizar en la lista original
-            for j, p in enumerate(series):
-                if p.get('titulo') == titulo:
-                    if año_encontrado:
+            for j, s in enumerate(series):
+                if s.get('titulo') == titulo:
+                    if propiedad_encontrada:
                         series[j]['id'] = f"{uuid.uuid4()}"
-                        print(f"   ✅ Propiedad actualizada: {año_encontrado}")
+                        print(f"   ✅ Propiedad actualizada: {propiedad_encontrada}")
                         actualizadas += 1
                     else:
                         print(f"   ⚠️  Propiedad no encontrada en database")
                         no_encontradas += 1
                     break
             
-            # Pausa entre películas
             if i < total:
                 time.sleep(delay)
         
-        # Resumen
         print(f"\n{'='*80}")
-        print(f"📊 Resumen de actualización de propiedad:")
+        print(f"📊 Resumen de actualización:")
         print(f"   ✅ Actualizadas: {actualizadas}")
         print(f"   ⚠️  No encontradas: {no_encontradas}")
         print('='*80)
         
-        # Guardar resultados actualizados
         self.guardar_resultados(series, prefijo='series_actualizadas')
 
     def seleccionar_archivo_json(self, carpeta='database'):
-        """
-        Lista los archivos JSON disponibles y permite seleccionar uno
-        """
-
+        """Lista los archivos JSON disponibles y permite seleccionar uno"""
         database_path = os.path.join(os.path.dirname(__file__), f'../{carpeta}')
         
-        # Verificar que existe la carpeta
         if not os.path.exists(database_path):
             print(f"❌ Error: No se encontró la carpeta {database_path}")
             return None
         
-        # Obtener todos los archivos JSON
         archivos_json = sorted([f for f in os.listdir(database_path) if f.endswith('.json')])
         
         if not archivos_json:
             print(f"❌ No se encontraron archivos JSON en {database_path}")
             return None
         
-        # Mostrar lista de archivos
         print(f"\n📁 Archivos JSON disponibles en {carpeta}/:")
         print("-" * 90)
         for i, archivo in enumerate(archivos_json, 1):
             ruta_completa = os.path.join(database_path, archivo)
             tamano = os.path.getsize(ruta_completa) / 1024
             
-            # Intentar leer el número de películas
             try:
                 with open(ruta_completa, 'r', encoding='utf-8') as f:
                     datos = json.load(f)
-                    num_peliculas = len(datos) if isinstance(datos, list) else "?"
-                    # Contar películas sin servidores
+                    num_items = len(datos) if isinstance(datos, list) else "?"
                     sin_servidores = sum(1 for p in datos if not p.get('servidores', []))
-                    print(f"  {i}. {archivo:<35} ({tamano:>6.1f} KB | {num_peliculas:>4} películas | {sin_servidores:>3} sin servidores)")
+                    print(f"  {i}. {archivo:<35} ({tamano:>6.1f} KB | {num_items:>4} series | {sin_servidores:>3} sin servidores)")
             except:
                 print(f"  {i}. {archivo:<35} ({tamano:>6.1f} KB)")
         
         print("-" * 90)
         
-        # Solicitar selección
         while True:
             try:
                 seleccion = input(f"\nSelecciona un archivo (1-{len(archivos_json)}) o Enter para cancelar: ").strip()
@@ -560,16 +606,14 @@ if __name__ == "__main__":
     print("🎬 EXTRACTOR DE SERIES - CINECALIDAD")
     print("="*80)
 
-    # Menú principal
     print("\n¿Qué deseas hacer?")
     print("  1. Procesar series desde database/")
-    print("  2. Actualizar propiedad faltantes desde cache/ (requiere database/)")
+    print("  2. Actualizar propiedades faltantes desde cache/ (requiere database/)")
 
-    modo = input("\nOpción (1-3): ").strip()
+    modo = input("\nOpción (1-2): ").strip()
         
     if modo == '2':
-
-        print("\n🔄 MODO: Actualizar años faltantes")
+        print("\n🔄 MODO: Actualizar propiedades faltantes")
         archivo_cache = extractor.seleccionar_archivo_json(carpeta='cache')        
         if not archivo_cache:
             print("\n❌ Debes seleccionar un archivo de cache para continuar")
@@ -580,7 +624,6 @@ if __name__ == "__main__":
             print("\n❌ Debes seleccionar un archivo de database para continuar")
             exit(1)
         
-        # Actualizar años
         extractor.recuperar_propiedad_faltantes(
             archivo_cache=archivo_cache,
             archivo_database=archivo_database,
@@ -588,43 +631,39 @@ if __name__ == "__main__":
         )
 
     elif modo == '1':
-        # Solicitar archivo JSON
         archivo_json = extractor.seleccionar_archivo_json()
 
         if not archivo_json:
             exit(1)
 
-        # Preguntar cuántas procesar
-        print("\n¿Cuántas películas procesar?")
-        print("  1. Solo 3 (prueba rápida)")
-        print("  2. 10 películas")
-        print("  3. 25 películas")
-        print("  4. Recuperar servidores")
-        print("  5. Todas")
+        print("\n¿Cuántas series procesar?")
+        print("  1. Solo 1 (prueba rápida)")
+        print("  2. 3 series")
+        print("  3. 10 series")
+        print("  4. Todas")
         
-        opcion = input("\nOpción (1-5): ").strip()
-        limite_map = {'1': 3, '2': 10, '3': 25, '4': -1, '5': None}
-        limite = limite_map.get(opcion, 3)
+        opcion = input("\nOpción (1-4): ").strip()
+        limite_map = {'1': 1, '2': 3, '3': 10, '4': None}
+        limite = limite_map.get(opcion, 1)
 
         if limite is not None:
-            print(f"\n⚙️ Procesando {limite} películas...")    
-        elif limite == -1:
-            print("\n⚙️ Recuperando servidores de TODAS las películas (esto puede tardar)...")
+            print(f"\n⚙️ Procesando {limite} series...")    
         else:
-            print("\n⚙️ Procesando TODAS las películas (esto puede tardar)...")
+            print("\n⚙️ Procesando TODAS las series (esto puede tardar)...")
         
-        # Procesar
         resultados = extractor.procesar_series(
             archivo_json=archivo_json,
             limite=limite,
-            delay=5  
+            delay=3
         )
+        
         if resultados:
             print(f"\n{'='*80}")
             print(f"✅ Completado: {len(resultados)} series procesadas")
             print('='*80)
             
-            # Guardar
             extractor.guardar_resultados(resultados)
         else:
-            print("\n❌ No se procesó ninguna película")
+            print("\n❌ No se procesó ninguna serie")
+    else:
+        print("❌ Opción inválida")
