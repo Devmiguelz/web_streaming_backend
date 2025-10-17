@@ -457,7 +457,7 @@ class AdvancedLinksExtractor:
         print('='*80)
         
         # Guardar resultados actualizados
-        self.guardar_resultados(peliculas, prefijo='peliculas_años_actualizados')
+        self.guardar_resultados(peliculas, prefijo='peliculas_actualizados')
 
     def procesar_peliculas(self, archivo_json, limite=None, delay=10):
         """

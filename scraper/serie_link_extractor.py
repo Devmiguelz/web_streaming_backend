@@ -3,7 +3,8 @@ from bs4 import BeautifulSoup
 import json
 import time
 import os
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urlparse
+import uuid
 
 class CineCalidadSerieExtractor:
 
@@ -23,9 +24,9 @@ class CineCalidadSerieExtractor:
         """Carga películas desde JSON"""
         try:
             with open(archivo_json, 'r', encoding='utf-8') as f:
-                peliculas = json.load(f)
-            print(f"✓ {len(peliculas)} películas cargadas desde {archivo_json}")
-            return peliculas
+                series = json.load(f)
+            print(f"✓ {len(series)} películas cargadas desde {archivo_json}")
+            return series
         except FileNotFoundError:
             print(f"❌ Error: No se encontró el archivo {archivo_json}")
             return []
@@ -409,33 +410,122 @@ class CineCalidadSerieExtractor:
 
         print(f"\n✓ JSON guardado: {ruta_archivo}")
     
-    def seleccionar_archivo_json(self):
+    def recuperar_propiedad_faltantes(self, archivo_cache, archivo_database, delay=1):
         """
-        Lista los archivos JSON disponibles en ../database y permite seleccionar uno
+        Lee el JSON de cache y actualiza solo las películas sin año desde database
         """
-        database_path = os.path.join('..', 'database')
+        # Cargar películas desde cache
+        series = self.cargar_series_json(archivo_cache)
+
+        if not series:
+            return []
         
-        # Verificar que existe la carpeta database
+        # Cargar database si se proporciona
+        series_database = None
+        if archivo_database:
+            print(f"\n📥 Cargando database para buscar propiedad faltantes...")
+            series_database = self.cargar_series_json(archivo_database)
+        else:
+            print("❌ Se requiere archivo database para actualizar propiedad")
+            return series
+        
+        # Filtrar películas sin año
+        serie_sin_propiedad = []
+        for serie in series:
+            año = serie.get('propiedad')
+            
+            # Si no tiene año o el año está vacío
+            if not año or año == "" or año is None:
+                serie_sin_propiedad.append(serie)
+        
+        total = len(serie_sin_propiedad)
+        
+        if total == 0:
+            print("✅ Todas las películas ya tienen año!")
+            return series
+        
+        print(f"\n{'='*80}")
+        print(f"🔄 Actualizando años de {total} películas...")
+        print('='*80)
+        
+        actualizadas = 0
+        no_encontradas = 0
+        
+        for i, serie in enumerate(serie_sin_propiedad, 1):
+            titulo = serie.get('titulo', 'Sin título')
+            print(f"\n[{i}/{total}] {titulo}")
+            
+            # Buscar año en database
+            año_encontrado = None
+            for p_db in series_database:
+                if p_db.get('titulo') == titulo:
+                    año_encontrado = p_db.get('tipo')
+                    break
+            
+            # Actualizar en la lista original
+            for j, p in enumerate(series):
+                if p.get('titulo') == titulo:
+                    if año_encontrado:
+                        series[j]['id'] = f"{uuid.uuid4()}"
+                        print(f"   ✅ Propiedad actualizada: {año_encontrado}")
+                        actualizadas += 1
+                    else:
+                        print(f"   ⚠️  Propiedad no encontrada en database")
+                        no_encontradas += 1
+                    break
+            
+            # Pausa entre películas
+            if i < total:
+                time.sleep(delay)
+        
+        # Resumen
+        print(f"\n{'='*80}")
+        print(f"📊 Resumen de actualización de propiedad:")
+        print(f"   ✅ Actualizadas: {actualizadas}")
+        print(f"   ⚠️  No encontradas: {no_encontradas}")
+        print('='*80)
+        
+        # Guardar resultados actualizados
+        self.guardar_resultados(series, prefijo='series_actualizadas')
+
+    def seleccionar_archivo_json(self, carpeta='database'):
+        """
+        Lista los archivos JSON disponibles y permite seleccionar uno
+        """
+
+        database_path = os.path.join(os.path.dirname(__file__), f'../{carpeta}')
+        
+        # Verificar que existe la carpeta
         if not os.path.exists(database_path):
             print(f"❌ Error: No se encontró la carpeta {database_path}")
             return None
         
         # Obtener todos los archivos JSON
-        archivos_json = [f for f in os.listdir(database_path) if f.endswith('.json')]
+        archivos_json = sorted([f for f in os.listdir(database_path) if f.endswith('.json')])
         
         if not archivos_json:
             print(f"❌ No se encontraron archivos JSON en {database_path}")
             return None
         
         # Mostrar lista de archivos
-        print("\n📁 Archivos JSON disponibles en database/:")
-        print("-" * 60)
+        print(f"\n📁 Archivos JSON disponibles en {carpeta}/:")
+        print("-" * 90)
         for i, archivo in enumerate(archivos_json, 1):
             ruta_completa = os.path.join(database_path, archivo)
-            # Obtener tamaño del archivo
-            tamano = os.path.getsize(ruta_completa) / 1024  # KB
-            print(f"  {i}. {archivo} ({tamano:.1f} KB)")
-        print("-" * 60)
+            tamano = os.path.getsize(ruta_completa) / 1024
+            
+            # Intentar leer el número de películas
+            try:
+                with open(ruta_completa, 'r', encoding='utf-8') as f:
+                    datos = json.load(f)
+                    num_peliculas = len(datos) if isinstance(datos, list) else "?"
+                    # Contar películas sin servidores
+                    sin_servidores = sum(1 for p in datos if not p.get('servidores', []))
+                    print(f"  {i}. {archivo:<35} ({tamano:>6.1f} KB | {num_peliculas:>4} películas | {sin_servidores:>3} sin servidores)")
+            except:
+                print(f"  {i}. {archivo:<35} ({tamano:>6.1f} KB)")
+        
+        print("-" * 90)
         
         # Solicitar selección
         while True:
@@ -469,43 +559,72 @@ if __name__ == "__main__":
     
     print("🎬 EXTRACTOR DE SERIES - CINECALIDAD")
     print("="*80)
-    
-    # Solicitar archivo JSON
-    archivo_json = extractor.seleccionar_archivo_json()
-    if not archivo_json:
-        exit(1)
-    
-    # Preguntar cuántas procesar
-    print("\n¿Cuántas películas procesar?")
-    print("  1. Solo 3 (prueba rápida)")
-    print("  2. 10 películas")
-    print("  3. 25 películas")
-    print("  4. Recuperar servidores")
-    print("  5. Todas")
-    
-    opcion = input("\nOpción (1-5): ").strip()
-    limite_map = {'1': 3, '2': 10, '3': 25, '4': -1, '5': None}
-    limite = limite_map.get(opcion, 3)
 
-    if limite is not None:
-        print(f"\n⚙️ Procesando {limite} películas...")    
-    elif limite == -1:
-        print("\n⚙️ Recuperando servidores de TODAS las películas (esto puede tardar)...")
-    else:
-        print("\n⚙️ Procesando TODAS las películas (esto puede tardar)...")
-    
-    # Procesar
-    resultados = extractor.procesar_series(
-        archivo_json=archivo_json,
-        limite=limite,
-        delay=5  
-    )
-    if resultados:
-        print(f"\n{'='*80}")
-        print(f"✅ Completado: {len(resultados)} series procesadas")
-        print('='*80)
+    # Menú principal
+    print("\n¿Qué deseas hacer?")
+    print("  1. Procesar series desde database/")
+    print("  2. Actualizar propiedad faltantes desde cache/ (requiere database/)")
+
+    modo = input("\nOpción (1-3): ").strip()
         
-        # Guardar
-        extractor.guardar_resultados(resultados)
-    else:
-        print("\n❌ No se procesó ninguna película")
+    if modo == '2':
+
+        print("\n🔄 MODO: Actualizar años faltantes")
+        archivo_cache = extractor.seleccionar_archivo_json(carpeta='cache')        
+        if not archivo_cache:
+            print("\n❌ Debes seleccionar un archivo de cache para continuar")
+            exit(1)
+        
+        archivo_database = extractor.seleccionar_archivo_json(carpeta='database')        
+        if not archivo_database:
+            print("\n❌ Debes seleccionar un archivo de database para continuar")
+            exit(1)
+        
+        # Actualizar años
+        extractor.recuperar_propiedad_faltantes(
+            archivo_cache=archivo_cache,
+            archivo_database=archivo_database,
+            delay=0
+        )
+
+    elif modo == '1':
+        # Solicitar archivo JSON
+        archivo_json = extractor.seleccionar_archivo_json()
+
+        if not archivo_json:
+            exit(1)
+
+        # Preguntar cuántas procesar
+        print("\n¿Cuántas películas procesar?")
+        print("  1. Solo 3 (prueba rápida)")
+        print("  2. 10 películas")
+        print("  3. 25 películas")
+        print("  4. Recuperar servidores")
+        print("  5. Todas")
+        
+        opcion = input("\nOpción (1-5): ").strip()
+        limite_map = {'1': 3, '2': 10, '3': 25, '4': -1, '5': None}
+        limite = limite_map.get(opcion, 3)
+
+        if limite is not None:
+            print(f"\n⚙️ Procesando {limite} películas...")    
+        elif limite == -1:
+            print("\n⚙️ Recuperando servidores de TODAS las películas (esto puede tardar)...")
+        else:
+            print("\n⚙️ Procesando TODAS las películas (esto puede tardar)...")
+        
+        # Procesar
+        resultados = extractor.procesar_series(
+            archivo_json=archivo_json,
+            limite=limite,
+            delay=5  
+        )
+        if resultados:
+            print(f"\n{'='*80}")
+            print(f"✅ Completado: {len(resultados)} series procesadas")
+            print('='*80)
+            
+            # Guardar
+            extractor.guardar_resultados(resultados)
+        else:
+            print("\n❌ No se procesó ninguna película")

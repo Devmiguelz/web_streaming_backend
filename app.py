@@ -155,13 +155,10 @@ def obtener_relacionados(tipo, item_id):
             return jsonify({'error': 'No se pudieron cargar los datos'}), 500
         
         # Buscar el item actual
-        item_actual = None
-        item_id = int(item_id)
-        if 0 <= item_id < len(datos):
-            item_actual = datos[item_id]
+        item_actual = next((item for item in datos if item.get('id') == item_id), None)
         
         if not item_actual:
-            return jsonify({'error': 'Item no encontrado'}), 404
+            return jsonify({'error': f'Item con ID {item_id} no encontrado'}), 404
         
         # Obtener géneros y año del item actual
         generos_actual = item_actual.get('generos', [])
@@ -170,7 +167,7 @@ def obtener_relacionados(tipo, item_id):
         # Calcular relacionados con puntuación
         relacionados = []
         
-        for item in enumerate(datos):
+        for item in datos:
             # Saltar el item actual
             if item == item_actual:
                 continue
@@ -291,8 +288,13 @@ def detalle_pelicula(id):
     """Obtiene el detalle de una película"""
     peliculas = cargar_json(PELICULAS_FILE)
     
-    if 0 <= id < len(peliculas):
-        return jsonify(peliculas[id])
+    if not peliculas:
+        return jsonify({'error': 'No se pudieron cargar los datos'}), 500
+    
+    pelicula = next((p for p in peliculas if p.get('id') == id), None)
+    
+    if pelicula:
+        return jsonify(pelicula)
     
     return jsonify({'error': 'Película no encontrada'}), 404
 
@@ -319,11 +321,9 @@ def listar_series():
     genero = request.args.get('genero', None)
     ordenar = request.args.get('ordenar', 'reciente')
     
-    # Filtrar por género
     if genero:
         series = [s for s in series if genero in s.get('generos', [])]
     
-    # Ordenar
     if ordenar == 'titulo':
         series.sort(key=lambda x: x.get('titulo', ''))
     
@@ -355,8 +355,10 @@ def detalle_serie(id):
     """Obtiene el detalle completo de una serie"""
     series = cargar_json(SERIES_FILE)
     
-    if 0 <= id < len(series):
-        return jsonify(series[id])
+    serie = next((p for p in series if p.get('id') == id), None)
+
+    if serie:
+        return jsonify(serie)
     
     return jsonify({'error': 'Serie no encontrada'}), 404
 
