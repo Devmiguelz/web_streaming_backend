@@ -1,19 +1,26 @@
+import json
+import os
+import sys
+import smtplib
 from flask import Flask, jsonify, request, send_from_directory
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_cors import CORS
-import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime
-import json
-import os
 from dotenv import load_dotenv
 
 # Cargar variables de entorno
 load_dotenv()
 
-app = Flask(__name__, static_folder='../frontend', static_url_path='')
+# ==================== CONFIGURACIÓN DE LA APP ====================
+if sys.platform == 'win32':
+    app = Flask(__name__, static_folder='../frontend', static_url_path='')
+else:
+    app = Flask(__name__)
+
+# Configurar rate limiting
 limiter = Limiter(
     get_remote_address,  # Función para identificar al cliente (por IP)
     app=app,
@@ -597,5 +604,11 @@ if __name__ == '__main__':
     print("=" * 60)
     print("🌐 Servidor corriendo en http://localhost:5400")
     print("=" * 60)
-    
-    app.run(debug=True, host='0.0.0.0', port=5400)
+
+    if sys.platform == 'win32':
+        from waitress import serve
+        print("Running with Waitress on Windows...")
+        serve(app, host='0.0.0.0', port=5400)
+    else:
+        print("Running Flask development server...")
+        app.run(host='0.0.0.0', port=5400)

@@ -6,3 +6,8 @@ lxml
 APScheduler
 python-dotenv
 Flask-Limiter
+# Servidor WSGI para producción (Linux)
+gunicorn; sys_platform != 'win32'
+
+# Servidor WSGI para desarrollo (Windows)
+waitress; sys_platform == 'win32'
