@@ -170,13 +170,12 @@ def obtener_relacionados(tipo, item_id):
         # Calcular relacionados con puntuación
         relacionados = []
         
-        for index, item in enumerate(datos):
+        for item in enumerate(datos):
             # Saltar el item actual
             if item == item_actual:
                 continue
             
             puntuacion = 0
-            item["id"] = index
             
             # Puntos por géneros compartidos
             generos_item = item.get('generos', [])
