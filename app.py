@@ -10,6 +10,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime
 from dotenv import load_dotenv
+import resend
 
 # Cargar variables de entorno
 load_dotenv()
@@ -67,10 +68,7 @@ CACHE_DIR = 'cache'
 PELICULAS_FILE = os.path.join(CACHE_DIR, 'peliculas.json')
 SERIES_FILE = os.path.join(CACHE_DIR, 'series.json')
 
-EMAIL_HOST = os.getenv('EMAIL_HOST')
-EMAIL_PORT = int(os.getenv('EMAIL_PORT'))
-EMAIL_USER = os.getenv('EMAIL_USER')
-EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')
+resend.api_key = os.getenv('RESEND_API_KEY')
 EMAIL_DESTINATARIO = os.getenv('EMAIL_DESTINATARIO')
 
 # Crear directorio de cache si no existe
@@ -510,30 +508,13 @@ def server_error(e):
 
 def enviar_email(nombre, email, asunto, mensaje):
     """
-    Envía un email usando SMTP
+    Envía un email usando Resend
     """
     try:
-        # Crear el mensaje
-        msg = MIMEMultipart('alternative')
-        msg['Subject'] = f'[Cinevo Contacto] {asunto}'
-        msg['From'] = EMAIL_USER
-        msg['To'] = EMAIL_DESTINATARIO
-        msg['Reply-To'] = email
+        if not resend.api_key:
+            print('❌ Error: RESEND_API_KEY no configurado')
+            return False
         
-        # Contenido del email en texto plano
-        texto_plano = f"""
-        Nuevo mensaje de contacto desde Cinevo
-        
-        Nombre: {nombre}
-        Email: {email}
-        Asunto: {asunto}
-        Fecha: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}
-        
-        Mensaje:
-        {mensaje}
-        """
-        
-        # Contenido del email en HTML
         html = f"""
         <html>
             <head>
@@ -607,23 +588,20 @@ def enviar_email(nombre, email, asunto, mensaje):
         </html>
         """
         
-        # Adjuntar ambas versiones
-        parte_texto = MIMEText(texto_plano, 'plain', 'utf-8')
-        parte_html = MIMEText(html, 'html', 'utf-8')
+        params = {
+            "from": "onboarding@resend.dev",
+            "to": [EMAIL_DESTINATARIO],
+            "subject": f"[Cinevo Contacto] {asunto}",
+            "html": html,
+            "reply_to": email 
+        }
         
-        msg.attach(parte_texto)
-        msg.attach(parte_html)
-        
-        # Conectar al servidor SMTP y enviar
-        with smtplib.SMTP(EMAIL_HOST, EMAIL_PORT) as server:
-            server.starttls()  # Seguridad TLS
-            server.login(EMAIL_USER, EMAIL_PASSWORD)
-            server.send_message(msg)
-        
+        email_response = resend.Emails.send(params)
+        print(f'✅ Email enviado: {email_response}')
         return True
-    
+        
     except Exception as e:
-        print(f'Error enviando email: {str(e)}')
+        print(f'❌ Error enviando email con Resend: {str(e)}')
         return False
 
 # ==================== INICIO DEL SERVIDOR ====================
