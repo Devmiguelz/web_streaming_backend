@@ -283,7 +283,7 @@ def buscar_peliculas():
     
     return jsonify(paginar(resultados, pagina))
 
-@app.route('/api/pelicula/<int:id>')
+@app.route('/api/pelicula/<string:id>')
 def detalle_pelicula(id):
     """Obtiene el detalle de una película"""
     peliculas = cargar_json(PELICULAS_FILE)
@@ -350,7 +350,7 @@ def buscar_series():
     
     return jsonify(paginar(resultados, pagina))
 
-@app.route('/api/serie/<int:id>')
+@app.route('/api/serie/<string:id>')
 def detalle_serie(id):
     """Obtiene el detalle completo de una serie"""
     series = cargar_json(SERIES_FILE)
