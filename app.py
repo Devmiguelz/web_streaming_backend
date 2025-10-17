@@ -28,7 +28,39 @@ limiter = Limiter(
     storage_uri="memory://",  # Backend de almacenamiento
     strategy="fixed-window"  # Estrategia de conteo
 )
-CORS(app)  
+
+# Obtener el entorno
+ENV = os.environ.get('FLASK_ENV', 'production')
+
+if ENV == 'development':
+    # En desarrollo: permitir localhost
+    CORS(app, resources={
+        r"/api/*": {
+            "origins": [
+                "http://localhost:5400",
+                "http://127.0.0.1:5400"
+            ],
+            "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+            "allow_headers": ["Content-Type", "Authorization"],
+            "supports_credentials": True
+        }
+    })
+    print("🔧 CORS configurado para DESARROLLO")
+else:
+    ALLOWED_ORIGINS = [
+        "https://web-streaming-frontend.pages.dev",  
+        "https://cinevo.lat"            
+    ]
+    
+    CORS(app, resources={
+        r"/api/*": {
+            "origins": ALLOWED_ORIGINS,
+            "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+            "allow_headers": ["Content-Type", "Authorization"],
+            "supports_credentials": True
+        }
+    })
+    print(f"🔒 CORS configurado para PRODUCCIÓN: {ALLOWED_ORIGINS}")
 
 # Configuración
 CACHE_DIR = 'cache'
