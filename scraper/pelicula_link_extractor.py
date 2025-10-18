@@ -500,7 +500,7 @@ class AdvancedLinksExtractor:
         
         return resultados
     
-    def guardar_resultados(self, resultados, prefijo='peliculas'):
+    def guardar_resultados(self, resultados, prefijo='peliculas_new'):
         """
         Guarda resultados únicamente en un archivo JSON
         """
@@ -656,8 +656,8 @@ if __name__ == "__main__":
         # Preguntar cuántas procesar
         print("\n¿Cuántas películas procesar?")
         print("  1. Solo 3 (prueba rápida)")
-        print("  2. 10 películas")
-        print("  3. 25 películas")
+        print("  2. 100 películas")
+        print("  3. 200 películas")
         print("  4. Todas")
         
         opcion = input("\nOpción (1-4): ").strip()

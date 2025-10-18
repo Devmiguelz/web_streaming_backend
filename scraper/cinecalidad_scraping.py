@@ -67,7 +67,7 @@ class CinecalidadScraper:
                         generos = [g.text.strip() for g in generos_links]
                     
                     pelicula_data = {
-                        'id': uuid.uuid4(),
+                        'id': f"{uuid.uuid4()}",
                         'tipo': tipo,
                         'titulo': titulo,
                         'enlace': enlace,
@@ -153,7 +153,7 @@ class CinecalidadScraper:
                         generos = [g.text.strip() for g in generos_links]
                 
                     serie_data = {
-                        'id': uuid.uuid4(),
+                        'id': f"{uuid.uuid4()}",
                         'tipo': tipo,
                         'titulo': titulo,
                         'enlace': enlace,

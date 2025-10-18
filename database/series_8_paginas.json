@@ -1,20 +1,6 @@
 [
   {
-    "tipo": "serie",
-    "titulo": "La Diplomática",
-    "enlace": "https://cinecalidad.bar/serie/la-diplomatica/",
-    "imagen": "https://image.tmdb.org/t/p/w342/1jEUtX0NQyZjZUt575061fKIaXm.jpg",
-    "temporadas": "seasons 2",
-    "episodios": "Episodios 6",
-    "calidad": "",
-    "año": "",
-    "descripcion": "En medio de una crisis internacional, una diplomática de carrera aterriza en un puesto de alto perfil para el que no es apta, con implicaciones tectónicas para su matrimonio y su futuro político.",
-    "generos": [
-      "Drama",
-      "War & Politics"
-    ]
-  },
-  {
+    "id": "fcd543e5-4f8c-4998-9fa1-dd2f63f6fb85",
     "tipo": "serie",
     "titulo": "La nueva brigada",
     "enlace": "https://cinecalidad.bar/serie/la-nueva-brigada/",
@@ -29,6 +15,7 @@
     ]
   },
   {
+    "id": "f733d759-443f-4f7d-bae0-a250f584523d",
     "tipo": "serie",
     "titulo": "Monstruo: La historia de Ed Gein",
     "enlace": "https://cinecalidad.bar/serie/monstruo-la-historia-de-ed-gein/",
@@ -44,6 +31,7 @@
     ]
   },
   {
+    "id": "8884bacb-63df-459f-8403-e16d27cdc5eb",
     "tipo": "serie",
     "titulo": "The Rookie",
     "enlace": "https://cinecalidad.bar/serie/the-rookie/",
@@ -60,6 +48,7 @@
     ]
   },
   {
+    "id": "808a4cef-02f3-438b-a52e-67f9c477de43",
     "tipo": "serie",
     "titulo": "Alien: Earth",
     "enlace": "https://cinecalidad.bar/serie/alien-earth-s3/",
@@ -75,6 +64,7 @@
     ]
   },
   {
+    "id": "75633fc6-4273-42b1-b926-4debce12a161",
     "tipo": "serie",
     "titulo": "She-Hulk: Defensora de héroes",
     "enlace": "https://cinecalidad.bar/serie/she-hulk-defensora-de-heroes-s1/",
@@ -90,6 +80,7 @@
     ]
   },
   {
+    "id": "88d0b172-5b5e-4e4e-abc8-58e3076412e1",
     "tipo": "serie",
     "titulo": "Mix Tape",
     "enlace": "https://cinecalidad.bar/serie/mix-tape/",
@@ -104,6 +95,7 @@
     ]
   },
   {
+    "id": "a7dc006b-5ee3-488e-922e-23a81fd10b23",
     "tipo": "serie",
     "titulo": "Merlina",
     "enlace": "https://cinecalidad.bar/serie/merlina/",
@@ -120,6 +112,7 @@
     ]
   },
   {
+    "id": "72e4fa56-af77-4007-9b43-5f3675b4751b",
     "tipo": "serie",
     "titulo": "El gran guerrero",
     "enlace": "https://cinecalidad.bar/serie/el-gran-guerrero/",
@@ -134,6 +127,7 @@
     ]
   },
   {
+    "id": "a58b3530-84cd-41df-b291-022ef2fbf23c",
     "tipo": "serie",
     "titulo": "Los ojos de Wakanda",
     "enlace": "https://cinecalidad.bar/serie/los-ojos-de-wakanda-s2/",
@@ -150,6 +144,7 @@
     ]
   },
   {
+    "id": "953f75ab-3de2-403a-9447-45361c7af1f0",
     "tipo": "serie",
     "titulo": "Love, Death & Robots",
     "enlace": "https://cinecalidad.bar/serie/love-death-robots/",
@@ -165,6 +160,7 @@
     ]
   },
   {
+    "id": "648d37cf-8550-4283-922d-f388b5b8a543",
     "tipo": "serie",
     "titulo": "Humo",
     "enlace": "https://cinecalidad.bar/serie/humo/",
@@ -180,6 +176,7 @@
     ]
   },
   {
+    "id": "d4d29ec0-27ad-402b-b099-7e91fcadff4d",
     "tipo": "serie",
     "titulo": "El Eternauta",
     "enlace": "https://cinecalidad.bar/serie/el-eternauta/",
@@ -196,6 +193,7 @@
     ]
   },
   {
+    "id": "74908f2d-ad0f-40c9-8c3b-c0c34f76ba33",
     "tipo": "serie",
     "titulo": "The Society",
     "enlace": "https://cinecalidad.bar/serie/the-society/",
@@ -211,6 +209,7 @@
     ]
   },
   {
+    "id": "13c521ec-6e2d-4318-bda4-2a375f90eedc",
     "tipo": "serie",
     "titulo": "Los crímenes del mandala",
     "enlace": "https://cinecalidad.bar/serie/los-crimenes-del-mandala/",
@@ -227,6 +226,7 @@
     ]
   },
   {
+    "id": "ecf0e8b4-c660-4c68-ae46-ee2cb5cf4330",
     "tipo": "serie",
     "titulo": "And Just Like That… Un nuevo capítulo de Sex and the City",
     "enlace": "https://cinecalidad.bar/serie/and-just-like-that-un-nuevo-capitulo-de-sex-and-the-city-s3/",
@@ -242,6 +242,7 @@
     ]
   },
   {
+    "id": "67792e3b-0e34-4f1f-8d01-a4966da6d806",
     "tipo": "serie",
     "titulo": "Sandman",
     "enlace": "https://cinecalidad.bar/serie/sandman/",
@@ -258,9 +259,10 @@
     ]
   },
   {
+    "id": "798c73fe-8c2f-41ca-82e8-25fd50917d4e",
     "tipo": "serie",
     "titulo": "Dexter: Resurrección",
-    "enlace": "https://cinecalidad.bar/serie/dexter-resurreccion/",
+    "enlace": "https://cinecalidad.bar/serie/dexter-resurreccion-s1/",
     "imagen": "https://image.tmdb.org/t/p/w342/fORqf1CdugrD5oHnGYL24VZktFQ.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 10",
@@ -273,6 +275,7 @@
     ]
   },
   {
+    "id": "223f1128-c82c-4091-867d-712d13d8331b",
     "tipo": "serie",
     "titulo": "Hell Motel",
     "enlace": "https://cinecalidad.bar/serie/hell-motel/",
@@ -289,6 +292,7 @@
     ]
   },
   {
+    "id": "1a8ff283-77b2-4764-80a5-dbca50336114",
     "tipo": "serie",
     "titulo": "El instituto",
     "enlace": "https://cinecalidad.bar/serie/el-instituto/",
@@ -304,6 +308,7 @@
     ]
   },
   {
+    "id": "464a6265-37a1-4f81-8003-314233ef1929",
     "tipo": "serie",
     "titulo": "El verano en que me enamoré",
     "enlace": "https://cinecalidad.bar/serie/el-verano-en-que-me-enamore/",
@@ -318,6 +323,7 @@
     ]
   },
   {
+    "id": "ed07ea98-df31-4b3a-aeea-495f9e3f8d86",
     "tipo": "serie",
     "titulo": "Motorheads: Amantes de la velocidad",
     "enlace": "https://cinecalidad.bar/serie/motorheads-amantes-de-la-velocidad-s1/",
@@ -332,6 +338,7 @@
     ]
   },
   {
+    "id": "d72f8884-5f14-433e-8d22-432d448c58e7",
     "tipo": "serie",
     "titulo": "The Game",
     "enlace": "https://cinecalidad.bar/serie/the-game/",
@@ -346,6 +353,7 @@
     ]
   },
   {
+    "id": "6e833b46-38df-4556-b889-358b1a94d8fc",
     "tipo": "serie",
     "titulo": "Matabot",
     "enlace": "https://cinecalidad.bar/serie/matabot/",
@@ -362,6 +370,7 @@
     ]
   },
   {
+    "id": "a315d3a6-12ec-495f-a88a-0522aabd8015",
     "tipo": "serie",
     "titulo": "Duster",
     "enlace": "https://cinecalidad.bar/serie/duster/",
@@ -377,6 +386,7 @@
     ]
   },
   {
+    "id": "bf857c9d-42fb-45a0-8db6-79aded511a54",
     "tipo": "serie",
     "titulo": "Poker Face",
     "enlace": "https://cinecalidad.bar/serie/poker-face-s1/",
@@ -392,6 +402,7 @@
     ]
   },
   {
+    "id": "d91c9382-c8f2-472f-ad5d-b67650d327cb",
     "tipo": "serie",
     "titulo": "Sospechoso: el asesinato de Jean Charles de Menezes",
     "enlace": "https://cinecalidad.bar/serie/sospechoso-el-asesinato-de-jean-charles-de-menezes/",
@@ -406,6 +417,7 @@
     ]
   },
   {
+    "id": "edc937bd-2511-48e3-af5d-23840cfc8666",
     "tipo": "serie",
     "titulo": "Star Wars: Historias del inframundo",
     "enlace": "https://cinecalidad.bar/serie/star-wars-historias-del-inframundo/",
@@ -423,6 +435,7 @@
     ]
   },
   {
+    "id": "c81b1889-3a1f-4dcd-8f3b-609f9ec389cb",
     "tipo": "serie",
     "titulo": "The Walking Dead: Dead City",
     "enlace": "https://cinecalidad.bar/serie/the-walking-dead-dead-city/",
@@ -439,6 +452,7 @@
     ]
   },
   {
+    "id": "f5223b1b-89ec-4879-9958-9188f3576df3",
     "tipo": "serie",
     "titulo": "Carême: Chef de reyes",
     "enlace": "https://cinecalidad.bar/serie/careme-chef-de-reyes/",
@@ -453,6 +467,7 @@
     ]
   },
   {
+    "id": "bd681eea-bd99-473f-b2a8-8bf5fe9f2491",
     "tipo": "serie",
     "titulo": "Sherlock & Daughter",
     "enlace": "https://cinecalidad.bar/serie/sherlock-daughter/",
@@ -468,9 +483,10 @@
     ]
   },
   {
+    "id": "bb121d32-7a59-448a-9ae9-5d715e645ced",
     "tipo": "serie",
     "titulo": "Andor",
-    "enlace": "https://cinecalidad.bar/serie/andor-v4/",
+    "enlace": "https://cinecalidad.bar/serie/andor-v5/",
     "imagen": "https://image.tmdb.org/t/p/w342/khZqmwHQicTYoS7Flreb9EddFZC.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 12",
@@ -484,9 +500,10 @@
     ]
   },
   {
+    "id": "17130cbc-cee8-488d-8c2f-f361ff08578f",
     "tipo": "serie",
     "titulo": "Power Book III: Raising Kanan",
-    "enlace": "https://cinecalidad.bar/serie/power-book-iii-raising-kanan-s23/",
+    "enlace": "https://cinecalidad.bar/serie/power-book-iii-raising-kanan-s24/",
     "imagen": "https://image.tmdb.org/t/p/w342/pZ7IaHON9hnu8C0g3zdoWwIsJ9t.jpg",
     "temporadas": "seasons 4",
     "episodios": "Episodios 10",
@@ -499,6 +516,7 @@
     ]
   },
   {
+    "id": "a3659a16-74de-4ad6-b735-3928860bce88",
     "tipo": "serie",
     "titulo": "El Elegido",
     "enlace": "https://cinecalidad.bar/serie/el-elegido/",
@@ -514,6 +532,7 @@
     ]
   },
   {
+    "id": "3e1b2ef1-d491-4c71-b996-98d8fecb7650",
     "tipo": "serie",
     "titulo": "Tierra de Mafia",
     "enlace": "https://cinecalidad.bar/serie/tierra-de-mafia/",
@@ -529,6 +548,7 @@
     ]
   },
   {
+    "id": "708b4f0a-553d-4627-becd-0bab3f2f1447",
     "tipo": "serie",
     "titulo": "Cazador de Demonios",
     "enlace": "https://cinecalidad.bar/serie/cazador-de-demonios/",
@@ -545,6 +565,7 @@
     ]
   },
   {
+    "id": "f642bc6a-ed07-4213-9b0f-ff297b274b85",
     "tipo": "serie",
     "titulo": "Celtics City",
     "enlace": "https://cinecalidad.bar/serie/celtics-city-s1/",
@@ -559,6 +580,7 @@
     ]
   },
   {
+    "id": "db02ce35-7f2a-45dd-9d26-08b7f11947c0",
     "tipo": "serie",
     "titulo": "Mentes Criminales",
     "enlace": "https://cinecalidad.bar/serie/mentes-criminales-s1/",
@@ -575,6 +597,7 @@
     ]
   },
   {
+    "id": "fcd16622-5035-44e8-9219-a5556b047059",
     "tipo": "serie",
     "titulo": "Malas influencias: El lado oscuro de las redes en la infancia",
     "enlace": "https://cinecalidad.bar/serie/malas-influencias-el-lado-oscuro-de-las-redes-en-la-infancia/",
@@ -589,6 +612,7 @@
     ]
   },
   {
+    "id": "677287eb-c8eb-4936-8bfa-850b099d22f6",
     "tipo": "serie",
     "titulo": "El jardinero",
     "enlace": "https://cinecalidad.bar/serie/el-jardinero/",
@@ -604,6 +628,7 @@
     ]
   },
   {
+    "id": "7cd24148-a353-4eb8-a88c-8ebb73e00f14",
     "tipo": "serie",
     "titulo": "Dope Thief: ladrones de drogas",
     "enlace": "https://cinecalidad.bar/serie/dope-thief-ladrones-de-drogas/",
@@ -619,6 +644,7 @@
     ]
   },
   {
+    "id": "c53b2bf9-093e-45f1-a076-8f2dc1e4e63e",
     "tipo": "serie",
     "titulo": "El Cuento de La Criada",
     "enlace": "https://cinecalidad.bar/serie/el-cuento-de-la-criada/",
@@ -634,6 +660,7 @@
     ]
   },
   {
+    "id": "e5d5afeb-8228-4170-aae6-cf38e83b4963",
     "tipo": "serie",
     "titulo": "Black Mirror",
     "enlace": "https://cinecalidad.bar/serie/black-mirror/",
@@ -650,6 +677,7 @@
     ]
   },
   {
+    "id": "7b11f5ca-8ff9-4ceb-979a-6f0c9c86920c",
     "tipo": "serie",
     "titulo": "Devil May Cry",
     "enlace": "https://cinecalidad.bar/serie/devil-may-cry/",
@@ -666,6 +694,7 @@
     ]
   },
   {
+    "id": "849d5e9f-4b27-44fd-af1a-e5b5c035fb68",
     "tipo": "serie",
     "titulo": "El Vecindario",
     "enlace": "https://cinecalidad.bar/serie/el-vecindario/",
@@ -680,6 +709,7 @@
     ]
   },
   {
+    "id": "cdde3e0f-f9ee-419a-93fe-6c9445763f0c",
     "tipo": "serie",
     "titulo": "Reinas del Soho",
     "enlace": "https://cinecalidad.bar/serie/dope-girls/",
@@ -695,6 +725,7 @@
     ]
   },
   {
+    "id": "d60ceaf7-f0e7-44c3-9712-939d1ca96278",
     "tipo": "serie",
     "titulo": "Karma",
     "enlace": "https://cinecalidad.bar/serie/karma-s1/",
@@ -710,6 +741,7 @@
     ]
   },
   {
+    "id": "7bdd85af-1051-4edc-90cf-f9284aa0d25b",
     "tipo": "serie",
     "titulo": "Morir de placer",
     "enlace": "https://cinecalidad.bar/serie/morir-de-placer-s1/",
@@ -725,6 +757,7 @@
     ]
   },
   {
+    "id": "71428bd0-cad3-4e56-aebc-53290360932c",
     "tipo": "serie",
     "titulo": "Anatomía según Grey",
     "enlace": "https://cinecalidad.bar/serie/anatomia-segun-grey/",
@@ -739,6 +772,7 @@
     ]
   },
   {
+    "id": "24018c39-2bd5-43e5-84d5-3fb3f74f82ea",
     "tipo": "serie",
     "titulo": "Grosse Pointe Garden Society",
     "enlace": "https://cinecalidad.bar/serie/grosse-pointe-garden-society-s6/",
@@ -755,6 +789,7 @@
     ]
   },
   {
+    "id": "1161f2f3-a9d8-4832-a33f-fc1350bba282",
     "tipo": "serie",
     "titulo": "You",
     "enlace": "https://cinecalidad.bar/serie/you-s7/",
@@ -769,6 +804,7 @@
     ]
   },
   {
+    "id": "29a3e41b-e953-45da-a06b-434ed4bc1f3f",
     "tipo": "serie",
     "titulo": "Solo Leveling",
     "enlace": "https://cinecalidad.bar/serie/solo-leveling-s3/",
@@ -785,6 +821,7 @@
     ]
   },
   {
+    "id": "568bd9da-a716-49cd-b238-b1d0e07a0333",
     "tipo": "serie",
     "titulo": "Suits LA",
     "enlace": "https://cinecalidad.bar/serie/suits-la/",
@@ -799,9 +836,10 @@
     ]
   },
   {
+    "id": "fb695a3c-c5f9-4aaa-863d-bb3bd49c624c",
     "tipo": "serie",
     "titulo": "The White Lotus",
-    "enlace": "https://cinecalidad.bar/serie/the-white-lotus-s4/",
+    "enlace": "https://cinecalidad.bar/serie/the-white-lotus-s5/",
     "imagen": "https://image.tmdb.org/t/p/w342/gbSaK9v1CbcYH1ISgbM7XObD2dW.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -815,6 +853,7 @@
     ]
   },
   {
+    "id": "47d7e2a7-b364-4564-8edf-99fa36a86426",
     "tipo": "serie",
     "titulo": "The Hunting Party",
     "enlace": "https://cinecalidad.bar/serie/the-hunting-party/",
@@ -830,6 +869,7 @@
     ]
   },
   {
+    "id": "42cb74f5-0380-490a-8d30-d1d666b2ab83",
     "tipo": "serie",
     "titulo": "Atrapados",
     "enlace": "https://cinecalidad.bar/serie/atrapados-s2/",
@@ -845,6 +885,7 @@
     ]
   },
   {
+    "id": "f71558ef-4a1e-40c9-b445-935c720e485a",
     "tipo": "serie",
     "titulo": "Si la vida te da mandarinas…",
     "enlace": "https://cinecalidad.bar/serie/si-la-vida-te-da-mandarinas/",
@@ -859,6 +900,7 @@
     ]
   },
   {
+    "id": "fc5e46b6-fcfd-47f4-b9c0-28409a1e8758",
     "tipo": "serie",
     "titulo": "Una buena familia americana",
     "enlace": "https://cinecalidad.bar/serie/una-buena-familia-americana-s7/",
@@ -873,6 +915,7 @@
     ]
   },
   {
+    "id": "bbaa9ed3-2f28-479b-a098-569a5daca904",
     "tipo": "serie",
     "titulo": "Happy Face: Asesino en Serie",
     "enlace": "https://cinecalidad.bar/serie/happy-face-asesino-en-serie-s1/",
@@ -888,6 +931,7 @@
     ]
   },
   {
+    "id": "d08e23c1-a7e8-4a73-8928-0df6ea3d560b",
     "tipo": "serie",
     "titulo": "Wolf Pack",
     "enlace": "https://cinecalidad.bar/serie/wolf-pack-s6/",
@@ -903,6 +947,7 @@
     ]
   },
   {
+    "id": "385235a0-a258-4cfe-82b6-6a63a4b254a8",
     "tipo": "serie",
     "titulo": "Adolescencia",
     "enlace": "https://cinecalidad.bar/serie/adolescencia/",
@@ -918,6 +963,7 @@
     ]
   },
   {
+    "id": "613a4251-2356-4113-86c8-b5c93fbcc365",
     "tipo": "serie",
     "titulo": "Daredevil: Born Again",
     "enlace": "https://cinecalidad.bar/serie/daredevil-born-again-s10/",
@@ -933,9 +979,10 @@
     ]
   },
   {
+    "id": "2281718d-b1be-4c0b-9c62-4d441186785d",
     "tipo": "serie",
     "titulo": "La casa de David",
-    "enlace": "https://cinecalidad.bar/serie/la-casa-de-david/",
+    "enlace": "https://cinecalidad.bar/serie/la-casa-de-david-s1/",
     "imagen": "https://image.tmdb.org/t/p/w342/5s6OHwM0Z3VTquTaEmpCBd4G3X4.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -947,6 +994,7 @@
     ]
   },
   {
+    "id": "2edac594-ad8d-402e-a8da-58eeed171a65",
     "tipo": "serie",
     "titulo": "Reacher",
     "enlace": "https://cinecalidad.bar/serie/reacher-s3/",
@@ -963,6 +1011,7 @@
     ]
   },
   {
+    "id": "1e95cc92-aa42-4a77-944f-b214c21b6f1e",
     "tipo": "serie",
     "titulo": "La caída de Diddy",
     "enlace": "https://cinecalidad.bar/serie/la-caida-de-diddy/",
@@ -978,6 +1027,7 @@
     ]
   },
   {
+    "id": "66e57c4f-baff-4924-a936-cb7254ad0abe",
     "tipo": "serie",
     "titulo": "Black Snow",
     "enlace": "https://cinecalidad.bar/serie/black-snow/",
@@ -992,6 +1042,7 @@
     ]
   },
   {
+    "id": "86355b23-351d-4a9a-838c-dfea2cb0babb",
     "tipo": "serie",
     "titulo": "Al filo del deber",
     "enlace": "https://cinecalidad.bar/serie/al-filo-del-deber/",
@@ -1008,6 +1059,7 @@
     ]
   },
   {
+    "id": "498ddd78-2e5f-4d15-9e1b-92f5ee37ea9f",
     "tipo": "serie",
     "titulo": "La liberación",
     "enlace": "https://cinecalidad.bar/serie/la-liberacion/",
@@ -1022,6 +1074,7 @@
     ]
   },
   {
+    "id": "1f4ce958-6b15-4011-a4b6-06194862c285",
     "tipo": "serie",
     "titulo": "El novato",
     "enlace": "https://cinecalidad.bar/serie/el-novato/",
@@ -1038,9 +1091,10 @@
     ]
   },
   {
+    "id": "bfa6aba2-0f79-4251-a6dc-40751643d38b",
     "tipo": "serie",
     "titulo": "High Potential: Detective Inesperada",
-    "enlace": "https://cinecalidad.bar/serie/high-potential-detective-inesperada-x1/",
+    "enlace": "https://cinecalidad.bar/serie/high-potential-detective-inesperada-x2/",
     "imagen": "https://image.tmdb.org/t/p/w342/sEWC7lzVKfuwXhzdahW4AX1F05s.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 13",
@@ -1053,6 +1107,7 @@
     ]
   },
   {
+    "id": "fec015c1-242d-482d-afe1-a6170732981b",
     "tipo": "serie",
     "titulo": "Lady Love",
     "enlace": "https://cinecalidad.bar/serie/lady-love-s2/",
@@ -1068,6 +1123,7 @@
     ]
   },
   {
+    "id": "2df65891-e670-4b42-92f8-bba4430d968f",
     "tipo": "serie",
     "titulo": "Las brujas de Mayfair de Anne Rice",
     "enlace": "https://cinecalidad.bar/serie/las-brujas-de-mayfair-de-anne-rice/",
@@ -1083,6 +1139,7 @@
     ]
   },
   {
+    "id": "3ba03bfd-ee1c-4db3-902a-8d2611c5f9e2",
     "tipo": "serie",
     "titulo": "Besos, Kitty",
     "enlace": "https://cinecalidad.bar/serie/besos-kitty/",
@@ -1098,6 +1155,7 @@
     ]
   },
   {
+    "id": "1dd88346-fdfc-4ff0-8680-6e22ec61ff5c",
     "tipo": "serie",
     "titulo": "La Agencia",
     "enlace": "https://cinecalidad.bar/serie/la-agencia-s1/",
@@ -1113,6 +1171,7 @@
     ]
   },
   {
+    "id": "3ce6e887-6b95-473b-9d70-97cfc17fe783",
     "tipo": "serie",
     "titulo": "Star Wars Skeleton Crew: Viaje a lo desconocido",
     "enlace": "https://cinecalidad.bar/serie/star-wars-skeleton-crew-viaje-a-lo-desconocido-s2/",
@@ -1128,6 +1187,7 @@
     ]
   },
   {
+    "id": "279a02d4-0404-4061-8dc9-c304a0910af1",
     "tipo": "serie",
     "titulo": "Hysteria!",
     "enlace": "https://cinecalidad.bar/serie/hysteria/",
@@ -1143,6 +1203,23 @@
     ]
   },
   {
+    "id": "0e49ac74-06d4-4753-bde3-46b02e27f16e",
+    "tipo": "serie",
+    "titulo": "La Diplomática",
+    "enlace": "https://cinecalidad.bar/serie/la-diplomatica/",
+    "imagen": "https://image.tmdb.org/t/p/w342/1jEUtX0NQyZjZUt575061fKIaXm.jpg",
+    "temporadas": "seasons 2",
+    "episodios": "Episodios 6",
+    "calidad": "",
+    "año": "",
+    "descripcion": "En medio de una crisis internacional, una diplomática de carrera aterriza en un puesto de alto perfil para el que no es apta, con implicaciones tectónicas para su matrimonio y su futuro político.",
+    "generos": [
+      "Drama",
+      "War & Politics"
+    ]
+  },
+  {
+    "id": "1ad0e369-70e1-4dba-af42-0323f1ece2c9",
     "tipo": "serie",
     "titulo": "Goosebumps: La desaparición",
     "enlace": "https://cinecalidad.bar/serie/goosebumps-la-desaparicion-s1/",
@@ -1159,9 +1236,10 @@
     ]
   },
   {
+    "id": "a8bf886f-a791-453c-acbc-ec8409511ad4",
     "tipo": "serie",
     "titulo": "Dexter: Pecado Original",
-    "enlace": "https://cinecalidad.bar/serie/dexter-pecado-original/",
+    "enlace": "https://cinecalidad.bar/serie/dexter-pecado-original-s1/",
     "imagen": "https://image.tmdb.org/t/p/w342/9XLULEZTkeLwRytTUQtgmx2HH4o.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 10",
@@ -1174,6 +1252,7 @@
     ]
   },
   {
+    "id": "7ea2b0b3-3ac3-4365-9b7b-c3e81f707774",
     "tipo": "serie",
     "titulo": "What If…?",
     "enlace": "https://cinecalidad.bar/serie/what-if-s5/",
@@ -1190,6 +1269,7 @@
     ]
   },
   {
+    "id": "eca99f12-452e-4a94-ac79-3c503b5f0890",
     "tipo": "serie",
     "titulo": "El juego del calamar",
     "enlace": "https://cinecalidad.bar/serie/el-juego-del-calamar-s7/",
@@ -1206,6 +1286,7 @@
     ]
   },
   {
+    "id": "87ddad69-2feb-4258-afaa-1c653161e2db",
     "tipo": "serie",
     "titulo": "El nivel secreto",
     "enlace": "https://cinecalidad.bar/serie/el-nivel-secreto-s1/",
@@ -1222,6 +1303,7 @@
     ]
   },
   {
+    "id": "e8751308-b527-446a-85ee-73354e00704d",
     "tipo": "serie",
     "titulo": "9-1-1: Lone Star",
     "enlace": "https://cinecalidad.bar/serie/9-1-1-lone-star-s2/",
@@ -1238,6 +1320,7 @@
     ]
   },
   {
+    "id": "64dafe15-cdc3-4c4e-94a1-33dec8728402",
     "tipo": "serie",
     "titulo": "Operativo: Lioness",
     "enlace": "https://cinecalidad.bar/serie/operativo-lioness/",
@@ -1253,6 +1336,7 @@
     ]
   },
   {
+    "id": "13513047-daa3-4af0-bed7-3632ff2c608f",
     "tipo": "serie",
     "titulo": "Yellowstone",
     "enlace": "https://cinecalidad.bar/serie/yellowstone/",
@@ -1268,6 +1352,7 @@
     ]
   },
   {
+    "id": "b4023dc2-0a07-4561-8641-beacefa40e9d",
     "tipo": "serie",
     "titulo": "Millie Black",
     "enlace": "https://cinecalidad.bar/serie/millie-black/",
@@ -1283,6 +1368,7 @@
     ]
   },
   {
+    "id": "013c29ea-3b31-46dc-8492-e3339d221c99",
     "tipo": "serie",
     "titulo": "Silo",
     "enlace": "https://cinecalidad.bar/serie/silo-s3/",
@@ -1298,6 +1384,7 @@
     ]
   },
   {
+    "id": "75648727-a7cc-4387-beb1-465aa0e5cb1b",
     "tipo": "serie",
     "titulo": "Lo que hacemos en las sombras",
     "enlace": "https://cinecalidad.bar/serie/lo-que-hacemos-en-las-sombras-s1/",
@@ -1312,6 +1399,7 @@
     ]
   },
   {
+    "id": "6dfb3642-17d2-44c9-99a2-2001a45d683c",
     "tipo": "serie",
     "titulo": "Un hombre infiltrado",
     "enlace": "https://cinecalidad.bar/serie/un-hombre-infiltrado-s1/",
@@ -1327,6 +1415,7 @@
     ]
   },
   {
+    "id": "b0611f50-1f55-498a-9b84-e677707c3ad9",
     "tipo": "serie",
     "titulo": "Fire Country",
     "enlace": "https://cinecalidad.bar/serie/fire-country-s6/",
@@ -1342,6 +1431,7 @@
     ]
   },
   {
+    "id": "9796af34-ba3e-43ce-8f6d-57a7aea641a7",
     "tipo": "serie",
     "titulo": "El problema de los 3 cuerpos",
     "enlace": "https://cinecalidad.bar/serie/el-problema-de-los-3-cuerpos/",
@@ -1358,6 +1448,7 @@
     ]
   },
   {
+    "id": "d9349c27-27a6-42fd-87c2-108c7399654d",
     "tipo": "serie",
     "titulo": "True Detective",
     "enlace": "https://cinecalidad.bar/serie/true-detective-s4/",
@@ -1373,6 +1464,7 @@
     ]
   },
   {
+    "id": "412ca488-ca4e-4d32-9629-7d3f833b18e7",
     "tipo": "serie",
     "titulo": "Grotesquerie",
     "enlace": "https://cinecalidad.bar/serie/grotesquerie-s9/",
@@ -1389,6 +1481,7 @@
     ]
   },
   {
+    "id": "12910f27-13af-4c45-915d-f2339e188e99",
     "tipo": "serie",
     "titulo": "Rumbo al infierno",
     "enlace": "https://cinecalidad.bar/serie/rumbo-al-infierno/",
@@ -1405,6 +1498,7 @@
     ]
   },
   {
+    "id": "2755d1da-5d41-448c-83c3-d995d2b47c62",
     "tipo": "serie",
     "titulo": "Superman y Lois",
     "enlace": "https://cinecalidad.bar/serie/superman-y-lois/",
@@ -1420,6 +1514,7 @@
     ]
   },
   {
+    "id": "521449d8-92f4-43a7-a917-bf40c2d3f626",
     "tipo": "serie",
     "titulo": "The Walking Dead: Daryl Dixon",
     "enlace": "https://cinecalidad.bar/serie/the-walking-dead-daryl-dixon/",
@@ -1436,6 +1531,7 @@
     ]
   },
   {
+    "id": "a8b1604e-ee46-4a2e-bfc5-42208d5a33e0",
     "tipo": "serie",
     "titulo": "Monstruos: La historia de Lyle y Erik Menendez",
     "enlace": "https://cinecalidad.bar/serie/monstruos-la-historia-de-lyle-y-erik-menendez/",
@@ -1451,6 +1547,7 @@
     ]
   },
   {
+    "id": "d98f6038-23c8-4a43-ba30-a5d7649244d9",
     "tipo": "serie",
     "titulo": "FROM",
     "enlace": "https://cinecalidad.bar/serie/from/",
@@ -1466,6 +1563,7 @@
     ]
   },
   {
+    "id": "3f69e94a-69b8-46d9-9717-7a1480386630",
     "tipo": "serie",
     "titulo": "El monstruo de la vieja Seúl",
     "enlace": "https://cinecalidad.bar/serie/el-monstruo-de-la-vieja-seul/",
@@ -1483,6 +1581,7 @@
     ]
   },
   {
+    "id": "658151ee-1c54-44bd-a04a-8be43f9576b9",
     "tipo": "serie",
     "titulo": "Agatha en todas partes",
     "enlace": "https://cinecalidad.bar/serie/agatha-en-todas-partes-x14/",
@@ -1499,6 +1598,7 @@
     ]
   },
   {
+    "id": "926cf661-dc8e-4853-9c95-7d14fbf719bb",
     "tipo": "serie",
     "titulo": "Dark",
     "enlace": "https://cinecalidad.bar/serie/dark/",
@@ -1516,6 +1616,7 @@
     ]
   },
   {
+    "id": "c336caaf-f85a-4dc0-8fd1-26cd600e0c9a",
     "tipo": "serie",
     "titulo": "Nadie nos va a extrañar",
     "enlace": "https://cinecalidad.bar/serie/nadie-nos-va-a-extranar/",
@@ -1531,6 +1632,7 @@
     ]
   },
   {
+    "id": "83e44da7-ca99-40e8-a546-91237bf13030",
     "tipo": "serie",
     "titulo": "Bad Monkey: Negocios turbios",
     "enlace": "https://cinecalidad.bar/serie/bad-monkey-negocios-turbios-s2/",
@@ -1546,6 +1648,7 @@
     ]
   },
   {
+    "id": "463c56eb-d999-4da7-8bd4-d8ef4238899d",
     "tipo": "serie",
     "titulo": "La voz ausente",
     "enlace": "https://cinecalidad.bar/serie/la-voz-ausente-s17/",
@@ -1561,6 +1664,7 @@
     ]
   },
   {
+    "id": "86ed0756-9245-4f4f-8905-3af8e8ef108c",
     "tipo": "serie",
     "titulo": "Élite",
     "enlace": "https://cinecalidad.bar/serie/elite/",
@@ -1577,6 +1681,7 @@
     ]
   },
   {
+    "id": "3f73d677-867f-4622-a759-fed38b78e2bf",
     "tipo": "serie",
     "titulo": "Ghosts",
     "enlace": "https://cinecalidad.bar/serie/ghosts-s11/",
@@ -1591,6 +1696,7 @@
     ]
   },
   {
+    "id": "f2096a39-5f17-4872-af71-6dcf06a94235",
     "tipo": "serie",
     "titulo": "Emily en París",
     "enlace": "https://cinecalidad.bar/serie/emily-en-paris-s1/",
@@ -1606,6 +1712,7 @@
     ]
   },
   {
+    "id": "349e5cf6-7583-4906-9860-8f49b3a794e5",
     "tipo": "serie",
     "titulo": "Asesinato para principiantes",
     "enlace": "https://cinecalidad.bar/serie/asesinato-para-principiantes/",
@@ -1621,6 +1728,7 @@
     ]
   },
   {
+    "id": "5b5a2868-860c-431e-8ea1-30f7738f8df7",
     "tipo": "serie",
     "titulo": "Desafío Americano: Nuevos comienzos",
     "enlace": "https://cinecalidad.bar/serie/desafio-americano-nuevos-comienzos/",
@@ -1635,6 +1743,7 @@
     ]
   },
   {
+    "id": "0dda4261-5ec2-4907-984d-efb8b39810c0",
     "tipo": "serie",
     "titulo": "The Jetty",
     "enlace": "https://cinecalidad.bar/serie/the-jetty-s1/",
@@ -1650,6 +1759,7 @@
     ]
   },
   {
+    "id": "c23e1fda-b152-48bb-8fd7-cfe6c79946ca",
     "tipo": "serie",
     "titulo": "Vikingos: Valhalla",
     "enlace": "https://cinecalidad.bar/serie/vikingos-valhalla-s1/",
@@ -1666,6 +1776,7 @@
     ]
   },
   {
+    "id": "4a3036b3-e5a4-4339-b32c-70e4ccc9066f",
     "tipo": "serie",
     "titulo": "La mujer en el lago",
     "enlace": "https://cinecalidad.bar/serie/la-mujer-en-el-lago-s1/",
@@ -1681,6 +1792,7 @@
     ]
   },
   {
+    "id": "ae3563c8-b20d-4d8b-9d5f-106419368dc9",
     "tipo": "serie",
     "titulo": "El mundo oculto de Sabrina",
     "enlace": "https://cinecalidad.bar/serie/el-mundo-oculto-de-sabrina/",
@@ -1697,6 +1809,7 @@
     ]
   },
   {
+    "id": "3f62a2a4-9ccc-4298-94d0-983d7d4ee888",
     "tipo": "serie",
     "titulo": "Geek Girl",
     "enlace": "https://cinecalidad.bar/serie/geek-girl-s1/",
@@ -1713,6 +1826,7 @@
     ]
   },
   {
+    "id": "61234276-b236-469f-a45a-1560b1e27a95",
     "tipo": "serie",
     "titulo": "Clanes",
     "enlace": "https://cinecalidad.bar/serie/clanes-s4/",
@@ -1728,6 +1842,7 @@
     ]
   },
   {
+    "id": "72a2665f-e182-4464-a8c6-a4c52db299c4",
     "tipo": "serie",
     "titulo": "Orphan Black: Echoes",
     "enlace": "https://cinecalidad.bar/serie/orphan-black-echoes/",
@@ -1743,6 +1858,7 @@
     ]
   },
   {
+    "id": "577a5caf-16f9-41cf-8666-116716016812",
     "tipo": "serie",
     "titulo": "Taylor Swift vs Scooter Braun: Bad Blood",
     "enlace": "https://cinecalidad.bar/serie/taylor-swift-vs-scooter-braun-bad-blood/",
@@ -1758,6 +1874,7 @@
     ]
   },
   {
+    "id": "b70b907b-290c-431d-a3d7-50580589faea",
     "tipo": "serie",
     "titulo": "Bridgerton",
     "enlace": "https://cinecalidad.bar/serie/bridgerton-s1/",
@@ -1772,6 +1889,7 @@
     ]
   },
   {
+    "id": "92de4d8e-947a-4b87-a93b-c46e9c65da26",
     "tipo": "serie",
     "titulo": "La Casa del Dragón",
     "enlace": "https://cinecalidad.bar/serie/la-casa-del-dragon/",
@@ -1789,9 +1907,10 @@
     ]
   },
   {
+    "id": "4d64ead9-b614-4e4c-976d-164e5036aceb",
     "tipo": "serie",
     "titulo": "The Boys",
-    "enlace": "https://cinecalidad.bar/serie/the-boys-s5/",
+    "enlace": "https://cinecalidad.bar/serie/the-boys-s6/",
     "imagen": "https://image.tmdb.org/t/p/w342/2zmTngn1tYC1AvfnrFLhxeD82hz.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -1805,6 +1924,7 @@
     ]
   },
   {
+    "id": "c67877d9-480c-4b3e-a74b-bff8ffb83de0",
     "tipo": "serie",
     "titulo": "Jurassic World: Teoría del dinocaos",
     "enlace": "https://cinecalidad.bar/serie/jurassic-world-teoria-del-dinocaos/",
@@ -1823,6 +1943,7 @@
     ]
   },
   {
+    "id": "10f97df0-5d42-40d4-9d2c-b0e6d09f0ff3",
     "tipo": "serie",
     "titulo": "Ni una más",
     "enlace": "https://cinecalidad.bar/serie/ni-una-mas-s3/",
@@ -1837,6 +1958,7 @@
     ]
   },
   {
+    "id": "84f96cb4-2d38-45db-9618-3381862853f3",
     "tipo": "serie",
     "titulo": "Materia oscura",
     "enlace": "https://cinecalidad.bar/serie/materia-oscura/",
@@ -1853,6 +1975,7 @@
     ]
   },
   {
+    "id": "7e617725-0e08-437f-9cc2-16737dcac1fb",
     "tipo": "serie",
     "titulo": "Doctor Who",
     "enlace": "https://cinecalidad.bar/serie/doctor-who/",
@@ -1869,6 +1992,7 @@
     ]
   },
   {
+    "id": "25a3c2ac-22c4-4b62-a9a3-ed75fcd74d8f",
     "tipo": "serie",
     "titulo": "El ídolo",
     "enlace": "https://cinecalidad.bar/serie/el-idolo/",
@@ -1883,6 +2007,7 @@
     ]
   },
   {
+    "id": "5ec9fcfe-16d6-4a79-aae2-95a509b283cc",
     "tipo": "serie",
     "titulo": "Yellowjackets",
     "enlace": "https://cinecalidad.bar/serie/yellowjackets-s1/",
@@ -1898,6 +2023,7 @@
     ]
   },
   {
+    "id": "d955b6c8-5eff-4855-a4d9-c900ca039fbc",
     "tipo": "serie",
     "titulo": "Detrás de sus ojos",
     "enlace": "https://cinecalidad.bar/serie/detras-de-sus-ojos/",
@@ -1912,6 +2038,7 @@
     ]
   },
   {
+    "id": "80ef0d94-4d4a-430d-afa6-042f5c041a7b",
     "tipo": "serie",
     "titulo": "Loki",
     "enlace": "https://cinecalidad.bar/serie/loki-s16/",
@@ -1927,6 +2054,7 @@
     ]
   },
   {
+    "id": "23a93893-7508-4749-8499-fe7779921998",
     "tipo": "serie",
     "titulo": "Hawkeye",
     "enlace": "https://cinecalidad.bar/serie/hawkeye-s6/",
@@ -1943,6 +2071,7 @@
     ]
   },
   {
+    "id": "dfb005de-1a94-4462-8725-54526ca86325",
     "tipo": "serie",
     "titulo": "Invasión",
     "enlace": "https://cinecalidad.bar/serie/invasion-s1/",
@@ -1958,6 +2087,7 @@
     ]
   },
   {
+    "id": "9966a6e5-5ba7-48ef-9daa-a1c13fdc907a",
     "tipo": "serie",
     "titulo": "Sweet Tooth",
     "enlace": "https://cinecalidad.bar/serie/sweet-tooth-s7/",
@@ -1973,6 +2103,7 @@
     ]
   },
   {
+    "id": "b02c4a29-dca8-44f0-a9ca-355928a8d6fe",
     "tipo": "serie",
     "titulo": "Monarch: legado de monstruos",
     "enlace": "https://cinecalidad.bar/serie/monarch-legado-de-monstruos-s1/",
@@ -1989,9 +2120,10 @@
     ]
   },
   {
+    "id": "ed406f44-fe7c-43f4-a21b-080a9976ef50",
     "tipo": "serie",
     "titulo": "Gen V",
-    "enlace": "https://cinecalidad.bar/serie/gen-v-s10/",
+    "enlace": "https://cinecalidad.bar/serie/gen-v-s11/",
     "imagen": "https://image.tmdb.org/t/p/w342/8XQNhJ3y8LT8guh7wwbzUgzuAi3.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -2005,6 +2137,7 @@
     ]
   },
   {
+    "id": "91b50ea3-721f-40fe-8ea6-0a8119c8ac74",
     "tipo": "serie",
     "titulo": "El agente nocturno",
     "enlace": "https://cinecalidad.bar/serie/el-agente-nocturno/",
@@ -2022,6 +2155,7 @@
     ]
   },
   {
+    "id": "58e4ded1-ad8f-46a4-9316-6df7c64812cd",
     "tipo": "serie",
     "titulo": "The Last of Us",
     "enlace": "https://cinecalidad.bar/serie/the-last-of-us-s6/",
@@ -2036,6 +2170,7 @@
     ]
   },
   {
+    "id": "06b07b8b-9833-4873-bdf7-a34fcff68a88",
     "tipo": "serie",
     "titulo": "La maldición de Hill House",
     "enlace": "https://cinecalidad.bar/serie/la-maldicion-de-hill-house/",
@@ -2051,6 +2186,7 @@
     ]
   },
   {
+    "id": "afe14977-9f95-45ef-bfe2-cfbf81c0cd0d",
     "tipo": "serie",
     "titulo": "Nueve perfectos desconocidos",
     "enlace": "https://cinecalidad.bar/serie/nueve-perfectos-desconocidos/",
@@ -2066,6 +2202,7 @@
     ]
   },
   {
+    "id": "1f59b6c5-a91f-4497-a94c-9ab2cdaec40e",
     "tipo": "serie",
     "titulo": "Testamento: La historia de Moisés",
     "enlace": "https://cinecalidad.bar/serie/testamento-la-historia-de-moises/",
@@ -2081,6 +2218,7 @@
     ]
   },
   {
+    "id": "59116b4e-e0ba-4869-a992-4917b9efefa6",
     "tipo": "serie",
     "titulo": "RIPLEY",
     "enlace": "https://cinecalidad.bar/serie/ripley/",
@@ -2095,6 +2233,7 @@
     ]
   },
   {
+    "id": "ce4e2ed3-4d2b-423f-b4f3-e247446b831b",
     "tipo": "serie",
     "titulo": "Dahmer",
     "enlace": "https://cinecalidad.bar/serie/dahmer-monstruo-la-historia-de-jeffrey-dahmer/",
@@ -2110,6 +2249,7 @@
     ]
   },
   {
+    "id": "44104f80-ddef-4fe9-86c3-77993910aa0e",
     "tipo": "serie",
     "titulo": "Shōgun",
     "enlace": "https://cinecalidad.bar/serie/shogun-s7/",
@@ -2125,6 +2265,7 @@
     ]
   },
   {
+    "id": "ce19864f-9058-4606-9256-47bcae640830",
     "tipo": "serie",
     "titulo": "Bebé Reno",
     "enlace": "https://cinecalidad.bar/serie/bebe-reno/",
@@ -2139,6 +2280,7 @@
     ]
   },
   {
+    "id": "50a5fc10-3b54-4e88-bac2-c3e4651d5fa7",
     "tipo": "serie",
     "titulo": "Griselda",
     "enlace": "https://cinecalidad.bar/serie/griselda/",
@@ -2154,6 +2296,7 @@
     ]
   },
   {
+    "id": "67e54037-c790-4190-98ea-9bd1bd3f3969",
     "tipo": "serie",
     "titulo": "Pretty Little Liars: Un Nuevo Pecado",
     "enlace": "https://cinecalidad.bar/serie/pretty-little-liars-un-nuevo-pecado/",
