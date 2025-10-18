@@ -455,32 +455,74 @@ class CineCalidadSerieExtractor:
         except Exception as e:
             print(f"❌ Error al extraer datos de la serie: {e}")
             return None
-
-    def procesar_series(self, archivo_json, limite=None, delay=5):
-        """Procesa múltiples series"""
+        
+    def procesar_series(self, archivo_json, inicio=0, fin=None, delay=5):
+        """
+        Procesa series desde un índice de inicio hasta un índice final
+        con guardado incremental después de cada serie
+        """
         series = self.cargar_series_json(archivo_json)
         
         if not series:
             return []
         
-        if limite:
-            series = series[:limite]
+        # Ajustar índices
+        total_series = len(series)
+        inicio = max(0, inicio)
+        fin = min(fin if fin is not None else total_series, total_series)
         
-        resultados = []
-        total = len(series)
+        # Seleccionar el rango
+        series_a_procesar = series[inicio:fin]
+        
+        # Cargar resultados previos si existen
+        carpeta_destino = os.path.join(os.path.dirname(__file__), '../cache')
+        archivo_resultados = os.path.join(carpeta_destino, 'series_new.json')
+        
+        if os.path.exists(archivo_resultados):
+            print(f"\n📂 Cargando resultados previos...")
+            resultados = self.cargar_series_json(archivo_resultados)
+        else:
+            resultados = []
+        
+        # Crear diccionario de series ya procesadas
+        procesadas = {s.get('titulo'): s for s in resultados}
+        
+        total = len(series_a_procesar)
         
         print(f"\n{'='*80}")
-        print(f"Procesando {total} series...")
+        print(f"Procesando series {inicio+1} a {fin} (total: {total})...")
+        print(f"Series ya procesadas anteriormente: {len(procesadas)}")
         print('='*80)
         
-        for i, serie in enumerate(series, 1):
-            print(f"\n[{i}/{total}] {serie.get('titulo', 'Sin título')}")
+        for i, serie in enumerate(series_a_procesar, 1):
+            titulo = serie.get('titulo', 'Sin título')
+            indice_global = inicio + i
             
-            resultado = self.procesar_serie(serie, delay_entre_episodios=delay)
+            # Verificar si ya fue procesada
+            if titulo in procesadas:
+                print(f"\n[{i}/{total}] {titulo} - ⏭️  Ya procesada, omitiendo...")
+                continue
             
-            if resultado:
-                resultados.append(resultado)
+            print(f"\n[{i}/{total}] (Global: {indice_global}/{total_series}) {titulo}")
             
+            try:
+                resultado = self.procesar_serie(serie, delay_entre_episodios=delay)
+                
+                if resultado:
+                    # Agregar a resultados
+                    resultados.append(resultado)
+                    procesadas[titulo] = resultado
+                    
+                    # 🔥 GUARDAR INMEDIATAMENTE después de cada serie
+                    self.guardar_resultados(resultados, prefijo='series_new')
+                    print(f"    💾 Guardado incremental completado ({len(resultados)} series)")
+                
+            except Exception as e:
+                print(f"    ❌ Error procesando serie: {e}")
+                # Continuar con la siguiente serie aunque haya error
+                continue
+            
+            # Pausa entre series
             if i < total:
                 time.sleep(delay)
         
@@ -657,29 +699,58 @@ if __name__ == "__main__":
         )
 
     elif modo == '1':
-        archivo_json = extractor.seleccionar_archivo_json()
-
-        if not archivo_json:
+        print("\n📥 MODO: Procesar series nuevas")
+        archivo_database = extractor.seleccionar_archivo_json(carpeta='database')
+        
+        if not archivo_database:
             exit(1)
-
-        print("\n¿Cuántas series procesar?")
+        
+        # Preguntar cómo desea procesar
+        print("\n¿Cómo deseas procesar las series?")
         print("  1. Solo 1 (prueba rápida)")
-        print("  2. 3 series")
-        print("  3. 10 series")
-        print("  4. Todas")
+        print("  2. Rango específico (inicio - fin)")
+        print("  3. Todas")
         
-        opcion = input("\nOpción (1-4): ").strip()
-        limite_map = {'1': 1, '2': 3, '3': 10, '4': None}
-        limite = limite_map.get(opcion, 1)
-
-        if limite is not None:
-            print(f"\n⚙️ Procesando {limite} series...")    
-        else:
+        opcion = input("\nOpción (1-3): ").strip()
+        
+        inicio = 0
+        fin = None
+        
+        if opcion == '1':
+            fin = 1
+            print(f"\n⚙️ Procesando la primera serie...")
+            
+        elif opcion == '2':
+            # Pedir rango
+            try:
+                inicio_input = input("\nÍndice de inicio (ej: 0, 10, 100): ").strip()
+                inicio = int(inicio_input)
+                
+                fin_input = input("Índice final (ej: 10, 50, 200): ").strip()
+                fin = int(fin_input)
+                
+                if inicio < 0 or fin <= inicio:
+                    print("❌ Rango inválido. El inicio debe ser menor que el fin y ambos positivos.")
+                    exit(1)
+                
+                print(f"\n⚙️ Procesando series desde índice {inicio} hasta {fin}...")
+                
+            except ValueError:
+                print("❌ Por favor ingresa números válidos")
+                exit(1)
+                
+        elif opcion == '3':
             print("\n⚙️ Procesando TODAS las series (esto puede tardar)...")
+            
+        else:
+            print("❌ Opción no válida")
+            exit(1)
         
+        # Procesar
         resultados = extractor.procesar_series(
-            archivo_json=archivo_json,
-            limite=limite,
+            archivo_json=archivo_database,
+            inicio=inicio,
+            fin=fin,
             delay=3
         )
         
@@ -688,8 +759,18 @@ if __name__ == "__main__":
             print(f"✅ Completado: {len(resultados)} series procesadas")
             print('='*80)
             
-            extractor.guardar_resultados(resultados)
+            # Estadísticas
+            total_temporadas = sum(len(s.get('temporadas', [])) for s in resultados)
+            total_episodios = sum(
+                len(temp.get('episodios', [])) 
+                for s in resultados 
+                for temp in s.get('temporadas', [])
+            )
+            
+            print(f"\n📊 ESTADÍSTICAS:")
+            print(f"  - Total series procesadas: {len(resultados)}")
+            print(f"  - Total temporadas: {total_temporadas}")
+            print(f"  - Total episodios: {total_episodios}")
+            print(f"\n💾 Archivo guardado: cache/series_new.json")
         else:
             print("\n❌ No se procesó ninguna serie")
-    else:
-        print("❌ Opción inválida")

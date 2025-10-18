@@ -4,7 +4,7 @@ import json
 import os
 import time
 from urllib.parse import urljoin, urlparse
-import base64
+import uuid
 
 class AdvancedLinksExtractor:
     def __init__(self):
@@ -249,6 +249,7 @@ class AdvancedLinksExtractor:
         info_basica = self._extraer_info_pelicula(soup)
         
         resultado = {
+            'id': f"{uuid.uuid4()}",
             **info_basica,
             'año': pelicula.get('año'),
             'url_pelicula': url_pelicula,
@@ -372,12 +373,12 @@ class AdvancedLinksExtractor:
                     peliculas[j] = pelicula_actualizada
                     break
             
+            # Guardar después de cada película procesada
+            self.guardar_resultados(peliculas, prefijo='peliculas_actualizadas')
+            
             # Pausa entre películas
             if i < total:
                 time.sleep(delay)
-        
-        # Guardar resultados actualizados
-        self.guardar_resultados(peliculas, prefijo='peliculas_actualizadas')
         
         return peliculas
     
@@ -457,42 +458,80 @@ class AdvancedLinksExtractor:
         print('='*80)
         
         # Guardar resultados actualizados
-        self.guardar_resultados(peliculas, prefijo='peliculas_actualizados')
+        self.guardar_resultados(peliculas, prefijo='peliculas_actualizadas')
 
-    def procesar_peliculas(self, archivo_json, limite=None, delay=10):
+    def procesar_peliculas(self, archivo_json, inicio=0, fin=None, delay=10):
         """
-        Procesa múltiples películas
+        Procesa películas desde un índice de inicio hasta un índice final
+        con guardado incremental después de cada película
         """
         peliculas = self.cargar_peliculas_json(archivo_json)
         
         if not peliculas:
             return []
         
-        if limite:
-            peliculas = peliculas[:limite]
+        # Ajustar índices
+        total_peliculas = len(peliculas)
+        inicio = max(0, inicio)
+        fin = min(fin if fin is not None else total_peliculas, total_peliculas)
         
-        resultados = []
-        total = len(peliculas)
+        # Seleccionar el rango
+        peliculas_a_procesar = peliculas[inicio:fin]
+        
+        # Cargar resultados previos si existen
+        carpeta_destino = os.path.join(os.path.dirname(__file__), '../cache')
+        archivo_resultados = os.path.join(carpeta_destino, 'peliculas_actualizadas.json')
+        
+        if os.path.exists(archivo_resultados):
+            print(f"\n📂 Cargando resultados previos...")
+            resultados = self.cargar_peliculas_json(archivo_resultados)
+        else:
+            resultados = []
+        
+        # Crear diccionario de películas ya procesadas
+        procesadas = {p.get('titulo'): p for p in resultados}
+        
+        total = len(peliculas_a_procesar)
         
         print(f"\n{'='*80}")
-        print(f"Procesando {total} películas...")
+        print(f"Procesando películas {inicio+1} a {fin} (total: {total})...")
+        print(f"Películas ya procesadas anteriormente: {len(procesadas)}")
         print('='*80)
         
-        for i, pelicula in enumerate(peliculas, 1):
-            print(f"\n[{i}/{total}] {pelicula.get('titulo', 'Sin título')}")
+        for i, pelicula in enumerate(peliculas_a_procesar, 1):
+            titulo = pelicula.get('titulo', 'Sin título')
+            indice_global = inicio + i
             
-            resultado = self.procesar_pelicula(pelicula)
-            resultado["id"] = i
+            # Verificar si ya fue procesada
+            if titulo in procesadas:
+                print(f"\n[{i}/{total}] {titulo} - ⏭️  Ya procesada, omitiendo...")
+                continue
             
-            if resultado:
-                # Mostrar servidores encontrados
-                if resultado.get('servidores'):
-                    for servidor in resultado['servidores']:
-                        print(f"    ✓ {servidor['nombre']} - {servidor['descripcion']}")
-                else:
-                    print("    ⚠️ No se encontraron servidores")
+            print(f"\n[{i}/{total}] (Global: {indice_global}/{total_peliculas}) {titulo}")
+            
+            try:
+                resultado = self.procesar_pelicula(pelicula)
                 
-                resultados.append(resultado)
+                if resultado:
+                    # Mostrar servidores encontrados
+                    if resultado.get('servidores'):
+                        for servidor in resultado['servidores']:
+                            print(f"    ✓ {servidor['nombre']} - {servidor['descripcion']}")
+                    else:
+                        print("    ⚠️ No se encontraron servidores")
+                    
+                    # Agregar a resultados
+                    resultados.append(resultado)
+                    procesadas[titulo] = resultado
+                    
+                    # 🔥 GUARDAR INMEDIATAMENTE después de cada película
+                    self.guardar_resultados(resultados, prefijo='peliculas_actualizadas')
+                    print(f"    💾 Guardado incremental completado ({len(resultados)} películas)")
+                
+            except Exception as e:
+                print(f"    ❌ Error procesando película: {e}")
+                # Continuar con la siguiente película aunque haya error
+                continue
             
             # Pausa entre películas
             if i < total:
@@ -505,7 +544,6 @@ class AdvancedLinksExtractor:
         Guarda resultados únicamente en un archivo JSON
         """
         if not resultados:
-            print("No hay resultados para guardar")
             return
 
         carpeta_destino = os.path.join(os.path.dirname(__file__), '../cache')
@@ -515,8 +553,6 @@ class AdvancedLinksExtractor:
 
         with open(ruta_archivo, 'w', encoding='utf-8') as f:
             json.dump(resultados, f, ensure_ascii=False, indent=2)
-
-        print(f"\n✓ JSON guardado: {ruta_archivo}")
 
     def seleccionar_archivo_json(self, carpeta='database'):
         """
@@ -598,7 +634,6 @@ if __name__ == "__main__":
     modo = input("\nOpción (1-3): ").strip()
     
     if modo == '3':
-
         print("\n🔄 MODO: Actualizar años faltantes")
         archivo_cache = extractor.seleccionar_archivo_json(carpeta='cache')        
         if not archivo_cache:
@@ -654,25 +689,51 @@ if __name__ == "__main__":
             exit(1)
         
         # Preguntar cuántas procesar
-        print("\n¿Cuántas películas procesar?")
+        print("\n¿Cómo deseas procesar las películas?")
         print("  1. Solo 3 (prueba rápida)")
-        print("  2. 100 películas")
-        print("  3. 200 películas")
-        print("  4. Todas")
+        print("  2. Rango específico (inicio - fin)")
+        print("  3. Todas")
         
-        opcion = input("\nOpción (1-4): ").strip()
-        limite_map = {'1': 3, '2': 10, '3': 25, '4': None}
-        limite = limite_map.get(opcion, 3)
+        opcion = input("\nOpción (1-3): ").strip()
         
-        if limite:
-            print(f"\n⚙️ Procesando {limite} películas...")
-        else:
+        inicio = 0
+        fin = None
+        
+        if opcion == '1':
+            fin = 3
+            print(f"\n⚙️ Procesando las primeras 3 películas...")
+            
+        elif opcion == '2':
+            # Pedir rango
+            try:
+                inicio_input = input("\nÍndice de inicio (ej: 0, 10, 100): ").strip()
+                inicio = int(inicio_input)
+                
+                fin_input = input("Índice final (ej: 10, 50, 200): ").strip()
+                fin = int(fin_input)
+                
+                if inicio < 0 or fin <= inicio:
+                    print("❌ Rango inválido. El inicio debe ser menor que el fin y ambos positivos.")
+                    exit(1)
+                
+                print(f"\n⚙️ Procesando películas desde índice {inicio} hasta {fin}...")
+                
+            except ValueError:
+                print("❌ Por favor ingresa números válidos")
+                exit(1)
+                
+        elif opcion == '3':
             print("\n⚙️ Procesando TODAS las películas (esto puede tardar)...")
+            
+        else:
+            print("❌ Opción no válida")
+            exit(1)
         
         # Procesar
         resultados = extractor.procesar_peliculas(
             archivo_json=archivo_database,
-            limite=limite,
+            inicio=inicio,
+            fin=fin,
             delay=5
         )
         
@@ -686,11 +747,10 @@ if __name__ == "__main__":
             sin_servidores = sum(1 for p in resultados if not p.get('servidores', []))
             
             print(f"\n📊 ESTADÍSTICAS:")
+            print(f"  - Total películas procesadas: {len(resultados)}")
             print(f"  - Total servidores encontrados: {total_servidores}")
             print(f"  - Promedio por película: {total_servidores/len(resultados):.1f}")
             print(f"  - Películas sin servidores: {sin_servidores}")
-            
-            # Guardar
-            extractor.guardar_resultados(resultados)
+            print(f"\n💾 Archivo guardado: cache/peliculas_new.json")
         else:
             print("\n❌ No se procesó ninguna película")
