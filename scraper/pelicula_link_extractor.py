@@ -31,7 +31,7 @@ class AdvancedLinksExtractor:
         headers['User-Agent'] = random.choice(self.user_agents)
         return headers
     
-    def hacer_peticion_segura(self, url, max_reintentos=3, delay_min=2, delay_max=5):
+    def hacer_peticion_segura(self, url, max_reintentos=3, delay_min=5, delay_max=10):
         """
         Hace una petición HTTP con protección anti-bloqueo
         

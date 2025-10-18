@@ -6,20 +6,92 @@ import os
 from urllib.parse import urlparse
 import uuid
 import re
+import random
 
 class CineCalidadSerieExtractor:
 
     def __init__(self):
         self.base_url = "https://cinecalidad.bar"
         self.session = requests.Session()
-        self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        self.user_agents = [
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/121.0',
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15',
+        ]
+        self.headers_base = {
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
             'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8',
             'Accept-Encoding': 'gzip, deflate',
             'Connection': 'keep-alive',
             'Upgrade-Insecure-Requests': '1'
         }
+    
+    def get_random_headers(self):
+        """Genera headers con User-Agent aleatorio"""
+        headers = self.headers_base.copy()
+        headers['User-Agent'] = random.choice(self.user_agents)
+        return headers
+    
+    def hacer_peticion_segura(self, url, max_reintentos=3, delay_min=5, delay_max=10):
+        """
+        Hace una petición HTTP con protección anti-bloqueo
+        
+        Args:
+            url: URL a la que hacer la petición
+            max_reintentos: Número máximo de reintentos
+            delay_min: Delay mínimo aleatorio en segundos
+            delay_max: Delay máximo aleatorio en segundos
+        
+        Returns:
+            response object o None si falla
+        """
+        for intento in range(1, max_reintentos + 1):
+            try:
+                # Delay aleatorio para simular comportamiento humano
+                if intento > 1:
+                    espera_extra = random.uniform(5, 10)
+                    print(f"  🔄 Reintento {intento}/{max_reintentos} - Esperando {espera_extra:.1f}s...")
+                    time.sleep(espera_extra)
+                else:
+                    time.sleep(random.uniform(delay_min, delay_max))
+                
+                response = self.session.get(
+                    url, 
+                    headers=self.get_random_headers(),
+                    timeout=15
+                )
+                response.raise_for_status()
+                return response
+                
+            except requests.exceptions.HTTPError as e:
+                if e.response.status_code == 429:  # Too Many Requests
+                    espera = 60 * intento
+                    print(f"  ⚠️ Rate limit (429). Esperando {espera}s...")
+                    time.sleep(espera)
+                elif e.response.status_code == 403:  # Forbidden
+                    print(f"  ⚠️ Acceso denegado (403) - Posible bloqueo de IP")
+                    if intento < max_reintentos:
+                        time.sleep(random.uniform(30, 60))
+                    else:
+                        raise
+                else:
+                    print(f"  ❌ Error HTTP {e.response.status_code}: {e}")
+                    if intento == max_reintentos:
+                        raise
+                        
+            except requests.exceptions.Timeout:
+                print(f"  ⚠️ Timeout en intento {intento}/{max_reintentos}")
+                if intento == max_reintentos:
+                    raise
+                    
+            except requests.exceptions.RequestException as e:
+                print(f"  ❌ Error de conexión: {e}")
+                if intento == max_reintentos:
+                    raise
+        
+        return None
 
     def cargar_series_json(self, archivo_json):
         """Carga series desde JSON"""
@@ -40,7 +112,7 @@ class CineCalidadSerieExtractor:
                     print(f"  🔄 Reintento {intento}/{max_intentos}...")
                     time.sleep(delay_reintento)
                 
-                response = self.session.get(url_episodio_serie, headers=self.headers, timeout=15)
+                response = self.hacer_peticion_segura(url_episodio_serie)
                 response.raise_for_status()
                 
                 soup = BeautifulSoup(response.content, 'html.parser')
@@ -93,7 +165,7 @@ class CineCalidadSerieExtractor:
                 if intento == 1:
                     print(f"  → Accediendo al player...")
                 
-                response = self.session.get(player_url, headers=headers_player, timeout=15)
+                response = self.hacer_peticion_segura(player_url)
                 response.raise_for_status()
                 
                 soup = BeautifulSoup(response.content, 'html.parser')
@@ -150,37 +222,6 @@ class CineCalidadSerieExtractor:
         
         return []
 
-    def obtener_url_final_video(self, redirect_url, referer_url):
-        """Sigue la redirección de /r.php para obtener la URL final del video"""
-        try:
-            headers_redirect = self.headers.copy()
-            headers_redirect['Referer'] = referer_url
-            
-            # Hacer petición pero NO seguir redirects automáticamente
-            response = self.session.get(
-                redirect_url, 
-                headers=headers_redirect, 
-                timeout=15,
-                allow_redirects=False
-            )
-            
-            # Si hay redirección (código 3xx)
-            if 300 <= response.status_code < 400:
-                url_final = response.headers.get('Location')
-                return url_final
-            
-            # Si no hay redirección, intentar extraer del HTML
-            soup = BeautifulSoup(response.content, 'html.parser')
-            iframe = soup.find('iframe')
-            if iframe and 'src' in iframe.attrs:
-                return iframe['src']
-            
-            return None
-            
-        except Exception as e:
-            print(f"    Error obteniendo URL final: {e}")
-            return None
-    
     def _extraer_info_basica(self, soup):
         """Extrae la información básica de la serie"""
         info = {}
@@ -264,7 +305,7 @@ class CineCalidadSerieExtractor:
                 'X-Requested-With': 'XMLHttpRequest',
                 'Origin': self.base_url,
                 'Referer': url_serie,
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+                'User-Agent': random.choice(self.user_agents)
             }
             
             response = self.session.post(
@@ -421,7 +462,7 @@ class CineCalidadSerieExtractor:
             print(f"Extrayendo datos de: {url_serie}")
             print(f"{'='*60}\n")
             
-            response = self.session.get(url_serie, headers=self.headers, timeout=15)
+            response = self.hacer_peticion_segura(url_serie)
             response.raise_for_status()
             
             soup = BeautifulSoup(response.content, 'html.parser')
