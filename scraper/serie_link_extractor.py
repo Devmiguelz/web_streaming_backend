@@ -20,7 +20,7 @@ class CineCalidadSerieExtractor:
             'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/121.0',
             'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15',
         ]
-        self.headers_base = {
+        self.headers = {
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
             'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8',
             'Accept-Encoding': 'gzip, deflate',
@@ -30,7 +30,7 @@ class CineCalidadSerieExtractor:
     
     def get_random_headers(self):
         """Genera headers con User-Agent aleatorio"""
-        headers = self.headers_base.copy()
+        headers = self.headers.copy()
         headers['User-Agent'] = random.choice(self.user_agents)
         return headers
     
@@ -159,13 +159,15 @@ class CineCalidadSerieExtractor:
                     print(f"  🔄 Reintento acceso al player {intento}/{max_intentos}...")
                     time.sleep(delay_reintento)
                 
+                # Headers específicos con referer
                 headers_player = self.headers.copy()
+                headers_player['User-Agent'] = random.choice(self.user_agents)
                 headers_player['Referer'] = referer_url
                 
                 if intento == 1:
                     print(f"  → Accediendo al player...")
                 
-                response = self.hacer_peticion_segura(player_url)
+                response = self.session.get(player_url, headers=headers_player, timeout=15)
                 response.raise_for_status()
                 
                 soup = BeautifulSoup(response.content, 'html.parser')
