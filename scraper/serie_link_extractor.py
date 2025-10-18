@@ -476,7 +476,7 @@ class CineCalidadSerieExtractor:
         
         # Cargar resultados previos si existen
         carpeta_destino = os.path.join(os.path.dirname(__file__), '../cache')
-        archivo_resultados = os.path.join(carpeta_destino, 'series_new.json')
+        archivo_resultados = os.path.join(carpeta_destino, 'series_actualizadas.json')
         
         if os.path.exists(archivo_resultados):
             print(f"\n📂 Cargando resultados previos...")
@@ -514,7 +514,7 @@ class CineCalidadSerieExtractor:
                     procesadas[titulo] = resultado
                     
                     # 🔥 GUARDAR INMEDIATAMENTE después de cada serie
-                    self.guardar_resultados(resultados, prefijo='series_new')
+                    self.guardar_resultados(resultados, prefijo='series_actualizadas')
                     print(f"    💾 Guardado incremental completado ({len(resultados)} series)")
                 
             except Exception as e:
@@ -528,7 +528,7 @@ class CineCalidadSerieExtractor:
         
         return resultados
 
-    def guardar_resultados(self, resultados, prefijo='series_new'):
+    def guardar_resultados(self, resultados, prefijo='series_actualizadas'):
         """Guarda resultados en un archivo JSON"""
         if not resultados:
             print("No hay resultados para guardar")
