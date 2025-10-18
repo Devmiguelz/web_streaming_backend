@@ -32,99 +32,123 @@ class CineCalidadSerieExtractor:
             print(f"❌ Error: No se encontró el archivo {archivo_json}")
             return []
     
-    def extraer_player_url_episodio(self, url_episodio_serie):
+    def extraer_player_url_episodio(self, url_episodio_serie, max_intentos=5, delay_reintento=2):
         """Extrae la URL del iframe player desde la página del episodio"""
-        try:
-            response = self.session.get(url_episodio_serie, headers=self.headers, timeout=15)
-            response.raise_for_status()
-            
-            soup = BeautifulSoup(response.content, 'html.parser')
-            
-            # Buscar el iframe
-            iframes = soup.find_all('iframe', class_='absolute inset-0 w-full h-full')
-        
-            if not iframes:
-                print("  ⚠️ No se encontraron iframes con las clases especificadas")
-                return None
-            
-            # Filtrar iframes que NO sean de YouTube
-            for iframe in iframes:
-                if 'src' in iframe.attrs:
-                    src = iframe['src']
-                    
-                    # Excluir iframes de YouTube (trailers)
-                    if 'youtube.com' not in src.lower() and 'youtu.be' not in src.lower():
-                        print(f"  ✓ Player URL encontrada: {src}")
-                        return src
-            
-            print("  ⚠️ No se encontró iframe válido (solo trailers de YouTube)")
-            return None
+        for intento in range(1, max_intentos + 1):
+            try:
+                if intento > 1:
+                    print(f"  🔄 Reintento {intento}/{max_intentos}...")
+                    time.sleep(delay_reintento)
                 
-        except Exception as e:
-            print(f"  ❌ Error extrayendo player URL: {e}")
-            return None
-
-    def extraer_servidores_video(self, player_url, referer_url):
-        """Accede al iframe del player y extrae los servidores de video disponibles"""
-        try:
-            # Headers específicos con referer
-            headers_player = self.headers.copy()
-            headers_player['Referer'] = referer_url
+                response = self.session.get(url_episodio_serie, headers=self.headers, timeout=15)
+                response.raise_for_status()
+                
+                soup = BeautifulSoup(response.content, 'html.parser')
+                
+                # Buscar el iframe
+                iframes = soup.find_all('iframe', class_='absolute inset-0 w-full h-full')
             
-            print(f"  → Accediendo al player...")
-            response = self.session.get(player_url, headers=headers_player, timeout=15)
-            response.raise_for_status()
-            
-            soup = BeautifulSoup(response.content, 'html.parser')
-            
-            servidores = []
-            
-            # Buscar todos los botones de servidor (los <li> con onclick)
-            botones_servidor = soup.find_all('li', onclick=True)
-            
-            for boton in botones_servidor:
-                try:
-                    # Extraer el onclick
-                    onclick = boton.get('onclick', '')
-                    
-                    # El onclick contiene: go_to_player('/r.php?id=...&hash=...')
-                    if 'go_to_player' in onclick:
-                        # Extraer la URL entre comillas
-                        match = re.search(r"go_to_player\('([^']+)'\)", onclick)
-                        if match:
-                            ruta_relativa = match.group(1)
-                            
-                            # Construir URL completa
-                            base_url = urlparse(player_url)
-                            url_completa = f"{base_url.scheme}://{base_url.netloc}{ruta_relativa}"
-                            
-                            # Extraer nombre del servidor
-                            span = boton.find('span')
-                            nombre_servidor = span.text.strip() if span else 'Desconocido'
-                            
-                            # Extraer descripción
-                            p = boton.find('p')
-                            descripcion = p.text.strip() if p else ''
-                            
-                            servidor_info = {
-                                'nombre': nombre_servidor,
-                                'descripcion': descripcion,
-                                'url_redirect': url_completa,
-                                'ruta_relativa': ruta_relativa
-                            }
-                            
-                            servidores.append(servidor_info)
-                            
-                except Exception as e:
-                    print(f"    Error extrayendo servidor: {e}")
+                if not iframes:
+                    if intento == max_intentos:
+                        print("  ⚠️ No se encontraron iframes con las clases especificadas")
                     continue
-            
-            print(f"  ✓ {len(servidores)} servidores encontrados")
-            return servidores
-            
-        except Exception as e:
-            print(f"  ❌ Error accediendo al player: {e}")
-            return []
+                
+                # Filtrar iframes que NO sean de YouTube
+                for iframe in iframes:
+                    if 'src' in iframe.attrs:
+                        src = iframe['src']
+                        
+                        # Excluir iframes de YouTube (trailers)
+                        if 'youtube.com' not in src.lower() and 'youtu.be' not in src.lower():
+                            print(f"  ✓ Player URL encontrada: {src}")
+                            return src
+                
+                if intento == max_intentos:
+                    print("  ⚠️ No se encontró iframe válido (solo trailers de YouTube)")
+                    
+            except requests.exceptions.HTTPError as e:
+                if intento == max_intentos:
+                    print(f"  ❌ Error HTTP tras {max_intentos} intentos: {e}")
+                else:
+                    print(f"  ⚠️ Error HTTP (intento {intento}/{max_intentos}): {e.response.status_code}")
+            except Exception as e:
+                if intento == max_intentos:
+                    print(f"  ❌ Error tras {max_intentos} intentos: {e}")
+                else:
+                    print(f"  ⚠️ Error (intento {intento}/{max_intentos}): {e}")
+        
+        return None
+
+    def extraer_servidores_video(self, player_url, referer_url, max_intentos=5, delay_reintento=2):
+        """Accede al iframe del player y extrae los servidores de video disponibles"""
+        for intento in range(1, max_intentos + 1):
+            try:
+                if intento > 1:
+                    print(f"  🔄 Reintento acceso al player {intento}/{max_intentos}...")
+                    time.sleep(delay_reintento)
+                
+                headers_player = self.headers.copy()
+                headers_player['Referer'] = referer_url
+                
+                if intento == 1:
+                    print(f"  → Accediendo al player...")
+                
+                response = self.session.get(player_url, headers=headers_player, timeout=15)
+                response.raise_for_status()
+                
+                soup = BeautifulSoup(response.content, 'html.parser')
+                
+                servidores = []
+                
+                botones_servidor = soup.find_all('li', onclick=True)
+                
+                for boton in botones_servidor:
+                    try:
+                        onclick = boton.get('onclick', '')
+                        
+                        if 'go_to_player' in onclick:
+
+                            match = re.search(r"go_to_player\('([^']+)'\)", onclick)
+                            if match:
+                                ruta_relativa = match.group(1)
+                                
+                                base_url = urlparse(player_url)
+                                url_completa = f"{base_url.scheme}://{base_url.netloc}{ruta_relativa}"
+                                
+                                span = boton.find('span')
+                                nombre_servidor = span.text.strip() if span else 'Desconocido'
+                                
+                                p = boton.find('p')
+                                descripcion = p.text.strip() if p else ''
+                                
+                                servidor_info = {
+                                    'nombre': nombre_servidor,
+                                    'descripcion': descripcion,
+                                    'url_redirect': url_completa,
+                                    'ruta_relativa': ruta_relativa
+                                }
+                                
+                                servidores.append(servidor_info)
+                                
+                    except Exception as e:
+                        print(f"    Error extrayendo servidor: {e}")
+                        continue
+                
+                print(f"  ✓ {len(servidores)} servidores encontrados")
+                return servidores
+                
+            except requests.exceptions.HTTPError as e:
+                if intento == max_intentos:
+                    print(f"  ❌ Error HTTP accediendo al player tras {max_intentos} intentos: {e}")
+                else:
+                    print(f"  ⚠️ Error HTTP en player (intento {intento}/{max_intentos}): {e.response.status_code}")
+            except Exception as e:
+                if intento == max_intentos:
+                    print(f"  ❌ Error accediendo al player tras {max_intentos} intentos: {e}")
+                else:
+                    print(f"  ⚠️ Error en player (intento {intento}/{max_intentos}): {e}")
+        
+        return []
 
     def obtener_url_final_video(self, redirect_url, referer_url):
         """Sigue la redirección de /r.php para obtener la URL final del video"""
@@ -250,6 +274,8 @@ class CineCalidadSerieExtractor:
                 timeout=15
             )
             response.raise_for_status()
+
+            print(f"    → Cargando episodios de temporada {temporada_numero}...")
 
             try:
                 json_response = response.json()
