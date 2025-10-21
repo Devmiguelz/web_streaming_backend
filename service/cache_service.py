@@ -54,11 +54,7 @@ class CacheService:
             dict: Datos de la película o None si no existe/expiró
         """
 
-        print(f"Intentando obtener caché para slug: {slug}")
-
         cache_path = self._get_cache_path(slug)
-
-        print(f"Buscando caché para {slug} en {cache_path}")
         
         # Verificar si el archivo existe
         if not cache_path.exists():
