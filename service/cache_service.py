@@ -20,16 +20,19 @@ class CacheService:
             cache_dir (str): Directorio donde se almacenan los archivos de caché
             expiration_hours (int): Horas de validez de la caché (default: 24)
         """
-        self.cache_dir = Path(cache_dir)
+        self.cache_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), cache_dir))
         self.expiration_hours = expiration_hours
-        
-        # Crear directorio si no existe
-        self.cache_dir.mkdir(parents=True, exist_ok=True)
     
     def _get_cache_path(self, slug: str) -> Path:
         """Genera la ruta del archivo de caché para un slug"""
-        safe_slug = "".join(c if c.isalnum() or c in ('-', '_') else '_' for c in slug)
-        return self.cache_dir / f"{safe_slug}.json"
+        routePath = None     
+        try:
+            safe_slug = "".join(c if c.isalnum() or c in ('-', '_') else '_' for c in slug)
+            routePath = os.path.join(self.cache_dir, f"{safe_slug}.json")
+        except Exception as e:
+            print(f"Error generando ruta de caché para {slug}: {e}")
+
+        return Path(routePath)        
     
     def _is_cache_valid(self, cache_data: Dict) -> bool:
         """Verifica si la caché aún es válida según el tiempo de expiración"""
@@ -50,7 +53,12 @@ class CacheService:
         Returns:
             dict: Datos de la película o None si no existe/expiró
         """
+
+        print(f"Intentando obtener caché para slug: {slug}")
+
         cache_path = self._get_cache_path(slug)
+
+        print(f"Buscando caché para {slug} en {cache_path}")
         
         # Verificar si el archivo existe
         if not cache_path.exists():
@@ -87,6 +95,8 @@ class CacheService:
             bool: True si se guardó correctamente, False si hubo error
         """
         cache_path = self._get_cache_path(slug)
+
+        print(f"Guardando caché para {slug} en {cache_path}")
         
         try:
             # Preparar datos para caché

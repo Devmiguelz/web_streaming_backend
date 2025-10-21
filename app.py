@@ -2,15 +2,16 @@ import json
 import os
 import sys
 import requests
+import resend
+import time
+import uuid
+from bs4 import BeautifulSoup
 from flask import Flask, jsonify, request, send_from_directory
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_cors import CORS
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 from datetime import datetime
 from dotenv import load_dotenv
-import resend
 from scraper.pelicula_scraper_live import scraper_movie_live
 from scraper.serie_scraper_live import scraper_serie_live
 from service.cache_service import cache_service
@@ -26,11 +27,11 @@ else:
 
 # Configurar rate limiting
 limiter = Limiter(
-    get_remote_address,  # Función para identificar al cliente (por IP)
+    get_remote_address, 
     app=app,
-    default_limits=[],  # Límites por defecto
-    storage_uri="memory://",  # Backend de almacenamiento
-    strategy="fixed-window"  # Estrategia de conteo
+    default_limits=[],  
+    storage_uri="memory://",  
+    strategy="fixed-window"  
 )
 
 # Obtener el entorno
@@ -391,15 +392,142 @@ def buscar_series():
     return jsonify(paginar(resultados, pagina))
 
 @app.route('/api/serie/<string:slug>')
-def serie_por_url(slug):
+def serie_info_basica(slug):
     """
-    Obtiene serie haciendo scraping en vivo por su slug
+    PASO 1: Obtiene solo información básica de la serie (RÁPIDO)
+    - Título, descripción, imagen, géneros, etc.
+    - Lista de temporadas disponibles (sin episodios)
     
-    Ejemplo: /api/serie/url/la-nueva-brigada
+    Ejemplo: /api/serie/la-nueva-brigada
     """
     try:
+        # Intentar obtener del caché
+        cache_key = f"serie_info_{slug}"
+        cached_data = cache_service.get(cache_key)
         
-        cached_data = cache_service.get(slug)
+        if cached_data:
+            response = jsonify(cached_data)
+            response.headers['X-Cache'] = 'HIT'
+            return response, 200
+        
+        url_serie = f"{scraper_serie_live.base_url}/serie/{slug}/"
+        
+        http_response = scraper_serie_live.hacer_peticion_segura(url_serie)
+        soup = BeautifulSoup(http_response.content, 'html.parser')
+        
+        serie_info = scraper_serie_live.extraer_info_basica(soup)
+        
+        season_selector = soup.find('select', id='season-selector')
+        temporadas_disponibles = []
+        serie_id = None
+        
+        if season_selector:
+            options = season_selector.find_all('option')
+            serie_id = options[0].get('data-serie') if options else None
+            
+            for option in options:
+                temporadas_disponibles.append({
+                    'numero': option['value'],
+                    'nombre': option.text.strip(),
+                    'episodios_cargados': False
+                })
+        
+        resultado = {
+            'id': str(uuid.uuid4()),
+            **serie_info,
+            'url_serie': url_serie,
+            'slug': slug,
+            'serie_id': serie_id,
+            'temporadas': temporadas_disponibles,
+            'tipo': 'info_basica'
+        }
+        
+        cache_service.set(cache_key, resultado)
+        
+        response = jsonify(resultado)
+        response.headers['X-Cache'] = 'MISS'
+        return response, 200
+        
+    except Exception as e:
+        return jsonify({
+            'error': 'Error al obtener información básica',
+            'detalle': str(e)
+        }), 500
+
+@app.route('/api/serie/<string:slug>/temporada/<int:temporada_num>')
+def serie_temporada_completa(slug, temporada_num):
+    """
+    PASO 2: Obtiene episodios y servidores de UNA temporada específica
+    
+    Ejemplo: /api/serie/la-nueva-brigada/temporada/1
+    """
+    try:
+        # Intentar obtener del caché
+        cache_key = f"serie_temp_{slug}_s{temporada_num}"
+        cached_data = cache_service.get(cache_key)
+        
+        if cached_data:
+            response = jsonify(cached_data)
+            response.headers['X-Cache'] = 'HIT'
+            return response, 200
+        
+        # Construir URL y obtener serie_id
+        url_serie = f"{scraper_serie_live.base_url}/serie/{slug}/"
+        http_response = scraper_serie_live.hacer_peticion_segura(url_serie)
+        soup = BeautifulSoup(http_response.content, 'html.parser')
+        
+        season_selector = soup.find('select', id='season-selector')
+        if not season_selector:
+            return jsonify({'error': 'No se encontró selector de temporadas'}), 404
+        
+        options = season_selector.find_all('option')
+        serie_id = options[0].get('data-serie') if options else None
+        
+        if not serie_id:
+            return jsonify({'error': 'No se pudo obtener ID de la serie'}), 404
+        
+        episodios = scraper_serie_live.cargar_episodios_temporada(
+            serie_id, 
+            str(temporada_num), 
+            url_serie
+        )
+        
+        for episodio in episodios:
+            if episodio.get('url'):
+                servidores = scraper_serie_live.extraer_enlaces_episodio(episodio['url'])
+                episodio['servidores'] = servidores
+                time.sleep(1)
+        
+        resultado = {
+            'slug': slug,
+            'temporada_numero': temporada_num,
+            'total_episodios': len(episodios),
+            'episodios': episodios
+        }
+        
+        cache_service.set(cache_key, resultado)
+        
+        response = jsonify(resultado)
+        response.headers['X-Cache'] = 'MISS'
+        return response, 200
+        
+    except Exception as e:
+        return jsonify({
+            'error': 'Error al cargar temporada',
+            'detalle': str(e)
+        }), 500
+
+@app.route('/api/serie/<string:slug>/completa')
+def serie_completa(slug):
+    """
+    ENDPOINT COMPLETO: Obtiene toda la serie con todos los episodios y servidores
+    (Este es el endpoint original, pero más lento)
+    
+    Ejemplo: /api/serie/la-nueva-brigada/completa
+    """
+    try:
+        cache_key = f"serie_completa_{slug}"
+        cached_data = cache_service.get(cache_key)
         
         if cached_data:
             response = jsonify(cached_data)
@@ -414,7 +542,7 @@ def serie_por_url(slug):
                 'slug': slug
             }), 404
         
-        cache_service.set(slug, serie_data)
+        cache_service.set(cache_key, serie_data)
         
         response = jsonify(serie_data)
         response.headers['X-Cache'] = 'MISS'
@@ -449,7 +577,6 @@ def generos_series():
         generos.update(serie.get('generos', []))
     
     return jsonify(sorted(list(generos)))
-
 
 # ==================== ADMINISTRACIÓN ====================
 
