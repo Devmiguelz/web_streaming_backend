@@ -10,7 +10,6 @@ import uuid
 from urllib.parse import urlparse
 import re
 
-
 class ScraperMovieService:
     """Servicio para hacer scraping en vivo de películas"""
     

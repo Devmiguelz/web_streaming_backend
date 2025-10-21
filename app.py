@@ -13,6 +13,7 @@ from dotenv import load_dotenv
 import resend
 from scraper.pelicula_scraper_live import scraper_movie_live
 from scraper.serie_scraper_live import scraper_serie_live
+from service.cache_service import cache_service
 
 # Cargar variables de entorno
 load_dotenv()
@@ -297,6 +298,14 @@ def pelicula_por_url(slug):
         JSON con toda la información de la película incluyendo servidores
     """
     try:
+        cached_data = cache_service.get(slug)
+        
+        if cached_data:
+            # Caché encontrada y válida
+            response = jsonify(cached_data)
+            response.headers['X-Cache'] = 'HIT'
+            return response, 200
+        
         resultado = scraper_movie_live.obtener_pelicula_por_slug(slug)
         
         if not resultado:
@@ -305,7 +314,11 @@ def pelicula_por_url(slug):
                 'slug': slug
             }), 404
         
-        return jsonify(resultado), 200
+        cache_service.set(slug, resultado)
+        
+        response = jsonify(resultado)
+        response.headers['X-Cache'] = 'MISS'
+        return response, 200
         
     except requests.exceptions.HTTPError as e:
         if e.response.status_code == 404:
@@ -385,13 +398,27 @@ def serie_por_url(slug):
     Ejemplo: /api/serie/url/la-nueva-brigada
     """
     try:
-        # Hacer scraping en vivo
+        
+        cached_data = cache_service.get(slug)
+        
+        if cached_data:
+            response = jsonify(cached_data)
+            response.headers['X-Cache'] = 'HIT'
+            return response, 200
+        
         serie_data = scraper_serie_live.scrapear_serie_por_slug(slug)
         
         if not serie_data:
-            return jsonify({'error': 'No se pudo obtener datos de la serie'}), 404
+            return jsonify({
+                'error': 'Serie no encontrada',
+                'slug': slug
+            }), 404
         
-        return jsonify(serie_data), 200
+        cache_service.set(slug, serie_data)
+        
+        response = jsonify(serie_data)
+        response.headers['X-Cache'] = 'MISS'
+        return response, 200
         
     except Exception as e:
         return jsonify({
