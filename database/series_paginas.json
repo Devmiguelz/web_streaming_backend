@@ -1,9 +1,10 @@
 [
   {
-    "id": "fcd543e5-4f8c-4998-9fa1-dd2f63f6fb85",
+    "id": "2932996c-e3f5-4b1d-bae1-1ba35bfa1bec",
     "tipo": "serie",
     "titulo": "La nueva brigada",
     "enlace": "https://cinecalidad.bar/serie/la-nueva-brigada/",
+    "slug": "la-nueva-brigada",
     "imagen": "https://image.tmdb.org/t/p/w342/axSGysoo3CW3P1QnAxQrY1h7kWq.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 6",
@@ -15,10 +16,11 @@
     ]
   },
   {
-    "id": "f733d759-443f-4f7d-bae0-a250f584523d",
+    "id": "d808adb6-2133-4a80-827d-36265f1ba1ae",
     "tipo": "serie",
     "titulo": "Monstruo: La historia de Ed Gein",
     "enlace": "https://cinecalidad.bar/serie/monstruo-la-historia-de-ed-gein/",
+    "slug": "monstruo-la-historia-de-ed-gein",
     "imagen": "https://image.tmdb.org/t/p/w342/2RVFksm4DF17XZSXMVbNh1qDSOr.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -31,10 +33,11 @@
     ]
   },
   {
-    "id": "8884bacb-63df-459f-8403-e16d27cdc5eb",
+    "id": "35d565f3-4287-4563-8711-9d908c82e603",
     "tipo": "serie",
     "titulo": "The Rookie",
     "enlace": "https://cinecalidad.bar/serie/the-rookie/",
+    "slug": "the-rookie",
     "imagen": "https://image.tmdb.org/t/p/w342/xGJ98jmU88PNhxSxcsX8WWmJJCa.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 18",
@@ -48,10 +51,11 @@
     ]
   },
   {
-    "id": "808a4cef-02f3-438b-a52e-67f9c477de43",
+    "id": "55c31dcf-c687-469f-892d-d2e6f945dc55",
     "tipo": "serie",
     "titulo": "Alien: Earth",
     "enlace": "https://cinecalidad.bar/serie/alien-earth-s3/",
+    "slug": "alien-earth-s3",
     "imagen": "https://image.tmdb.org/t/p/w342/8IIPZe4V2xNYFWY7lBY6GpN2L8O.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -64,10 +68,11 @@
     ]
   },
   {
-    "id": "75633fc6-4273-42b1-b926-4debce12a161",
+    "id": "1f9a0f90-ac87-45e5-8b2d-c4167a65ab27",
     "tipo": "serie",
     "titulo": "She-Hulk: Defensora de héroes",
     "enlace": "https://cinecalidad.bar/serie/she-hulk-defensora-de-heroes-s1/",
+    "slug": "she-hulk-defensora-de-heroes-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/4ie82rXFa1rAJ9qTWoCvlljglLJ.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 9",
@@ -80,10 +85,11 @@
     ]
   },
   {
-    "id": "88d0b172-5b5e-4e4e-abc8-58e3076412e1",
+    "id": "48178a72-0d6c-4ac4-9cc5-4de99800f64f",
     "tipo": "serie",
     "titulo": "Mix Tape",
     "enlace": "https://cinecalidad.bar/serie/mix-tape/",
+    "slug": "mix-tape",
     "imagen": "https://image.tmdb.org/t/p/w342/soTDJ30863J3nGEKr4sbnX8L0HZ.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 4",
@@ -95,10 +101,11 @@
     ]
   },
   {
-    "id": "a7dc006b-5ee3-488e-922e-23a81fd10b23",
+    "id": "b10833a0-f6c7-4de1-bb6c-0cbe51d273e7",
     "tipo": "serie",
     "titulo": "Merlina",
     "enlace": "https://cinecalidad.bar/serie/merlina/",
+    "slug": "merlina",
     "imagen": "https://image.tmdb.org/t/p/w342/q6j9Dn3iiXoCjpVitDppNNZXwVq.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 16",
@@ -112,10 +119,11 @@
     ]
   },
   {
-    "id": "72e4fa56-af77-4007-9b43-5f3675b4751b",
+    "id": "03b55004-b6f0-4676-8e44-392b6a06e7af",
     "tipo": "serie",
     "titulo": "El gran guerrero",
     "enlace": "https://cinecalidad.bar/serie/el-gran-guerrero/",
+    "slug": "el-gran-guerrero",
     "imagen": "https://image.tmdb.org/t/p/w342/qEcYaWKUUJITpp3hwTIGtgfHeEZ.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 9",
@@ -127,10 +135,11 @@
     ]
   },
   {
-    "id": "a58b3530-84cd-41df-b291-022ef2fbf23c",
+    "id": "b8d9c637-8464-4421-8556-0d17430757f5",
     "tipo": "serie",
     "titulo": "Los ojos de Wakanda",
     "enlace": "https://cinecalidad.bar/serie/los-ojos-de-wakanda-s2/",
+    "slug": "los-ojos-de-wakanda-s2",
     "imagen": "https://image.tmdb.org/t/p/w342/xkMPhwoj0W5Db8EnMnoj1CbmY1W.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 4",
@@ -144,10 +153,11 @@
     ]
   },
   {
-    "id": "953f75ab-3de2-403a-9447-45361c7af1f0",
+    "id": "4c237429-739c-47df-a7be-1bbf74c3b184",
     "tipo": "serie",
     "titulo": "Love, Death & Robots",
     "enlace": "https://cinecalidad.bar/serie/love-death-robots/",
+    "slug": "love-death-robots",
     "imagen": "https://image.tmdb.org/t/p/w342/asDqvkE66EegtKJJXIRhBJPxscr.jpg",
     "temporadas": "seasons 4",
     "episodios": "Episodios 45",
@@ -160,10 +170,11 @@
     ]
   },
   {
-    "id": "648d37cf-8550-4283-922d-f388b5b8a543",
+    "id": "aec50cf3-5a66-47a0-b675-a7fd70857fc7",
     "tipo": "serie",
     "titulo": "Humo",
     "enlace": "https://cinecalidad.bar/serie/humo/",
+    "slug": "humo",
     "imagen": "https://image.tmdb.org/t/p/w342/ftbV3JuMSlM5Dk93TgYIMvbD9mY.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 9",
@@ -176,10 +187,11 @@
     ]
   },
   {
-    "id": "d4d29ec0-27ad-402b-b099-7e91fcadff4d",
+    "id": "3397eb8c-3b5f-44fb-beab-d8d651faf00b",
     "tipo": "serie",
     "titulo": "El Eternauta",
     "enlace": "https://cinecalidad.bar/serie/el-eternauta/",
+    "slug": "el-eternauta",
     "imagen": "https://image.tmdb.org/t/p/w342/9Krv5NvKa5a3Q3b1l2B3rP9Bj8E.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 6",
@@ -193,10 +205,11 @@
     ]
   },
   {
-    "id": "74908f2d-ad0f-40c9-8c3b-c0c34f76ba33",
+    "id": "cd684d54-9ec5-479c-8fe9-dcb1b95751a9",
     "tipo": "serie",
     "titulo": "The Society",
     "enlace": "https://cinecalidad.bar/serie/the-society/",
+    "slug": "the-society",
     "imagen": "https://image.tmdb.org/t/p/w342/2E6bA5oOGroPR2nzcTi9q9KETB3.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 10",
@@ -209,10 +222,11 @@
     ]
   },
   {
-    "id": "13c521ec-6e2d-4318-bda4-2a375f90eedc",
+    "id": "67f5e5a1-8253-4ef2-afce-1cde18dc044b",
     "tipo": "serie",
     "titulo": "Los crímenes del mandala",
     "enlace": "https://cinecalidad.bar/serie/los-crimenes-del-mandala/",
+    "slug": "los-crimenes-del-mandala",
     "imagen": "https://image.tmdb.org/t/p/w342/i0Jl1EkHux33PrOi0W5F2ECvH3q.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -226,10 +240,11 @@
     ]
   },
   {
-    "id": "ecf0e8b4-c660-4c68-ae46-ee2cb5cf4330",
+    "id": "bbf108f0-4adf-47e3-882c-d9f5ab0eeecd",
     "tipo": "serie",
     "titulo": "And Just Like That… Un nuevo capítulo de Sex and the City",
     "enlace": "https://cinecalidad.bar/serie/and-just-like-that-un-nuevo-capitulo-de-sex-and-the-city-s3/",
+    "slug": "and-just-like-that-un-nuevo-capitulo-de-sex-and-the-city-s3",
     "imagen": "https://image.tmdb.org/t/p/w342/qnZSQ20bhyaSJ83y0qaw61lv8Ef.jpg",
     "temporadas": "seasons 3",
     "episodios": "Episodios 12",
@@ -242,10 +257,11 @@
     ]
   },
   {
-    "id": "67792e3b-0e34-4f1f-8d01-a4966da6d806",
+    "id": "e7ec6c25-4cec-4599-9140-0c662fbd1a00",
     "tipo": "serie",
     "titulo": "Sandman",
     "enlace": "https://cinecalidad.bar/serie/sandman/",
+    "slug": "sandman",
     "imagen": "https://image.tmdb.org/t/p/w342/dnDGWdBwBC1zexCYcv8ihQKQPVT.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 23",
@@ -259,10 +275,11 @@
     ]
   },
   {
-    "id": "798c73fe-8c2f-41ca-82e8-25fd50917d4e",
+    "id": "9006b6ce-eea3-4f51-8daf-eb76706c422e",
     "tipo": "serie",
     "titulo": "Dexter: Resurrección",
     "enlace": "https://cinecalidad.bar/serie/dexter-resurreccion-s1/",
+    "slug": "dexter-resurreccion-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/fORqf1CdugrD5oHnGYL24VZktFQ.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 10",
@@ -275,10 +292,11 @@
     ]
   },
   {
-    "id": "223f1128-c82c-4091-867d-712d13d8331b",
+    "id": "34999330-b5be-417d-8185-6b84b46539d6",
     "tipo": "serie",
     "titulo": "Hell Motel",
     "enlace": "https://cinecalidad.bar/serie/hell-motel/",
+    "slug": "hell-motel",
     "imagen": "https://image.tmdb.org/t/p/w342/3HOOWgpfyK71yLxelc5Sa1IoULb.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -292,10 +310,11 @@
     ]
   },
   {
-    "id": "1a8ff283-77b2-4764-80a5-dbca50336114",
+    "id": "1ba7d2f0-5542-4c21-b06b-e36c2ccf6f90",
     "tipo": "serie",
     "titulo": "El instituto",
     "enlace": "https://cinecalidad.bar/serie/el-instituto/",
+    "slug": "el-instituto",
     "imagen": "https://image.tmdb.org/t/p/w342/nuJzSRiz3zEbxeRie4ldgkKMm8l.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -308,10 +327,11 @@
     ]
   },
   {
-    "id": "464a6265-37a1-4f81-8003-314233ef1929",
+    "id": "a4657d47-0811-479a-ac3f-0404016cfebd",
     "tipo": "serie",
     "titulo": "El verano en que me enamoré",
     "enlace": "https://cinecalidad.bar/serie/el-verano-en-que-me-enamore/",
+    "slug": "el-verano-en-que-me-enamore",
     "imagen": "https://image.tmdb.org/t/p/w342/wDeFJIE5chr2P8iKW6HjyHKNm8x.jpg",
     "temporadas": "seasons 3",
     "episodios": "Episodios 26",
@@ -323,10 +343,11 @@
     ]
   },
   {
-    "id": "ed07ea98-df31-4b3a-aeea-495f9e3f8d86",
+    "id": "35582f6f-aa80-424b-9784-a81fa2ec7789",
     "tipo": "serie",
     "titulo": "Motorheads: Amantes de la velocidad",
     "enlace": "https://cinecalidad.bar/serie/motorheads-amantes-de-la-velocidad-s1/",
+    "slug": "motorheads-amantes-de-la-velocidad-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/22PhXAOdj0h9lMIGnYkYmqdZgkZ.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 10",
@@ -338,10 +359,11 @@
     ]
   },
   {
-    "id": "d72f8884-5f14-433e-8d22-432d448c58e7",
+    "id": "6fcc8c94-bb2d-47b9-82c4-d19120029b94",
     "tipo": "serie",
     "titulo": "The Game",
     "enlace": "https://cinecalidad.bar/serie/the-game/",
+    "slug": "the-game",
     "imagen": "https://image.tmdb.org/t/p/w342/8C1lALIuIOIk8IxouWHV5FnQbxx.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 4",
@@ -353,10 +375,11 @@
     ]
   },
   {
-    "id": "6e833b46-38df-4556-b889-358b1a94d8fc",
+    "id": "7737e687-7529-4ea0-9ab7-c706094314a2",
     "tipo": "serie",
     "titulo": "Matabot",
     "enlace": "https://cinecalidad.bar/serie/matabot/",
+    "slug": "matabot",
     "imagen": "https://image.tmdb.org/t/p/w342/zwu7yXEGHvJv9va0SmkFEJGn2L7.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 10",
@@ -370,10 +393,11 @@
     ]
   },
   {
-    "id": "a315d3a6-12ec-495f-a88a-0522aabd8015",
+    "id": "e1c5d509-2972-47f4-8ada-72f3aee5bb63",
     "tipo": "serie",
     "titulo": "Duster",
     "enlace": "https://cinecalidad.bar/serie/duster/",
+    "slug": "duster",
     "imagen": "https://image.tmdb.org/t/p/w342/wYBsKEFU0qHdhSI9QtQjL8HELMn.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -386,10 +410,11 @@
     ]
   },
   {
-    "id": "bf857c9d-42fb-45a0-8db6-79aded511a54",
+    "id": "1413ceae-8d0e-46f9-b2f3-9b540c8d2913",
     "tipo": "serie",
     "titulo": "Poker Face",
     "enlace": "https://cinecalidad.bar/serie/poker-face-s1/",
+    "slug": "poker-face-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/zDeWkJRkKzzbNukbroQohjc4Q5P.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 12",
@@ -402,10 +427,11 @@
     ]
   },
   {
-    "id": "d91c9382-c8f2-472f-ad5d-b67650d327cb",
+    "id": "4e112e01-1d0a-424e-80d9-416e7b8821f9",
     "tipo": "serie",
     "titulo": "Sospechoso: el asesinato de Jean Charles de Menezes",
     "enlace": "https://cinecalidad.bar/serie/sospechoso-el-asesinato-de-jean-charles-de-menezes/",
+    "slug": "sospechoso-el-asesinato-de-jean-charles-de-menezes",
     "imagen": "https://image.tmdb.org/t/p/w342/5G19mfImFZTln0mYYSGczrDIxfR.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 4",
@@ -417,10 +443,11 @@
     ]
   },
   {
-    "id": "edc937bd-2511-48e3-af5d-23840cfc8666",
+    "id": "75a61e5d-3278-45bc-8122-c9b1c2940d79",
     "tipo": "serie",
     "titulo": "Star Wars: Historias del inframundo",
     "enlace": "https://cinecalidad.bar/serie/star-wars-historias-del-inframundo/",
+    "slug": "star-wars-historias-del-inframundo",
     "imagen": "https://image.tmdb.org/t/p/w342/7hcA0DZJWlbucSoh29gbNZFRlew.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 6",
@@ -435,10 +462,11 @@
     ]
   },
   {
-    "id": "c81b1889-3a1f-4dcd-8f3b-609f9ec389cb",
+    "id": "8e582492-1abb-4439-9e5a-02430125b36f",
     "tipo": "serie",
     "titulo": "The Walking Dead: Dead City",
     "enlace": "https://cinecalidad.bar/serie/the-walking-dead-dead-city/",
+    "slug": "the-walking-dead-dead-city",
     "imagen": "https://image.tmdb.org/t/p/w342/wq3vuQzQgbS83zX3malAFWMsSwX.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 8",
@@ -452,10 +480,11 @@
     ]
   },
   {
-    "id": "f5223b1b-89ec-4879-9958-9188f3576df3",
+    "id": "4d1cd614-5c41-4d12-a35d-215249c217e1",
     "tipo": "serie",
     "titulo": "Carême: Chef de reyes",
     "enlace": "https://cinecalidad.bar/serie/careme-chef-de-reyes/",
+    "slug": "careme-chef-de-reyes",
     "imagen": "https://image.tmdb.org/t/p/w342/mBDmNWD8HH8Jl8P8MNV90QHGkq4.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -467,10 +496,11 @@
     ]
   },
   {
-    "id": "bd681eea-bd99-473f-b2a8-8bf5fe9f2491",
+    "id": "21e648db-3316-4578-b7a7-9cfc63c5ff42",
     "tipo": "serie",
     "titulo": "Sherlock & Daughter",
     "enlace": "https://cinecalidad.bar/serie/sherlock-daughter/",
+    "slug": "sherlock-daughter",
     "imagen": "https://image.tmdb.org/t/p/w342/ifh5NNMzUEqErsHmeKjjGblbOav.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -483,10 +513,11 @@
     ]
   },
   {
-    "id": "bb121d32-7a59-448a-9ae9-5d715e645ced",
+    "id": "34a00927-9377-4d76-a2db-0b1ff2b40d41",
     "tipo": "serie",
     "titulo": "Andor",
     "enlace": "https://cinecalidad.bar/serie/andor-v5/",
+    "slug": "andor-v5",
     "imagen": "https://image.tmdb.org/t/p/w342/khZqmwHQicTYoS7Flreb9EddFZC.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 12",
@@ -500,10 +531,11 @@
     ]
   },
   {
-    "id": "17130cbc-cee8-488d-8c2f-f361ff08578f",
+    "id": "86058c2c-1949-44cb-8973-d79bcd5903ef",
     "tipo": "serie",
     "titulo": "Power Book III: Raising Kanan",
     "enlace": "https://cinecalidad.bar/serie/power-book-iii-raising-kanan-s24/",
+    "slug": "power-book-iii-raising-kanan-s24",
     "imagen": "https://image.tmdb.org/t/p/w342/pZ7IaHON9hnu8C0g3zdoWwIsJ9t.jpg",
     "temporadas": "seasons 4",
     "episodios": "Episodios 10",
@@ -516,10 +548,11 @@
     ]
   },
   {
-    "id": "a3659a16-74de-4ad6-b735-3928860bce88",
+    "id": "286c7186-5242-4492-bb40-e9b1ee71b639",
     "tipo": "serie",
     "titulo": "El Elegido",
     "enlace": "https://cinecalidad.bar/serie/el-elegido/",
+    "slug": "el-elegido",
     "imagen": "https://image.tmdb.org/t/p/w342/9HDsb3zEw7notQLXpJpN3kDMMl0.jpg",
     "temporadas": "seasons 5",
     "episodios": "Episodios 32",
@@ -532,10 +565,11 @@
     ]
   },
   {
-    "id": "3e1b2ef1-d491-4c71-b996-98d8fecb7650",
+    "id": "7d56a448-99fb-4abf-a750-bd1b26588131",
     "tipo": "serie",
     "titulo": "Tierra de Mafia",
     "enlace": "https://cinecalidad.bar/serie/tierra-de-mafia/",
+    "slug": "tierra-de-mafia",
     "imagen": "https://image.tmdb.org/t/p/w342/s7ye2BFq4HjGMi0dGkzGu5c2fyz.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 10",
@@ -548,10 +582,11 @@
     ]
   },
   {
-    "id": "708b4f0a-553d-4627-becd-0bab3f2f1447",
+    "id": "740bf2fa-ab3a-44f4-b91f-3661e7460577",
     "tipo": "serie",
     "titulo": "Cazador de Demonios",
     "enlace": "https://cinecalidad.bar/serie/cazador-de-demonios/",
+    "slug": "cazador-de-demonios",
     "imagen": "https://image.tmdb.org/t/p/w342/A85y1MJ2v6y6gt76UJnIExVEaex.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -565,10 +600,11 @@
     ]
   },
   {
-    "id": "f642bc6a-ed07-4213-9b0f-ff297b274b85",
+    "id": "8a0d8232-1b35-491a-90d0-9c571813b6ed",
     "tipo": "serie",
     "titulo": "Celtics City",
     "enlace": "https://cinecalidad.bar/serie/celtics-city-s1/",
+    "slug": "celtics-city-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/sPwE7NtveUK0lMUgr3g3ZygIsqB.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 9",
@@ -580,10 +616,11 @@
     ]
   },
   {
-    "id": "db02ce35-7f2a-45dd-9d26-08b7f11947c0",
+    "id": "43863158-4a7e-4cb6-a3d2-74c02ddce351",
     "tipo": "serie",
     "titulo": "Mentes Criminales",
     "enlace": "https://cinecalidad.bar/serie/mentes-criminales-s1/",
+    "slug": "mentes-criminales-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/3UyUgPfcs7ByA9hxbhWSW98xdpg.jpg",
     "temporadas": "seasons 18",
     "episodios": "Episodios 22",
@@ -597,10 +634,11 @@
     ]
   },
   {
-    "id": "fcd16622-5035-44e8-9219-a5556b047059",
+    "id": "b4ccc8e6-ed77-4e29-b33f-76c83c0a5583",
     "tipo": "serie",
     "titulo": "Malas influencias: El lado oscuro de las redes en la infancia",
     "enlace": "https://cinecalidad.bar/serie/malas-influencias-el-lado-oscuro-de-las-redes-en-la-infancia/",
+    "slug": "malas-influencias-el-lado-oscuro-de-las-redes-en-la-infancia",
     "imagen": "https://image.tmdb.org/t/p/w342/kbgdBz6VezAOCgNAhzNP6dL7XBC.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 3",
@@ -612,10 +650,11 @@
     ]
   },
   {
-    "id": "677287eb-c8eb-4936-8bfa-850b099d22f6",
+    "id": "4bca5f5e-1bbe-48a2-94f2-2d7d2f5294b4",
     "tipo": "serie",
     "titulo": "El jardinero",
     "enlace": "https://cinecalidad.bar/serie/el-jardinero/",
+    "slug": "el-jardinero",
     "imagen": "https://image.tmdb.org/t/p/w342/8nEYffm7XDQXSGoh1Ce0jvd45AO.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 6",
@@ -628,10 +667,11 @@
     ]
   },
   {
-    "id": "7cd24148-a353-4eb8-a88c-8ebb73e00f14",
+    "id": "e3a1183e-8510-4e16-bfcb-177d4396ee69",
     "tipo": "serie",
     "titulo": "Dope Thief: ladrones de drogas",
     "enlace": "https://cinecalidad.bar/serie/dope-thief-ladrones-de-drogas/",
+    "slug": "dope-thief-ladrones-de-drogas",
     "imagen": "https://image.tmdb.org/t/p/w342/6JthW5YU0LZK79FwHFzr0R30MSq.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -644,10 +684,11 @@
     ]
   },
   {
-    "id": "c53b2bf9-093e-45f1-a076-8f2dc1e4e63e",
+    "id": "d9458edb-0106-472d-b74d-360152e47e81",
     "tipo": "serie",
     "titulo": "El Cuento de La Criada",
     "enlace": "https://cinecalidad.bar/serie/el-cuento-de-la-criada/",
+    "slug": "el-cuento-de-la-criada",
     "imagen": "https://image.tmdb.org/t/p/w342/kAHyUzUkFv8xgJARoWEdiz9LgeY.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 10",
@@ -660,10 +701,11 @@
     ]
   },
   {
-    "id": "e5d5afeb-8228-4170-aae6-cf38e83b4963",
+    "id": "aaaf70c5-bf72-4f3d-83e2-1e00688fddbe",
     "tipo": "serie",
     "titulo": "Black Mirror",
     "enlace": "https://cinecalidad.bar/serie/black-mirror/",
+    "slug": "black-mirror",
     "imagen": "https://image.tmdb.org/t/p/w342/6nDRo824oyBwg1prOZHc8UtonVB.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 6",
@@ -677,10 +719,11 @@
     ]
   },
   {
-    "id": "7b11f5ca-8ff9-4ceb-979a-6f0c9c86920c",
+    "id": "b519a7c2-b259-4142-8260-571f6914d3bf",
     "tipo": "serie",
     "titulo": "Devil May Cry",
     "enlace": "https://cinecalidad.bar/serie/devil-may-cry/",
+    "slug": "devil-may-cry",
     "imagen": "https://image.tmdb.org/t/p/w342/mX9tqfpjqwreONJHhap7SnSSowe.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -694,10 +737,11 @@
     ]
   },
   {
-    "id": "849d5e9f-4b27-44fd-af1a-e5b5c035fb68",
+    "id": "129c0670-2ef7-4d9e-bdfc-f014d32ca280",
     "tipo": "serie",
     "titulo": "El Vecindario",
     "enlace": "https://cinecalidad.bar/serie/el-vecindario/",
+    "slug": "el-vecindario",
     "imagen": "https://image.tmdb.org/t/p/w342/lyONEbUuLa6OpkhkSFpnIyqKJ2T.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 20",
@@ -709,10 +753,11 @@
     ]
   },
   {
-    "id": "cdde3e0f-f9ee-419a-93fe-6c9445763f0c",
+    "id": "f87335e8-2cee-45cd-aafb-0dbf2d5e0dd6",
     "tipo": "serie",
     "titulo": "Reinas del Soho",
     "enlace": "https://cinecalidad.bar/serie/dope-girls/",
+    "slug": "dope-girls",
     "imagen": "https://image.tmdb.org/t/p/w342/cQQP1IWVzOdTndtAYRqFh5B83Mc.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 6",
@@ -725,10 +770,11 @@
     ]
   },
   {
-    "id": "d60ceaf7-f0e7-44c3-9712-939d1ca96278",
+    "id": "2812adfa-abc5-4cf6-805b-1af42f7fbaaf",
     "tipo": "serie",
     "titulo": "Karma",
     "enlace": "https://cinecalidad.bar/serie/karma-s1/",
+    "slug": "karma-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/kFx0FD0Cgns9OThcSkAmWYcnYzu.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 6",
@@ -741,10 +787,11 @@
     ]
   },
   {
-    "id": "7bdd85af-1051-4edc-90cf-f9284aa0d25b",
+    "id": "f08547c6-e6ff-447a-87ee-5d5f828a355a",
     "tipo": "serie",
     "titulo": "Morir de placer",
     "enlace": "https://cinecalidad.bar/serie/morir-de-placer-s1/",
+    "slug": "morir-de-placer-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/xaKb3cTh8mT6fgLSXuqo4JoS0dU.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -757,10 +804,11 @@
     ]
   },
   {
-    "id": "71428bd0-cad3-4e56-aebc-53290360932c",
+    "id": "21350997-4a18-4d56-b8a7-167dbb9e5b0e",
     "tipo": "serie",
     "titulo": "Anatomía según Grey",
     "enlace": "https://cinecalidad.bar/serie/anatomia-segun-grey/",
+    "slug": "anatomia-segun-grey",
     "imagen": "https://image.tmdb.org/t/p/w342/bgZMTxCIZNRrE4UAzRXdeKTvui9.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 18",
@@ -772,10 +820,11 @@
     ]
   },
   {
-    "id": "24018c39-2bd5-43e5-84d5-3fb3f74f82ea",
+    "id": "15d1b8f9-56be-42fe-bca6-1dabc157306a",
     "tipo": "serie",
     "titulo": "Grosse Pointe Garden Society",
     "enlace": "https://cinecalidad.bar/serie/grosse-pointe-garden-society-s6/",
+    "slug": "grosse-pointe-garden-society-s6",
     "imagen": "https://image.tmdb.org/t/p/w342/9F0uSxC1sQPDxPXRrY5HIRMcA4S.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 13",
@@ -789,10 +838,11 @@
     ]
   },
   {
-    "id": "1161f2f3-a9d8-4832-a33f-fc1350bba282",
+    "id": "0d01f746-50b6-4945-b048-9f02e9f934c4",
     "tipo": "serie",
     "titulo": "You",
     "enlace": "https://cinecalidad.bar/serie/you-s7/",
+    "slug": "you-s7",
     "imagen": "https://image.tmdb.org/t/p/w342/ligowe4x7OLEMVV7vTFyvkQaHk0.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 20",
@@ -804,10 +854,11 @@
     ]
   },
   {
-    "id": "29a3e41b-e953-45da-a06b-434ed4bc1f3f",
+    "id": "4eea9134-da10-4826-8356-c482c41c693a",
     "tipo": "serie",
     "titulo": "Solo Leveling",
     "enlace": "https://cinecalidad.bar/serie/solo-leveling-s3/",
+    "slug": "solo-leveling-s3",
     "imagen": "https://image.tmdb.org/t/p/w342/eCD7WS9h4lCT8N4Xavc9u8R1IGk.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 25",
@@ -821,10 +872,11 @@
     ]
   },
   {
-    "id": "568bd9da-a716-49cd-b238-b1d0e07a0333",
+    "id": "87614d5b-87fa-4957-a500-79d72bbbb2ea",
     "tipo": "serie",
     "titulo": "Suits LA",
     "enlace": "https://cinecalidad.bar/serie/suits-la/",
+    "slug": "suits-la",
     "imagen": "https://image.tmdb.org/t/p/w342/3hYiNPkcLoI3QWDokOHQJIfn55O.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 13",
@@ -836,10 +888,11 @@
     ]
   },
   {
-    "id": "fb695a3c-c5f9-4aaa-863d-bb3bd49c624c",
+    "id": "73c3a425-e5f7-4545-95f0-958ff591017c",
     "tipo": "serie",
     "titulo": "The White Lotus",
     "enlace": "https://cinecalidad.bar/serie/the-white-lotus-s5/",
+    "slug": "the-white-lotus-s5",
     "imagen": "https://image.tmdb.org/t/p/w342/gbSaK9v1CbcYH1ISgbM7XObD2dW.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -853,10 +906,11 @@
     ]
   },
   {
-    "id": "47d7e2a7-b364-4564-8edf-99fa36a86426",
+    "id": "ac985e47-6115-4433-9a3f-b1756f9097eb",
     "tipo": "serie",
     "titulo": "The Hunting Party",
     "enlace": "https://cinecalidad.bar/serie/the-hunting-party/",
+    "slug": "the-hunting-party",
     "imagen": "https://image.tmdb.org/t/p/w342/zy87kVh0gcHzFNkSqT32Sp8s7wv.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 10",
@@ -869,10 +923,11 @@
     ]
   },
   {
-    "id": "42cb74f5-0380-490a-8d30-d1d666b2ab83",
+    "id": "28f32d76-c4e0-4f9b-b706-6873919e0fff",
     "tipo": "serie",
     "titulo": "Atrapados",
     "enlace": "https://cinecalidad.bar/serie/atrapados-s2/",
+    "slug": "atrapados-s2",
     "imagen": "https://image.tmdb.org/t/p/w342/1ueEKgyPCWvOWwdPDo9A2ojU7Or.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 6",
@@ -885,10 +940,11 @@
     ]
   },
   {
-    "id": "f71558ef-4a1e-40c9-b445-935c720e485a",
+    "id": "782aa511-1e88-491e-ba44-1b4cf1f0a906",
     "tipo": "serie",
     "titulo": "Si la vida te da mandarinas…",
     "enlace": "https://cinecalidad.bar/serie/si-la-vida-te-da-mandarinas/",
+    "slug": "si-la-vida-te-da-mandarinas",
     "imagen": "https://image.tmdb.org/t/p/w342/h3Sv1qMAc6ADS6xWoIrUAzdXarf.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 16",
@@ -900,10 +956,11 @@
     ]
   },
   {
-    "id": "fc5e46b6-fcfd-47f4-b9c0-28409a1e8758",
+    "id": "16a06430-766f-4ba4-839c-cca2744daa25",
     "tipo": "serie",
     "titulo": "Una buena familia americana",
     "enlace": "https://cinecalidad.bar/serie/una-buena-familia-americana-s7/",
+    "slug": "una-buena-familia-americana-s7",
     "imagen": "https://image.tmdb.org/t/p/w342/jN4x0pgxKD0cWayIfySPhsopXIp.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -915,10 +972,11 @@
     ]
   },
   {
-    "id": "bbaa9ed3-2f28-479b-a098-569a5daca904",
+    "id": "1e4a5c46-b0cd-409f-b6fe-31e2b3400658",
     "tipo": "serie",
     "titulo": "Happy Face: Asesino en Serie",
     "enlace": "https://cinecalidad.bar/serie/happy-face-asesino-en-serie-s1/",
+    "slug": "happy-face-asesino-en-serie-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/sGHZrYxOU2U2JLrmYO12qGl1VK4.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -931,10 +989,11 @@
     ]
   },
   {
-    "id": "d08e23c1-a7e8-4a73-8928-0df6ea3d560b",
+    "id": "ac0b39da-d29d-4fb6-8861-228fb7aa6d89",
     "tipo": "serie",
     "titulo": "Wolf Pack",
     "enlace": "https://cinecalidad.bar/serie/wolf-pack-s6/",
+    "slug": "wolf-pack-s6",
     "imagen": "https://image.tmdb.org/t/p/w342/rbCANmS1ogweUkIBghP03EHtdHB.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -947,10 +1006,11 @@
     ]
   },
   {
-    "id": "385235a0-a258-4cfe-82b6-6a63a4b254a8",
+    "id": "1d771824-132d-4342-abfb-79ea036c4049",
     "tipo": "serie",
     "titulo": "Adolescencia",
     "enlace": "https://cinecalidad.bar/serie/adolescencia/",
+    "slug": "adolescencia",
     "imagen": "https://image.tmdb.org/t/p/w342/cZdsqlIqhRbYNo8ttxb2ThC09Wa.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 4",
@@ -963,10 +1023,11 @@
     ]
   },
   {
-    "id": "613a4251-2356-4113-86c8-b5c93fbcc365",
+    "id": "394bbfaf-e13f-423e-b0fe-01724467ba5e",
     "tipo": "serie",
     "titulo": "Daredevil: Born Again",
     "enlace": "https://cinecalidad.bar/serie/daredevil-born-again-s10/",
+    "slug": "daredevil-born-again-s10",
     "imagen": "https://image.tmdb.org/t/p/w342/9b6XFApT34dkGrmOZnTk7noyNx8.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 9",
@@ -979,10 +1040,11 @@
     ]
   },
   {
-    "id": "2281718d-b1be-4c0b-9c62-4d441186785d",
+    "id": "3499dd41-e6df-4385-9bf4-77cb5f3fca4f",
     "tipo": "serie",
     "titulo": "La casa de David",
     "enlace": "https://cinecalidad.bar/serie/la-casa-de-david-s1/",
+    "slug": "la-casa-de-david-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/5s6OHwM0Z3VTquTaEmpCBd4G3X4.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -994,10 +1056,11 @@
     ]
   },
   {
-    "id": "2edac594-ad8d-402e-a8da-58eeed171a65",
+    "id": "251da5ea-f67c-426f-a9da-57c25598a90e",
     "tipo": "serie",
     "titulo": "Reacher",
     "enlace": "https://cinecalidad.bar/serie/reacher-s3/",
+    "slug": "reacher-s3",
     "imagen": "https://image.tmdb.org/t/p/w342/31GlRQMiDunO8cl3NxTz34U64rf.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -1011,10 +1074,11 @@
     ]
   },
   {
-    "id": "1e95cc92-aa42-4a77-944f-b214c21b6f1e",
+    "id": "ac64a84c-52b6-4383-a79c-ff0522bebbf3",
     "tipo": "serie",
     "titulo": "La caída de Diddy",
     "enlace": "https://cinecalidad.bar/serie/la-caida-de-diddy/",
+    "slug": "la-caida-de-diddy",
     "imagen": "https://image.tmdb.org/t/p/w342/6OOUf9ItmijJgW5pVdy1YbWab2g.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 5",
@@ -1027,10 +1091,11 @@
     ]
   },
   {
-    "id": "66e57c4f-baff-4924-a936-cb7254ad0abe",
+    "id": "189a8750-3ea2-412b-a3f7-c12cdf2b2da3",
     "tipo": "serie",
     "titulo": "Black Snow",
     "enlace": "https://cinecalidad.bar/serie/black-snow/",
+    "slug": "black-snow",
     "imagen": "https://image.tmdb.org/t/p/w342/8cYzv4vR2u4IA8rx7yk0r8P8uIp.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 6",
@@ -1042,10 +1107,11 @@
     ]
   },
   {
-    "id": "86355b23-351d-4a9a-838c-dfea2cb0babb",
+    "id": "9b48c473-d945-457a-815a-73a9db062ada",
     "tipo": "serie",
     "titulo": "Al filo del deber",
     "enlace": "https://cinecalidad.bar/serie/al-filo-del-deber/",
+    "slug": "al-filo-del-deber",
     "imagen": "https://image.tmdb.org/t/p/w342/5SIryao4EUW9SdYrjnNBfirZV45.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -1059,10 +1125,11 @@
     ]
   },
   {
-    "id": "498ddd78-2e5f-4d15-9e1b-92f5ee37ea9f",
+    "id": "31dc9298-9594-4842-bedc-ae21e3e1fea9",
     "tipo": "serie",
     "titulo": "La liberación",
     "enlace": "https://cinecalidad.bar/serie/la-liberacion/",
+    "slug": "la-liberacion",
     "imagen": "https://image.tmdb.org/t/p/w342/tgS5SqTpinL6yN1kS77ayD2l6fE.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 7",
@@ -1074,10 +1141,11 @@
     ]
   },
   {
-    "id": "1f4ce958-6b15-4011-a4b6-06194862c285",
+    "id": "d75abb2a-f70f-438f-9371-542f6287ab5a",
     "tipo": "serie",
     "titulo": "El novato",
     "enlace": "https://cinecalidad.bar/serie/el-novato/",
+    "slug": "el-novato",
     "imagen": "https://image.tmdb.org/t/p/w342/sgCe7wVP5AxU2aNofxLhRn1XfwD.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 14",
@@ -1091,10 +1159,11 @@
     ]
   },
   {
-    "id": "bfa6aba2-0f79-4251-a6dc-40751643d38b",
+    "id": "5d14817b-0a21-403f-82af-2a754fc6e3df",
     "tipo": "serie",
     "titulo": "High Potential: Detective Inesperada",
     "enlace": "https://cinecalidad.bar/serie/high-potential-detective-inesperada-x2/",
+    "slug": "high-potential-detective-inesperada-x2",
     "imagen": "https://image.tmdb.org/t/p/w342/sEWC7lzVKfuwXhzdahW4AX1F05s.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 13",
@@ -1107,10 +1176,11 @@
     ]
   },
   {
-    "id": "fec015c1-242d-482d-afe1-a6170732981b",
+    "id": "9243e776-c2ba-4d8f-9b82-e04e1e8f66a3",
     "tipo": "serie",
     "titulo": "Lady Love",
     "enlace": "https://cinecalidad.bar/serie/lady-love-s2/",
+    "slug": "lady-love-s2",
     "imagen": "https://image.tmdb.org/t/p/w342/A2BoRnDG9mje2Vo7JZXREYI8w0r.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 6",
@@ -1123,10 +1193,11 @@
     ]
   },
   {
-    "id": "2df65891-e670-4b42-92f8-bba4430d968f",
+    "id": "7aa45c7e-4d47-4aae-9437-0d75f21e0783",
     "tipo": "serie",
     "titulo": "Las brujas de Mayfair de Anne Rice",
     "enlace": "https://cinecalidad.bar/serie/las-brujas-de-mayfair-de-anne-rice/",
+    "slug": "las-brujas-de-mayfair-de-anne-rice",
     "imagen": "https://image.tmdb.org/t/p/w342/t4WMA8CaBFqENDN5OEBYskBTgEd.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 16",
@@ -1139,10 +1210,11 @@
     ]
   },
   {
-    "id": "3ba03bfd-ee1c-4db3-902a-8d2611c5f9e2",
+    "id": "ff69b0f9-16d2-4843-bb15-2b614124fe61",
     "tipo": "serie",
     "titulo": "Besos, Kitty",
     "enlace": "https://cinecalidad.bar/serie/besos-kitty/",
+    "slug": "besos-kitty",
     "imagen": "https://image.tmdb.org/t/p/w342/8oq118OTYuftOu7lmxIbzB31JzK.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 18",
@@ -1155,10 +1227,11 @@
     ]
   },
   {
-    "id": "1dd88346-fdfc-4ff0-8680-6e22ec61ff5c",
+    "id": "23894b81-28a1-411d-ac28-8fc6faf3eace",
     "tipo": "serie",
     "titulo": "La Agencia",
     "enlace": "https://cinecalidad.bar/serie/la-agencia-s1/",
+    "slug": "la-agencia-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/fWGQaZ9BntXIDT1WKHrbSAVuShk.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 10",
@@ -1171,10 +1244,11 @@
     ]
   },
   {
-    "id": "3ce6e887-6b95-473b-9d70-97cfc17fe783",
+    "id": "80cf2350-b94e-4e0f-9e5b-78345583fe2c",
     "tipo": "serie",
     "titulo": "Star Wars Skeleton Crew: Viaje a lo desconocido",
     "enlace": "https://cinecalidad.bar/serie/star-wars-skeleton-crew-viaje-a-lo-desconocido-s2/",
+    "slug": "star-wars-skeleton-crew-viaje-a-lo-desconocido-s2",
     "imagen": "https://image.tmdb.org/t/p/w342/c2P7KSb4I2tY6uNX9eXXwo5hm46.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -1187,10 +1261,11 @@
     ]
   },
   {
-    "id": "279a02d4-0404-4061-8dc9-c304a0910af1",
+    "id": "e9697a15-f3bd-4edb-bd75-503fcd16feb8",
     "tipo": "serie",
     "titulo": "Hysteria!",
     "enlace": "https://cinecalidad.bar/serie/hysteria/",
+    "slug": "hysteria",
     "imagen": "https://image.tmdb.org/t/p/w342/rG3mGUouuSACs2KLdJWjEHpuG8L.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -1203,10 +1278,11 @@
     ]
   },
   {
-    "id": "0e49ac74-06d4-4753-bde3-46b02e27f16e",
+    "id": "60d55ba3-0e8e-4be7-9788-968cbb02467a",
     "tipo": "serie",
     "titulo": "La Diplomática",
     "enlace": "https://cinecalidad.bar/serie/la-diplomatica/",
+    "slug": "la-diplomatica",
     "imagen": "https://image.tmdb.org/t/p/w342/1jEUtX0NQyZjZUt575061fKIaXm.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 6",
@@ -1219,10 +1295,11 @@
     ]
   },
   {
-    "id": "1ad0e369-70e1-4dba-af42-0323f1ece2c9",
+    "id": "99f2a7fe-7142-4e9f-a7cb-bb1c9a5eda86",
     "tipo": "serie",
     "titulo": "Goosebumps: La desaparición",
     "enlace": "https://cinecalidad.bar/serie/goosebumps-la-desaparicion-s1/",
+    "slug": "goosebumps-la-desaparicion-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/41ZWNkH2JabjfaMYFOAVtUpSHCJ.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -1236,10 +1313,11 @@
     ]
   },
   {
-    "id": "a8bf886f-a791-453c-acbc-ec8409511ad4",
+    "id": "07a22042-5bb4-4b20-94e9-a4449a7534b7",
     "tipo": "serie",
     "titulo": "Dexter: Pecado Original",
     "enlace": "https://cinecalidad.bar/serie/dexter-pecado-original-s1/",
+    "slug": "dexter-pecado-original-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/9XLULEZTkeLwRytTUQtgmx2HH4o.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 10",
@@ -1252,10 +1330,11 @@
     ]
   },
   {
-    "id": "7ea2b0b3-3ac3-4365-9b7b-c3e81f707774",
+    "id": "04fcc169-b3e5-47dc-9d7c-f2b81afeed79",
     "tipo": "serie",
     "titulo": "What If…?",
     "enlace": "https://cinecalidad.bar/serie/what-if-s5/",
+    "slug": "what-if-s5",
     "imagen": "https://image.tmdb.org/t/p/w342/ebKQ0Lb84EF897UBk3d1KzMO33V.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -1269,10 +1348,11 @@
     ]
   },
   {
-    "id": "eca99f12-452e-4a94-ac79-3c503b5f0890",
+    "id": "98ebc810-9568-4c99-9bac-c091f3fe22d9",
     "tipo": "serie",
     "titulo": "El juego del calamar",
     "enlace": "https://cinecalidad.bar/serie/el-juego-del-calamar-s7/",
+    "slug": "el-juego-del-calamar-s7",
     "imagen": "https://image.tmdb.org/t/p/w342/74qMRUy0lwkBBi39vsQVerIDkHj.jpg",
     "temporadas": "seasons 3",
     "episodios": "Episodios 22",
@@ -1286,10 +1366,11 @@
     ]
   },
   {
-    "id": "87ddad69-2feb-4258-afaa-1c653161e2db",
+    "id": "5215fb95-4732-4ad1-b9fb-6b385e9f1f73",
     "tipo": "serie",
     "titulo": "El nivel secreto",
     "enlace": "https://cinecalidad.bar/serie/el-nivel-secreto-s1/",
+    "slug": "el-nivel-secreto-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/bjwHrZKREhL4VbCQP5x3LUPolQ5.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 15",
@@ -1303,10 +1384,11 @@
     ]
   },
   {
-    "id": "e8751308-b527-446a-85ee-73354e00704d",
+    "id": "76033130-5151-4885-8bb5-82d5d7a602ce",
     "tipo": "serie",
     "titulo": "9-1-1: Lone Star",
     "enlace": "https://cinecalidad.bar/serie/9-1-1-lone-star-s2/",
+    "slug": "9-1-1-lone-star-s2",
     "imagen": "https://image.tmdb.org/t/p/w342/BOTITv548LYGB4xRD3rHfbwkqm.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 12",
@@ -1320,10 +1402,11 @@
     ]
   },
   {
-    "id": "64dafe15-cdc3-4c4e-94a1-33dec8728402",
+    "id": "7942edec-92ca-4607-9efe-634678267c02",
     "tipo": "serie",
     "titulo": "Operativo: Lioness",
     "enlace": "https://cinecalidad.bar/serie/operativo-lioness/",
+    "slug": "operativo-lioness",
     "imagen": "https://image.tmdb.org/t/p/w342/d0r0rxI9UjMVvD5Krc5oET2O0gU.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 16",
@@ -1336,10 +1419,11 @@
     ]
   },
   {
-    "id": "13513047-daa3-4af0-bed7-3632ff2c608f",
+    "id": "53f09e13-1d1a-44f9-8f49-95456e328823",
     "tipo": "serie",
     "titulo": "Yellowstone",
     "enlace": "https://cinecalidad.bar/serie/yellowstone/",
+    "slug": "yellowstone",
     "imagen": "https://image.tmdb.org/t/p/w342/s4QRRYc1V2e68Qy9Wel9MI8fhRP.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 14",
@@ -1352,10 +1436,11 @@
     ]
   },
   {
-    "id": "b4023dc2-0a07-4561-8641-beacefa40e9d",
+    "id": "78a2d932-6223-4171-8d0a-8361089ef459",
     "tipo": "serie",
     "titulo": "Millie Black",
     "enlace": "https://cinecalidad.bar/serie/millie-black/",
+    "slug": "millie-black",
     "imagen": "https://image.tmdb.org/t/p/w342/ytXuD2ZP9Q82OzalMaGYoKUUPCG.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 5",
@@ -1368,10 +1453,11 @@
     ]
   },
   {
-    "id": "013c29ea-3b31-46dc-8492-e3339d221c99",
+    "id": "0d050d38-3f08-4767-bebd-3a127e37eb99",
     "tipo": "serie",
     "titulo": "Silo",
     "enlace": "https://cinecalidad.bar/serie/silo-s3/",
+    "slug": "silo-s3",
     "imagen": "https://image.tmdb.org/t/p/w342/ak7NFISSaROyoWjSOIjamhpt1LB.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 20",
@@ -1384,10 +1470,11 @@
     ]
   },
   {
-    "id": "75648727-a7cc-4387-beb1-465aa0e5cb1b",
+    "id": "94054c06-cd15-47d3-871d-0ab1bcd36650",
     "tipo": "serie",
     "titulo": "Lo que hacemos en las sombras",
     "enlace": "https://cinecalidad.bar/serie/lo-que-hacemos-en-las-sombras-s1/",
+    "slug": "lo-que-hacemos-en-las-sombras-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/5C9fDLP6N9595ENLvrOBOfo4T2Z.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 11",
@@ -1399,10 +1486,11 @@
     ]
   },
   {
-    "id": "6dfb3642-17d2-44c9-99a2-2001a45d683c",
+    "id": "6f0157b6-dc12-4913-a047-144c22d52053",
     "tipo": "serie",
     "titulo": "Un hombre infiltrado",
     "enlace": "https://cinecalidad.bar/serie/un-hombre-infiltrado-s1/",
+    "slug": "un-hombre-infiltrado-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/xRT8o1Tj7EdstCH7f2Ham4ugCFI.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -1415,10 +1503,11 @@
     ]
   },
   {
-    "id": "b0611f50-1f55-498a-9b84-e677707c3ad9",
+    "id": "1c0c5a8e-62fb-4764-b655-deefb1b0e0b9",
     "tipo": "serie",
     "titulo": "Fire Country",
     "enlace": "https://cinecalidad.bar/serie/fire-country-s6/",
+    "slug": "fire-country-s6",
     "imagen": "https://image.tmdb.org/t/p/w342/k4A0gowDmS62tV3aAqEeG9Dq7TN.jpg",
     "temporadas": "seasons 3",
     "episodios": "Episodios 41",
@@ -1431,10 +1520,11 @@
     ]
   },
   {
-    "id": "9796af34-ba3e-43ce-8f6d-57a7aea641a7",
+    "id": "bd942ef0-2bda-4a31-810f-f00cdf782c87",
     "tipo": "serie",
     "titulo": "El problema de los 3 cuerpos",
     "enlace": "https://cinecalidad.bar/serie/el-problema-de-los-3-cuerpos/",
+    "slug": "el-problema-de-los-3-cuerpos",
     "imagen": "https://image.tmdb.org/t/p/w342/6Dc9mMl083cVpNknWzALCw7JYPH.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -1448,10 +1538,11 @@
     ]
   },
   {
-    "id": "d9349c27-27a6-42fd-87c2-108c7399654d",
+    "id": "e5bb297d-f89b-4809-9eb2-53260cd75360",
     "tipo": "serie",
     "titulo": "True Detective",
     "enlace": "https://cinecalidad.bar/serie/true-detective-s4/",
+    "slug": "true-detective-s4",
     "imagen": "https://image.tmdb.org/t/p/w342/4XMpDLyu2xOeuKxl4qEQtwSrDac.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 6",
@@ -1464,10 +1555,11 @@
     ]
   },
   {
-    "id": "412ca488-ca4e-4d32-9629-7d3f833b18e7",
+    "id": "2aac4e19-875c-4d71-91fb-a6420d916b42",
     "tipo": "serie",
     "titulo": "Grotesquerie",
     "enlace": "https://cinecalidad.bar/serie/grotesquerie-s9/",
+    "slug": "grotesquerie-s9",
     "imagen": "https://image.tmdb.org/t/p/w342/ty2Rgi1bpmuW8waJKAP6XBYzLA7.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 10",
@@ -1481,10 +1573,11 @@
     ]
   },
   {
-    "id": "12910f27-13af-4c45-915d-f2339e188e99",
+    "id": "f36f8e89-6b91-4bd3-8a86-02be8d149b29",
     "tipo": "serie",
     "titulo": "Rumbo al infierno",
     "enlace": "https://cinecalidad.bar/serie/rumbo-al-infierno/",
+    "slug": "rumbo-al-infierno",
     "imagen": "https://image.tmdb.org/t/p/w342/5veiuXxIy3NFsm7LMqLGs4A2vgt.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 12",
@@ -1498,10 +1591,11 @@
     ]
   },
   {
-    "id": "2755d1da-5d41-448c-83c3-d995d2b47c62",
+    "id": "21607868-c1e6-40e6-9a19-dfcdd9175931",
     "tipo": "serie",
     "titulo": "Superman y Lois",
     "enlace": "https://cinecalidad.bar/serie/superman-y-lois/",
+    "slug": "superman-y-lois",
     "imagen": "https://image.tmdb.org/t/p/w342/hlMO1juHPuaiyL27BDLUcAvxmqq.jpg",
     "temporadas": "seasons 4",
     "episodios": "Episodios 10",
@@ -1514,10 +1608,11 @@
     ]
   },
   {
-    "id": "521449d8-92f4-43a7-a917-bf40c2d3f626",
+    "id": "96bde338-7b3f-4bd7-ac5e-e26578a10661",
     "tipo": "serie",
     "titulo": "The Walking Dead: Daryl Dixon",
     "enlace": "https://cinecalidad.bar/serie/the-walking-dead-daryl-dixon/",
+    "slug": "the-walking-dead-daryl-dixon",
     "imagen": "https://image.tmdb.org/t/p/w342/1e6y2MiGL7KCTJfpqa3cNHLDpF3.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 12",
@@ -1531,10 +1626,11 @@
     ]
   },
   {
-    "id": "a8b1604e-ee46-4a2e-bfc5-42208d5a33e0",
+    "id": "ccf4c15f-d755-44ff-8d90-946522ee6fd7",
     "tipo": "serie",
     "titulo": "Monstruos: La historia de Lyle y Erik Menendez",
     "enlace": "https://cinecalidad.bar/serie/monstruos-la-historia-de-lyle-y-erik-menendez/",
+    "slug": "monstruos-la-historia-de-lyle-y-erik-menendez",
     "imagen": "https://image.tmdb.org/t/p/w342/ziGwbvZvcyy8i3cYNUCDLkQGsU0.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 9",
@@ -1547,10 +1643,11 @@
     ]
   },
   {
-    "id": "d98f6038-23c8-4a43-ba30-a5d7649244d9",
+    "id": "0c5b6821-e923-481a-bd89-9ce1a83c8767",
     "tipo": "serie",
     "titulo": "FROM",
     "enlace": "https://cinecalidad.bar/serie/from/",
+    "slug": "from",
     "imagen": "https://image.tmdb.org/t/p/w342/8NGSjzmlvyuh8avA2SYHla086s2.jpg",
     "temporadas": "seasons 3",
     "episodios": "Episodios 30",
@@ -1563,10 +1660,11 @@
     ]
   },
   {
-    "id": "3f69e94a-69b8-46d9-9717-7a1480386630",
+    "id": "e98c9265-9ca3-4353-af51-f87a835dabc8",
     "tipo": "serie",
     "titulo": "El monstruo de la vieja Seúl",
     "enlace": "https://cinecalidad.bar/serie/el-monstruo-de-la-vieja-seul/",
+    "slug": "el-monstruo-de-la-vieja-seul",
     "imagen": "https://image.tmdb.org/t/p/w342/z5ZF5FHNErAle3Kq8kv8eQCC3aR.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 17",
@@ -1581,10 +1679,11 @@
     ]
   },
   {
-    "id": "658151ee-1c54-44bd-a04a-8be43f9576b9",
+    "id": "22c9c2c3-0e3b-4293-b4a9-9ccee4b4c066",
     "tipo": "serie",
     "titulo": "Agatha en todas partes",
     "enlace": "https://cinecalidad.bar/serie/agatha-en-todas-partes-x14/",
+    "slug": "agatha-en-todas-partes-x14",
     "imagen": "https://image.tmdb.org/t/p/w342/8ZGUn6w3quPSof5B61c5Wlj300S.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 9",
@@ -1598,10 +1697,11 @@
     ]
   },
   {
-    "id": "926cf661-dc8e-4853-9c95-7d14fbf719bb",
+    "id": "2c85a0dc-2c89-4d97-82ac-a7467e29c13a",
     "tipo": "serie",
     "titulo": "Dark",
     "enlace": "https://cinecalidad.bar/serie/dark/",
+    "slug": "dark",
     "imagen": "https://image.tmdb.org/t/p/w342/xMLE3PftnQjj9egECjj2bZg9STm.jpg",
     "temporadas": "seasons 3",
     "episodios": "Episodios 26",
@@ -1616,10 +1716,11 @@
     ]
   },
   {
-    "id": "c336caaf-f85a-4dc0-8fd1-26cd600e0c9a",
+    "id": "6c2ea4fc-a50f-4db4-bcec-ef9d26a00a7a",
     "tipo": "serie",
     "titulo": "Nadie nos va a extrañar",
     "enlace": "https://cinecalidad.bar/serie/nadie-nos-va-a-extranar/",
+    "slug": "nadie-nos-va-a-extranar",
     "imagen": "https://image.tmdb.org/t/p/w342/ixY3Ulu26di9b3cDf9yrLhwsiYy.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -1632,10 +1733,11 @@
     ]
   },
   {
-    "id": "83e44da7-ca99-40e8-a546-91237bf13030",
+    "id": "8947cba9-5c4c-40d3-8501-e4b59e842b95",
     "tipo": "serie",
     "titulo": "Bad Monkey: Negocios turbios",
     "enlace": "https://cinecalidad.bar/serie/bad-monkey-negocios-turbios-s2/",
+    "slug": "bad-monkey-negocios-turbios-s2",
     "imagen": "https://image.tmdb.org/t/p/w342/1O9U18Qk11DQ57GBEQw79JC2kTh.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 10",
@@ -1648,10 +1750,11 @@
     ]
   },
   {
-    "id": "463c56eb-d999-4da7-8bd4-d8ef4238899d",
+    "id": "e2d9f159-439d-4866-b3de-86befaabb0f4",
     "tipo": "serie",
     "titulo": "La voz ausente",
     "enlace": "https://cinecalidad.bar/serie/la-voz-ausente-s17/",
+    "slug": "la-voz-ausente-s17",
     "imagen": "https://image.tmdb.org/t/p/w342/ok4Nuvd0Sl11uxQoDQ3FbsUW0tM.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 7",
@@ -1664,10 +1767,11 @@
     ]
   },
   {
-    "id": "86ed0756-9245-4f4f-8905-3af8e8ef108c",
+    "id": "d8d8378d-cabd-4e12-9e98-b6d853bf1a3b",
     "tipo": "serie",
     "titulo": "Élite",
     "enlace": "https://cinecalidad.bar/serie/elite/",
+    "slug": "elite",
     "imagen": "https://image.tmdb.org/t/p/w342/c07WqB99Igco0rua794q9k9QJYm.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -1681,10 +1785,11 @@
     ]
   },
   {
-    "id": "3f73d677-867f-4622-a759-fed38b78e2bf",
+    "id": "e4ab567e-7161-48a1-ab81-48a3545bb826",
     "tipo": "serie",
     "titulo": "Ghosts",
     "enlace": "https://cinecalidad.bar/serie/ghosts-s11/",
+    "slug": "ghosts-s11",
     "imagen": "https://image.tmdb.org/t/p/w342/w2YgPBXOZT0Qftg6Dr1Ps2FQJ16.jpg",
     "temporadas": "seasons 4",
     "episodios": "Episodios 18",
@@ -1696,10 +1801,11 @@
     ]
   },
   {
-    "id": "f2096a39-5f17-4872-af71-6dcf06a94235",
+    "id": "bd210219-0090-4e52-b611-c3a0dfc30e79",
     "tipo": "serie",
     "titulo": "Emily en París",
     "enlace": "https://cinecalidad.bar/serie/emily-en-paris-s1/",
+    "slug": "emily-en-paris-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/vcqgEvP3fBabEk6OBasOAvm7owu.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 10",
@@ -1712,10 +1818,11 @@
     ]
   },
   {
-    "id": "349e5cf6-7583-4906-9860-8f49b3a794e5",
+    "id": "ad907b25-e2ed-48c5-8f89-22910cfa1e54",
     "tipo": "serie",
     "titulo": "Asesinato para principiantes",
     "enlace": "https://cinecalidad.bar/serie/asesinato-para-principiantes/",
+    "slug": "asesinato-para-principiantes",
     "imagen": "https://image.tmdb.org/t/p/w342/npwE7RnVecHMqzGN1LpQkxWFMGp.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 6",
@@ -1728,10 +1835,11 @@
     ]
   },
   {
-    "id": "5b5a2868-860c-431e-8ea1-30f7738f8df7",
+    "id": "859f0fe7-9c66-4051-9e5f-3ecb919fb87f",
     "tipo": "serie",
     "titulo": "Desafío Americano: Nuevos comienzos",
     "enlace": "https://cinecalidad.bar/serie/desafio-americano-nuevos-comienzos/",
+    "slug": "desafio-americano-nuevos-comienzos",
     "imagen": "https://image.tmdb.org/t/p/w342/97988mOprohvBB61LgdsSdeMGa3.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 7",
@@ -1743,10 +1851,11 @@
     ]
   },
   {
-    "id": "0dda4261-5ec2-4907-984d-efb8b39810c0",
+    "id": "2d268a16-c2b9-471a-bd9e-6d9ae51169fc",
     "tipo": "serie",
     "titulo": "The Jetty",
     "enlace": "https://cinecalidad.bar/serie/the-jetty-s1/",
+    "slug": "the-jetty-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/8NFkGx0L6tobGOeoHohO6ycXt6G.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 4",
@@ -1759,10 +1868,11 @@
     ]
   },
   {
-    "id": "c23e1fda-b152-48bb-8fd7-cfe6c79946ca",
+    "id": "aee9dbbc-ea9f-4d87-b35e-e7e7b5a7fc72",
     "tipo": "serie",
     "titulo": "Vikingos: Valhalla",
     "enlace": "https://cinecalidad.bar/serie/vikingos-valhalla-s1/",
+    "slug": "vikingos-valhalla-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/hZfPArlmeLS18oecv5yErmmf9lo.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -1776,10 +1886,11 @@
     ]
   },
   {
-    "id": "4a3036b3-e5a4-4339-b32c-70e4ccc9066f",
+    "id": "8234a337-693a-4ad3-a3ea-07713ae88bc5",
     "tipo": "serie",
     "titulo": "La mujer en el lago",
     "enlace": "https://cinecalidad.bar/serie/la-mujer-en-el-lago-s1/",
+    "slug": "la-mujer-en-el-lago-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/ttF7W6N1ixRZUChRamjBaEqBUyU.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 7",
@@ -1792,10 +1903,11 @@
     ]
   },
   {
-    "id": "ae3563c8-b20d-4d8b-9d5f-106419368dc9",
+    "id": "bf62a2b3-7d94-4d61-850b-0a1295915002",
     "tipo": "serie",
     "titulo": "El mundo oculto de Sabrina",
     "enlace": "https://cinecalidad.bar/serie/el-mundo-oculto-de-sabrina/",
+    "slug": "el-mundo-oculto-de-sabrina",
     "imagen": "https://image.tmdb.org/t/p/w342/frwsOLHKzfCaenY9QtYXpsOBZzX.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 20",
@@ -1809,10 +1921,11 @@
     ]
   },
   {
-    "id": "3f62a2a4-9ccc-4298-94d0-983d7d4ee888",
+    "id": "e962c375-cc79-46b5-b3c7-57f152f7c51b",
     "tipo": "serie",
     "titulo": "Geek Girl",
     "enlace": "https://cinecalidad.bar/serie/geek-girl-s1/",
+    "slug": "geek-girl-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/37UenJCm02vmwD3OLSfafWz23MG.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 10",
@@ -1826,10 +1939,11 @@
     ]
   },
   {
-    "id": "61234276-b236-469f-a45a-1560b1e27a95",
+    "id": "f9299d9c-f8e4-45e9-842f-de0ac6fffb5c",
     "tipo": "serie",
     "titulo": "Clanes",
     "enlace": "https://cinecalidad.bar/serie/clanes-s4/",
+    "slug": "clanes-s4",
     "imagen": "https://image.tmdb.org/t/p/w342/aTzuzMV8x4CVAAe6MQNDS3oTTGu.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 7",
@@ -1842,10 +1956,11 @@
     ]
   },
   {
-    "id": "72a2665f-e182-4464-a8c6-a4c52db299c4",
+    "id": "0c0a3511-6c5d-4f8b-b183-865153d38438",
     "tipo": "serie",
     "titulo": "Orphan Black: Echoes",
     "enlace": "https://cinecalidad.bar/serie/orphan-black-echoes/",
+    "slug": "orphan-black-echoes",
     "imagen": "https://image.tmdb.org/t/p/w342/qXJnvVgdV95kau1Z6OKf1jq8oqa.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 10",
@@ -1858,10 +1973,11 @@
     ]
   },
   {
-    "id": "577a5caf-16f9-41cf-8666-116716016812",
+    "id": "ccb6873e-6ef5-4785-a957-0288f0ea9d11",
     "tipo": "serie",
     "titulo": "Taylor Swift vs Scooter Braun: Bad Blood",
     "enlace": "https://cinecalidad.bar/serie/taylor-swift-vs-scooter-braun-bad-blood/",
+    "slug": "taylor-swift-vs-scooter-braun-bad-blood",
     "imagen": "https://image.tmdb.org/t/p/w342/vKJVL5EY5lAdN2TtyqQvsvAwWFH.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 2",
@@ -1874,10 +1990,11 @@
     ]
   },
   {
-    "id": "b70b907b-290c-431d-a3d7-50580589faea",
+    "id": "383af881-cc44-4e4d-b61c-eaf177822c46",
     "tipo": "serie",
     "titulo": "Bridgerton",
     "enlace": "https://cinecalidad.bar/serie/bridgerton-s1/",
+    "slug": "bridgerton-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/wR7f51NSYoIWJFnkdEG1pzIRI2Y.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -1889,10 +2006,11 @@
     ]
   },
   {
-    "id": "92de4d8e-947a-4b87-a93b-c46e9c65da26",
+    "id": "ef69d6c3-98c9-4eec-b0e9-0319277d68b5",
     "tipo": "serie",
     "titulo": "La Casa del Dragón",
     "enlace": "https://cinecalidad.bar/serie/la-casa-del-dragon/",
+    "slug": "la-casa-del-dragon",
     "imagen": "https://image.tmdb.org/t/p/w342/fAos5hPi7TB49KpuIAjvQNZkvwM.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 18",
@@ -1907,10 +2025,11 @@
     ]
   },
   {
-    "id": "4d64ead9-b614-4e4c-976d-164e5036aceb",
+    "id": "28e187f8-5ee7-43f0-ad00-3f7bf141a386",
     "tipo": "serie",
     "titulo": "The Boys",
     "enlace": "https://cinecalidad.bar/serie/the-boys-s6/",
+    "slug": "the-boys-s6",
     "imagen": "https://image.tmdb.org/t/p/w342/2zmTngn1tYC1AvfnrFLhxeD82hz.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -1924,10 +2043,11 @@
     ]
   },
   {
-    "id": "c67877d9-480c-4b3e-a74b-bff8ffb83de0",
+    "id": "69ae770b-5ab9-4d19-90e9-ca033cb5c1ba",
     "tipo": "serie",
     "titulo": "Jurassic World: Teoría del dinocaos",
     "enlace": "https://cinecalidad.bar/serie/jurassic-world-teoria-del-dinocaos/",
+    "slug": "jurassic-world-teoria-del-dinocaos",
     "imagen": "https://image.tmdb.org/t/p/w342/c2Od0cY2IeayDj5osUxZSAD1QK.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 10",
@@ -1943,10 +2063,11 @@
     ]
   },
   {
-    "id": "10f97df0-5d42-40d4-9d2c-b0e6d09f0ff3",
+    "id": "475c8c18-a1f0-47d0-97f6-54d2cfff6f7f",
     "tipo": "serie",
     "titulo": "Ni una más",
     "enlace": "https://cinecalidad.bar/serie/ni-una-mas-s3/",
+    "slug": "ni-una-mas-s3",
     "imagen": "https://image.tmdb.org/t/p/w342/cBPmGCrIjVpqMxs8p6U4AkGtGyr.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -1958,10 +2079,11 @@
     ]
   },
   {
-    "id": "84f96cb4-2d38-45db-9618-3381862853f3",
+    "id": "a4abfe6b-a7fc-4054-bee7-b58dccbaa291",
     "tipo": "serie",
     "titulo": "Materia oscura",
     "enlace": "https://cinecalidad.bar/serie/materia-oscura/",
+    "slug": "materia-oscura",
     "imagen": "https://image.tmdb.org/t/p/w342/ohuI1Ik5FsjSazomDqzMlyb6Yv2.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 9",
@@ -1975,10 +2097,11 @@
     ]
   },
   {
-    "id": "7e617725-0e08-437f-9cc2-16737dcac1fb",
+    "id": "8754b5ce-a7bb-4e07-8c45-b08bed9d3731",
     "tipo": "serie",
     "titulo": "Doctor Who",
     "enlace": "https://cinecalidad.bar/serie/doctor-who/",
+    "slug": "doctor-who",
     "imagen": "https://image.tmdb.org/t/p/w342/5ed6T2KGtuIkn1eHOvjQRchU75b.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 16",
@@ -1992,10 +2115,11 @@
     ]
   },
   {
-    "id": "25a3c2ac-22c4-4b62-a9a3-ed75fcd74d8f",
+    "id": "3de86aad-4893-4aeb-9837-2a2bf7d62ff2",
     "tipo": "serie",
     "titulo": "El ídolo",
     "enlace": "https://cinecalidad.bar/serie/el-idolo/",
+    "slug": "el-idolo",
     "imagen": "https://image.tmdb.org/t/p/w342/m2IDfG0IJphzq5s2kJ7Yvz52OQi.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 5",
@@ -2007,10 +2131,11 @@
     ]
   },
   {
-    "id": "5ec9fcfe-16d6-4a79-aae2-95a509b283cc",
+    "id": "7583a6fd-5782-4772-8f9f-bc2dd6b055a3",
     "tipo": "serie",
     "titulo": "Yellowjackets",
     "enlace": "https://cinecalidad.bar/serie/yellowjackets-s1/",
+    "slug": "yellowjackets-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/1xMrhea5G3iyZez1KidFs4ufE3D.jpg",
     "temporadas": "seasons 3",
     "episodios": "Episodios 29",
@@ -2023,10 +2148,11 @@
     ]
   },
   {
-    "id": "d955b6c8-5eff-4855-a4d9-c900ca039fbc",
+    "id": "882231f0-f9a6-458b-935b-40d8a14e6d8a",
     "tipo": "serie",
     "titulo": "Detrás de sus ojos",
     "enlace": "https://cinecalidad.bar/serie/detras-de-sus-ojos/",
+    "slug": "detras-de-sus-ojos",
     "imagen": "https://image.tmdb.org/t/p/w342/sfd90NIf778KoBFmpdBTow4xTm7.jpg",
     "temporadas": "seasons Desconocido",
     "episodios": "Episodios Desconocido",
@@ -2038,10 +2164,11 @@
     ]
   },
   {
-    "id": "80ef0d94-4d4a-430d-afa6-042f5c041a7b",
+    "id": "7f6cd448-9898-4c35-aa35-b4e45a48c2f1",
     "tipo": "serie",
     "titulo": "Loki",
     "enlace": "https://cinecalidad.bar/serie/loki-s16/",
+    "slug": "loki-s16",
     "imagen": "https://image.tmdb.org/t/p/w342/53aonG0QS3ynbYuuwhPtyoOwTDD.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 12",
@@ -2054,10 +2181,11 @@
     ]
   },
   {
-    "id": "23a93893-7508-4749-8499-fe7779921998",
+    "id": "5d41c9e2-e1d0-4ee9-acc3-c7cf1e288f1a",
     "tipo": "serie",
     "titulo": "Hawkeye",
     "enlace": "https://cinecalidad.bar/serie/hawkeye-s6/",
+    "slug": "hawkeye-s6",
     "imagen": "https://image.tmdb.org/t/p/w342/93aDXCBlXfXFTeHiERzIbkhozr.jpg",
     "temporadas": "seasons Desconocido",
     "episodios": "Episodios Desconocido",
@@ -2071,10 +2199,11 @@
     ]
   },
   {
-    "id": "dfb005de-1a94-4462-8725-54526ca86325",
+    "id": "41b53298-b381-49c0-b1fc-54e3b2180693",
     "tipo": "serie",
     "titulo": "Invasión",
     "enlace": "https://cinecalidad.bar/serie/invasion-s1/",
+    "slug": "invasion-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/sYPdoJ0PaMfbuSNv28bOljQaHUU.jpg",
     "temporadas": "seasons Desconocido",
     "episodios": "Episodios Desconocido",
@@ -2087,10 +2216,11 @@
     ]
   },
   {
-    "id": "9966a6e5-5ba7-48ef-9daa-a1c13fdc907a",
+    "id": "c86e0c26-a1c7-40da-9330-0848b8b5235d",
     "tipo": "serie",
     "titulo": "Sweet Tooth",
     "enlace": "https://cinecalidad.bar/serie/sweet-tooth-s7/",
+    "slug": "sweet-tooth-s7",
     "imagen": "https://image.tmdb.org/t/p/w342/ea1eNwi2P532ydGXqNpAV2vAv2F.jpg",
     "temporadas": "seasons 3",
     "episodios": "Episodios 16",
@@ -2103,10 +2233,11 @@
     ]
   },
   {
-    "id": "b02c4a29-dca8-44f0-a9ca-355928a8d6fe",
+    "id": "6dabf3e5-20e2-419c-bf97-555ee5bac936",
     "tipo": "serie",
     "titulo": "Monarch: legado de monstruos",
     "enlace": "https://cinecalidad.bar/serie/monarch-legado-de-monstruos-s1/",
+    "slug": "monarch-legado-de-monstruos-s1",
     "imagen": "https://image.tmdb.org/t/p/w342/8ZSrqUsa1JN9FkIQU8iTFOMw4D5.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 10",
@@ -2120,10 +2251,11 @@
     ]
   },
   {
-    "id": "ed406f44-fe7c-43f4-a21b-080a9976ef50",
+    "id": "37f60bd6-599c-416e-8f68-064e99e9581f",
     "tipo": "serie",
     "titulo": "Gen V",
     "enlace": "https://cinecalidad.bar/serie/gen-v-s11/",
+    "slug": "gen-v-s11",
     "imagen": "https://image.tmdb.org/t/p/w342/8XQNhJ3y8LT8guh7wwbzUgzuAi3.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -2137,10 +2269,11 @@
     ]
   },
   {
-    "id": "91b50ea3-721f-40fe-8ea6-0a8119c8ac74",
+    "id": "076ce078-d162-45a3-b067-1b728c2361d1",
     "tipo": "serie",
     "titulo": "El agente nocturno",
     "enlace": "https://cinecalidad.bar/serie/el-agente-nocturno/",
+    "slug": "el-agente-nocturno",
     "imagen": "https://image.tmdb.org/t/p/w342/uYNgC4Zd9NMcpMVug9NTgeIqfTy.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 20",
@@ -2155,10 +2288,11 @@
     ]
   },
   {
-    "id": "58e4ded1-ad8f-46a4-9316-6df7c64812cd",
+    "id": "f72933cb-4e92-4a0a-8af0-bad9c47d8ee9",
     "tipo": "serie",
     "titulo": "The Last of Us",
     "enlace": "https://cinecalidad.bar/serie/the-last-of-us-s6/",
+    "slug": "the-last-of-us-s6",
     "imagen": "https://image.tmdb.org/t/p/w342/tNQWO6cNzQYCyvw36mUcAQQyf5F.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 16",
@@ -2170,10 +2304,11 @@
     ]
   },
   {
-    "id": "06b07b8b-9833-4873-bdf7-a34fcff68a88",
+    "id": "cf7ebd9c-0328-402f-88c3-cc973a5bfed8",
     "tipo": "serie",
     "titulo": "La maldición de Hill House",
     "enlace": "https://cinecalidad.bar/serie/la-maldicion-de-hill-house/",
+    "slug": "la-maldicion-de-hill-house",
     "imagen": "https://image.tmdb.org/t/p/w342/flBIpQHga5217QgLE4BanIAzMix.jpg",
     "temporadas": "seasons Desconocido",
     "episodios": "Episodios Desconocido",
@@ -2186,10 +2321,11 @@
     ]
   },
   {
-    "id": "afe14977-9f95-45ef-bfe2-cfbf81c0cd0d",
+    "id": "5a9bc85c-9ab1-4261-a6a9-01251e4f998a",
     "tipo": "serie",
     "titulo": "Nueve perfectos desconocidos",
     "enlace": "https://cinecalidad.bar/serie/nueve-perfectos-desconocidos/",
+    "slug": "nueve-perfectos-desconocidos",
     "imagen": "https://image.tmdb.org/t/p/w342/4mVFqfL9stGKyGFIEAagEY4AL3s.jpg",
     "temporadas": "seasons Desconocido",
     "episodios": "Episodios Desconocido",
@@ -2202,10 +2338,11 @@
     ]
   },
   {
-    "id": "1f59b6c5-a91f-4497-a94c-9ab2cdaec40e",
+    "id": "dd1b5554-9d27-44b9-8a88-cadb946d73dc",
     "tipo": "serie",
     "titulo": "Testamento: La historia de Moisés",
     "enlace": "https://cinecalidad.bar/serie/testamento-la-historia-de-moises/",
+    "slug": "testamento-la-historia-de-moises",
     "imagen": "https://image.tmdb.org/t/p/w342/fVIeVmMg9ETRngnaFsAc3O6b3SS.jpg",
     "temporadas": "seasons Desconocido",
     "episodios": "Episodios Desconocido",
@@ -2218,10 +2355,11 @@
     ]
   },
   {
-    "id": "59116b4e-e0ba-4869-a992-4917b9efefa6",
+    "id": "d74f7cd6-f2f8-43c9-a841-b3ecd76216db",
     "tipo": "serie",
     "titulo": "RIPLEY",
     "enlace": "https://cinecalidad.bar/serie/ripley/",
+    "slug": "ripley",
     "imagen": "https://image.tmdb.org/t/p/w342/rpSo8z9alultGVTqQ3dkLEyU8xx.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 8",
@@ -2233,10 +2371,11 @@
     ]
   },
   {
-    "id": "ce4e2ed3-4d2b-423f-b4f3-e247446b831b",
+    "id": "579ff32b-4e63-4b00-b4da-4af2f99014b7",
     "tipo": "serie",
     "titulo": "Dahmer",
     "enlace": "https://cinecalidad.bar/serie/dahmer-monstruo-la-historia-de-jeffrey-dahmer/",
+    "slug": "dahmer-monstruo-la-historia-de-jeffrey-dahmer",
     "imagen": "https://image.tmdb.org/t/p/w342/f2PVrphK0u81ES256lw3oAZuF3x.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 10",
@@ -2249,10 +2388,11 @@
     ]
   },
   {
-    "id": "44104f80-ddef-4fe9-86c3-77993910aa0e",
+    "id": "3e3bd0e5-bd48-4524-a27c-2615a1cb05ec",
     "tipo": "serie",
     "titulo": "Shōgun",
     "enlace": "https://cinecalidad.bar/serie/shogun-s7/",
+    "slug": "shogun-s7",
     "imagen": "https://image.tmdb.org/t/p/w342/uIoDvVOQaKjSfz2oihkVS8M7l1v.jpg",
     "temporadas": "seasons Desconocido",
     "episodios": "Episodios Desconocido",
@@ -2265,10 +2405,11 @@
     ]
   },
   {
-    "id": "ce19864f-9058-4606-9256-47bcae640830",
+    "id": "f23d9132-bfab-4274-b28f-8ba22000f404",
     "tipo": "serie",
     "titulo": "Bebé Reno",
     "enlace": "https://cinecalidad.bar/serie/bebe-reno/",
+    "slug": "bebe-reno",
     "imagen": "https://image.tmdb.org/t/p/w342/1AMwfBYXeBWkGCCH0o85wrb6ffw.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 7",
@@ -2280,10 +2421,11 @@
     ]
   },
   {
-    "id": "50a5fc10-3b54-4e88-bac2-c3e4651d5fa7",
+    "id": "b731527c-d47d-487f-964b-b856c7954691",
     "tipo": "serie",
     "titulo": "Griselda",
     "enlace": "https://cinecalidad.bar/serie/griselda/",
+    "slug": "griselda",
     "imagen": "https://image.tmdb.org/t/p/w342/qT8OLi18IwkX6JwVoybJFagNSea.jpg",
     "temporadas": "seasons 1",
     "episodios": "Episodios 6",
@@ -2296,10 +2438,11 @@
     ]
   },
   {
-    "id": "67e54037-c790-4190-98ea-9bd1bd3f3969",
+    "id": "d79703b9-a3b7-42a5-9b69-ceaffbd6981d",
     "tipo": "serie",
     "titulo": "Pretty Little Liars: Un Nuevo Pecado",
     "enlace": "https://cinecalidad.bar/serie/pretty-little-liars-un-nuevo-pecado/",
+    "slug": "pretty-little-liars-un-nuevo-pecado",
     "imagen": "https://image.tmdb.org/t/p/w342/iT8WopXXwTTyIiBfk7nOCMQlWP0.jpg",
     "temporadas": "seasons 2",
     "episodios": "Episodios 18",

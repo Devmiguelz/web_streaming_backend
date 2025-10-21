@@ -71,6 +71,7 @@ class CinecalidadScraper:
                         'tipo': tipo,
                         'titulo': titulo,
                         'enlace': enlace,
+                        'slug': enlace.split('/')[-2] if enlace else None,
                         'imagen': imagen,
                         'calidad': calidad,
                         'año': año,
@@ -157,6 +158,7 @@ class CinecalidadScraper:
                         'tipo': tipo,
                         'titulo': titulo,
                         'enlace': enlace,
+                        'slug': enlace.split('/')[-2] if enlace else None,
                         'imagen': imagen,
                         'temporadas': temporadas,
                         'episodios': episodios,
@@ -332,7 +334,7 @@ if __name__ == "__main__":
             resultados = scraper.extraer_multiples_paginas(num_paginas=num_paginas, tipo=tipo_texto)
 
             scraper.mostrar_peliculas(resultados, limite=15)
-            archivo = f"{tipo_texto}s_{num_paginas}_paginas.json"
+            archivo = f"{tipo_texto}s_paginas.json"
             scraper.guardar_json(resultados, archivo)
             print(f"\n📊 Total de {tipo_texto}s extraídas: {len(resultados)}")
 

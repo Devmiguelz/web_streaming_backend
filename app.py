@@ -1,7 +1,7 @@
 import json
 import os
 import sys
-import smtplib
+import requests
 from flask import Flask, jsonify, request, send_from_directory
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -11,6 +11,8 @@ from email.mime.multipart import MIMEMultipart
 from datetime import datetime
 from dotenv import load_dotenv
 import resend
+from scraper.pelicula_scraper_live import scraper_movie_live
+from scraper.serie_scraper_live import scraper_serie_live
 
 # Cargar variables de entorno
 load_dotenv()
@@ -64,15 +66,15 @@ else:
     print(f"🔒 CORS configurado para PRODUCCIÓN: {ALLOWED_ORIGINS}")
 
 # Configuración
-CACHE_DIR = 'cache'
-PELICULAS_FILE = os.path.join(CACHE_DIR, 'peliculas.json')
-SERIES_FILE = os.path.join(CACHE_DIR, 'series.json')
+DATABASE_DIR = 'database'
+PELICULAS_FILE = os.path.join(DATABASE_DIR, 'peliculas_paginas.json')
+SERIES_FILE = os.path.join(DATABASE_DIR, 'series_paginas.json')
 
 resend.api_key = os.getenv('RESEND_API_KEY')
 EMAIL_DESTINATARIO = os.getenv('EMAIL_DESTINATARIO')
 
 # Crear directorio de cache si no existe
-os.makedirs(CACHE_DIR, exist_ok=True)
+os.makedirs(DATABASE_DIR, exist_ok=True)
 
 # ==================== UTILIDADES ====================
 
@@ -125,8 +127,8 @@ def static_files(path):
 
 # ==================== API RELACIONADOS ====================
 
-@app.route('/api/<tipo>/<item_id>/relacionados', methods=['GET'])
-def obtener_relacionados(tipo, item_id):
+@app.route('/api/<tipo>/<slug>/relacionados', methods=['GET'])
+def obtener_relacionados(tipo, slug):
     """
     Obtiene contenido relacionado por género y año
     Parámetros:
@@ -153,10 +155,10 @@ def obtener_relacionados(tipo, item_id):
             return jsonify({'error': 'No se pudieron cargar los datos'}), 500
         
         # Buscar el item actual
-        item_actual = next((item for item in datos if item.get('id') == item_id), None)
+        item_actual = next((item for item in datos if item.get('slug') == slug), None)
         
         if not item_actual:
-            return jsonify({'error': f'Item con ID {item_id} no encontrado'}), 404
+            return jsonify({'error': f'Item con ID {slug} no encontrado'}), 404
         
         # Obtener géneros y año del item actual
         generos_actual = item_actual.get('generos', [])
@@ -214,7 +216,8 @@ def obtener_relacionados(tipo, item_id):
             'relacionados': resultado,
             'total': len(resultado),
             'item_actual': {
-                'id': item_id,
+                'id': item_actual.get('id'),
+                'slug': slug,
                 'titulo': item_actual.get('titulo') or item_actual.get('nombre'),
                 'generos': generos_actual,
                 'año': año_actual
@@ -281,31 +284,57 @@ def buscar_peliculas():
     
     return jsonify(paginar(resultados, pagina))
 
-@app.route('/api/pelicula/<string:id>')
-def detalle_pelicula(id):
-    """Obtiene el detalle de una película"""
-    peliculas = cargar_json(PELICULAS_FILE)
+@app.route('/api/pelicula/<string:slug>')
+def pelicula_por_url(slug):
+    """
+    Obtiene película por su slug haciendo scraping en vivo
     
-    if not peliculas:
-        return jsonify({'error': 'No se pudieron cargar los datos'}), 500
+    Ejemplo: 
+        GET /api/pelicula/url/steve
+        -> Busca en https://cinecalidad.bar/peli/steve/
     
-    pelicula = next((p for p in peliculas if p.get('id') == id), None)
-    
-    if pelicula:
-        return jsonify(pelicula)
-    
-    return jsonify({'error': 'Película no encontrada'}), 404
-
-@app.route('/api/pelicula/url/<path:url>')
-def pelicula_por_url(url):
-    """Obtiene película por su URL original"""
-    peliculas = cargar_json(PELICULAS_FILE)
-    
-    for pelicula in peliculas:
-        if pelicula.get('enlace') == url or pelicula.get('url_pelicula') == url:
-            return jsonify(pelicula)
-    
-    return jsonify({'error': 'Película no encontrada'}), 404
+    Returns:
+        JSON con toda la información de la película incluyendo servidores
+    """
+    try:
+        resultado = scraper_movie_live.obtener_pelicula_por_slug(slug)
+        
+        if not resultado:
+            return jsonify({
+                'error': 'Película no encontrada',
+                'slug': slug
+            }), 404
+        
+        return jsonify(resultado), 200
+        
+    except requests.exceptions.HTTPError as e:
+        if e.response.status_code == 404:
+            return jsonify({
+                'error': 'Película no encontrada',
+                'slug': slug
+            }), 404
+        return jsonify({
+            'error': f'Error HTTP: {e.response.status_code}',
+            'detalle': str(e)
+        }), 500
+        
+    except requests.exceptions.Timeout:
+        return jsonify({
+            'error': 'Timeout al conectar con el servidor',
+            'slug': slug
+        }), 504
+        
+    except requests.exceptions.RequestException as e:
+        return jsonify({
+            'error': 'Error de conexión',
+            'detalle': str(e)
+        }), 500
+        
+    except Exception as e:
+        return jsonify({
+            'error': 'Error procesando película',
+            'detalle': str(e)
+        }), 500
 
 # ==================== API SERIES ====================
 
@@ -348,28 +377,27 @@ def buscar_series():
     
     return jsonify(paginar(resultados, pagina))
 
-@app.route('/api/serie/<string:id>')
-def detalle_serie(id):
-    """Obtiene el detalle completo de una serie"""
-    series = cargar_json(SERIES_FILE)
+@app.route('/api/serie/<string:slug>')
+def serie_por_url(slug):
+    """
+    Obtiene serie haciendo scraping en vivo por su slug
     
-    serie = next((p for p in series if p.get('id') == id), None)
-
-    if serie:
-        return jsonify(serie)
-    
-    return jsonify({'error': 'Serie no encontrada'}), 404
-
-@app.route('/api/serie/url/<path:url>')
-def serie_por_url(url):
-    """Obtiene serie por su URL original"""
-    series = cargar_json(SERIES_FILE)
-    
-    for serie in series:
-        if serie.get('url_serie') == url:
-            return jsonify(serie)
-    
-    return jsonify({'error': 'Serie no encontrada'}), 404
+    Ejemplo: /api/serie/url/la-nueva-brigada
+    """
+    try:
+        # Hacer scraping en vivo
+        serie_data = scraper_serie_live.scrapear_serie_por_slug(slug)
+        
+        if not serie_data:
+            return jsonify({'error': 'No se pudo obtener datos de la serie'}), 404
+        
+        return jsonify(serie_data), 200
+        
+    except Exception as e:
+        return jsonify({
+            'error': 'Error al procesar la serie',
+            'detalle': str(e)
+        }), 500
 
 # ==================== API GÉNEROS ====================
 
@@ -395,47 +423,8 @@ def generos_series():
     
     return jsonify(sorted(list(generos)))
 
-# ==================== API ESTADÍSTICAS ====================
-
-@app.route('/api/stats')
-def estadisticas():
-    """Obtiene estadísticas generales"""
-    peliculas = cargar_json(PELICULAS_FILE)
-    series = cargar_json(SERIES_FILE)
-    
-    total_episodios = sum(
-        len(temp.get('episodios', []))
-        for serie in series
-        for temp in serie.get('temporadas', [])
-    )
-    
-    return jsonify({
-        'total_peliculas': len(peliculas),
-        'total_series': len(series),
-        'total_episodios': total_episodios,
-        'ultima_actualizacion': datetime.now().isoformat()
-    })
 
 # ==================== ADMINISTRACIÓN ====================
-
-@app.route('/api/admin/actualizar', methods=['POST'])
-def actualizar_datos():
-    """Endpoint para actualizar datos desde los scrapers"""
-    # IMPORTANTE: Agregar autenticación aquí
-    
-    data = request.get_json()
-    tipo = data.get('tipo')
-    datos = data.get('datos')
-    
-    if tipo == 'peliculas':
-        if guardar_json(PELICULAS_FILE, datos):
-            return jsonify({'mensaje': 'Películas actualizadas'})
-    
-    elif tipo == 'series':
-        if guardar_json(SERIES_FILE, datos):
-            return jsonify({'mensaje': 'Series actualizadas'})
-    
-    return jsonify({'error': 'Error al actualizar'}), 500
 
 @app.route('/api/contacto', methods=['POST'])
 @limiter.limit("5 per hour")
