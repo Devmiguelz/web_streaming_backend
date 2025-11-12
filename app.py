@@ -12,7 +12,42 @@ from flask_limiter.util import get_remote_address
 from flask_cors import CORS
 from datetime import datetime
 from dotenv import load_dotenv
-from scraper.pelicula_scraper_playwright_v3 import scraper_movie_playwright_v3 as scraper_movie_live
+from scraper.serie_scraper_live import scraper_serie_live
+from service.cache_service import cache_service
+
+USAR_PLAYWRIGHT = False
+scraper_movie_live = None
+
+try:
+    print("🔍 Intentando cargar Playwright scraper...")
+    from scraper.pelicula_scraper_playwright_v3 import scraper_movie_playwright_v3
+    
+    # Probar si Playwright puede ejecutarse
+    print("🧪 Probando Playwright...")
+    from playwright.sync_api import sync_playwright
+    
+    with sync_playwright() as p:
+        try:
+            browser = p.chromium.launch(headless=True)
+            browser.close()
+            scraper_movie_live = scraper_movie_playwright_v3
+            USAR_PLAYWRIGHT = True
+            print("✅ Playwright scraper funcional")
+        except Exception as e:
+            print(f"⚠️ Playwright instalado pero no funcional: {e}")
+            raise ImportError("Chromium dependencies missing")
+            
+except Exception as e:
+    print(f"⚠️ Playwright no disponible: {e}")
+    print("🔄 Cargando scraper simple...")
+    try:
+        from scraper.pelicula_scraper_live import scraper_movie_live
+        print("✅ Scraper simple cargado exitosamente")
+    except ImportError as e2:
+        print(f"❌ Error crítico: No se pudo cargar ningún scraper: {e2}")
+        scraper_movie_live = None
+
+# Importar scraper de series
 from scraper.serie_scraper_live import scraper_serie_live
 from service.cache_service import cache_service
 
@@ -747,10 +782,9 @@ if __name__ == '__main__':
     print("=" * 60)
     print("🎬 API de Streaming iniciada")
     print("=" * 60)
+    print(f"🔧 Scraper mode: {'Playwright' if USAR_PLAYWRIGHT else 'Simple (requests)'}")
     print(f"📁 Películas: {len(cargar_json(PELICULAS_FILE))}")
     print(f"📺 Series: {len(cargar_json(SERIES_FILE))}")
-    print("=" * 60)
-    print("🌐 Servidor corriendo en http://localhost:5400")
     print("=" * 60)
 
     if sys.platform == 'win32':
