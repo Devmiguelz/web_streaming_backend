@@ -12,7 +12,7 @@ from flask_limiter.util import get_remote_address
 from flask_cors import CORS
 from datetime import datetime
 from dotenv import load_dotenv
-from scraper.pelicula_scraper_live import scraper_movie_live
+from scraper.pelicula_scraper_playwright_v3 import scraper_movie_playwright_v3 as scraper_movie_live
 from scraper.serie_scraper_live import scraper_serie_live
 from service.cache_service import cache_service
 
@@ -341,12 +341,6 @@ def pelicula_por_url(slug):
     except requests.exceptions.RequestException as e:
         return jsonify({
             'error': 'Error de conexión',
-            'detalle': str(e)
-        }), 500
-        
-    except Exception as e:
-        return jsonify({
-            'error': 'Error procesando película',
             'detalle': str(e)
         }), 500
 
