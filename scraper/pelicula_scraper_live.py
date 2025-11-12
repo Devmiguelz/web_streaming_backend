@@ -1,6 +1,7 @@
 """
 pelicula_scraper_live.py
 Servicio de scraping en vivo para películas de CineCalidad
+VERSIÓN MEJORADA - Anti-detección
 """
 
 import requests
@@ -9,31 +10,107 @@ import random
 import uuid
 from urllib.parse import urlparse
 import re
+import time
 
 class ScraperMovieService:
     """Servicio para hacer scraping en vivo de películas"""
     
     BASE_URL = "https://cinecalidad.bar"
     
+    # User agents más diversos y actualizados
     USER_AGENTS = [
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
         'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
         'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/121.0',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:120.0) Gecko/20100101 Firefox/120.0',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0',
+    ]
+    
+    # Referers comunes para simular tráfico orgánico
+    REFERERS = [
+        'https://www.google.com/',
+        'https://www.google.com.co/',
+        'https://www.google.com.mx/',
+        'https://www.bing.com/',
+        'https://duckduckgo.com/',
     ]
     
     def __init__(self):
         self.session = requests.Session()
+        # Configurar la sesión para mantener cookies
+        self.session.cookies.set('cookie_notice_accepted', 'true', domain='.cinecalidad.bar')
     
-    def _get_random_headers(self):
-        """Genera headers con User-Agent aleatorio"""
+    def _get_random_headers(self, referer=None):
+        """Genera headers realistas con todas las cabeceras necesarias"""
         return {
             'User-Agent': random.choice(self.USER_AGENTS),
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8',
-            'Accept-Encoding': 'gzip, deflate',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+            'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8,es-419;q=0.7',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'DNT': '1',
             'Connection': 'keep-alive',
+            'Upgrade-Insecure-Requests': '1',
+            'Sec-Fetch-Dest': 'document',
+            'Sec-Fetch-Mode': 'navigate',
+            'Sec-Fetch-Site': 'none' if not referer else 'same-origin',
+            'Sec-Fetch-User': '?1',
+            'Cache-Control': 'max-age=0',
+            'Sec-Ch-Ua': '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
+            'Sec-Ch-Ua-Mobile': '?0',
+            'Sec-Ch-Ua-Platform': '"Windows"',
+            'Referer': referer if referer else random.choice(self.REFERERS),
         }
+    
+    def _hacer_peticion_segura(self, url, referer=None, max_reintentos=3):
+        """
+        Hace una petición HTTP con reintentos y delays aleatorios
+        """
+        for intento in range(max_reintentos):
+            try:
+                # Delay aleatorio para simular comportamiento humano
+                if intento > 0:
+                    time.sleep(random.uniform(2, 4))
+                else:
+                    time.sleep(random.uniform(0.5, 1.5))
+                
+                headers = self._get_random_headers(referer)
+                
+                response = self.session.get(
+                    url,
+                    headers=headers,
+                    timeout=20,
+                    allow_redirects=True
+                )
+                
+                # Si es 403, reintentar
+                if response.status_code == 403:
+                    print(f"⚠️ 403 detectado en intento {intento + 1}/{max_reintentos}")
+                    if intento < max_reintentos - 1:
+                        continue
+                
+                response.raise_for_status()
+                return response
+                
+            except requests.exceptions.HTTPError as e:
+                if intento == max_reintentos - 1:
+                    raise
+                print(f"⚠️ Error HTTP en intento {intento + 1}: {e}")
+                
+            except requests.exceptions.Timeout:
+                if intento == max_reintentos - 1:
+                    raise
+                print(f"⚠️ Timeout en intento {intento + 1}")
+                
+            except requests.exceptions.RequestException as e:
+                if intento == max_reintentos - 1:
+                    raise
+                print(f"⚠️ Error de conexión en intento {intento + 1}: {e}")
+        
+        raise requests.exceptions.RequestException("Se agotaron los reintentos")
     
     def _extraer_info_basica(self, soup):
         """Extrae la información básica de una película desde el HTML"""
@@ -125,11 +202,8 @@ class ScraperMovieService:
     def _extraer_servidores_video(self, player_url, referer_url):
         """Extrae los servidores de video desde el player"""
         try:
-            headers = self._get_random_headers()
-            headers['Referer'] = referer_url
-            
-            response = self.session.get(player_url, headers=headers, timeout=15)
-            response.raise_for_status()
+            # Usar la función segura con reintentos
+            response = self._hacer_peticion_segura(player_url, referer=referer_url)
             
             soup = BeautifulSoup(response.content, 'html.parser')
             servidores = []
@@ -196,13 +270,12 @@ class ScraperMovieService:
             # Construir URL completa
             url_pelicula = f"{self.BASE_URL}/peli/{slug}/"
             
-            # Hacer petición
-            response = self.session.get(
-                url_pelicula, 
-                headers=self._get_random_headers(), 
-                timeout=15
-            )
-            response.raise_for_status()
+            print(f"🎬 Scrapeando: {url_pelicula}")
+            
+            # Hacer petición con reintentos y headers mejorados
+            response = self._hacer_peticion_segura(url_pelicula)
+            
+            print(f"✅ Respuesta recibida: {response.status_code}")
             
             # Parsear HTML
             soup = BeautifulSoup(response.content, 'html.parser')
@@ -227,15 +300,19 @@ class ScraperMovieService:
             player_url = self._extraer_player_url(soup)
             if player_url:
                 resultado['player_url'] = player_url
+                print(f"🎮 Player encontrado: {player_url}")
                 
-                # 4. Extraer servidores del player
+                # 4. Extraer servidores del player (con delay)
+                time.sleep(random.uniform(1, 2))
                 servidores = self._extraer_servidores_video(player_url, url_pelicula)
                 resultado['servidores'] = servidores
+                print(f"📡 Servidores encontrados: {len(servidores)}")
             
             return resultado
             
         except Exception as e:
             # Re-lanzar la excepción para que el controller la maneje
+            print(f"❌ Error en obtener_pelicula_por_slug: {e}")
             raise
 
     def obtener_pelicula_por_url_completa(self, url):
